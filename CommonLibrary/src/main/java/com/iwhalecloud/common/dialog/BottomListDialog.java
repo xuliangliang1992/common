@@ -1,0 +1,83 @@
+package com.iwhalecloud.common.dialog;
+
+import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
+import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+
+import com.iwhalecloud.common.base.adapter.BaseBindingListAdapter;
+import com.iwhalecloud.common.commonlibrary.R;
+import com.iwhalecloud.common.commonlibrary.databinding.DialogBottomListBinding;
+import com.iwhalecloud.common.commonlibrary.databinding.ItemBottomListBinding;
+import com.iwhalecloud.common.dialog.base.BottomBaseDialog;
+import com.iwhalecloud.common.view.decoration.HorizontalDividerItemDecoration;
+
+
+/**
+ * 底部有取消按钮的弹出框 从底部弹出
+ *
+ * @author xll
+ * @date 2018/1/1
+ */
+public class BottomListDialog extends BottomBaseDialog {
+    private DialogBottomListBinding mBinding;
+    private ObservableArrayList<String> titles;
+    private ItemClickListener mClickListener;
+
+    public BottomListDialog(Context context, ObservableArrayList<String> titles, ItemClickListener itemClickListener) {
+        super(context);
+        this.titles = titles;
+        this.mClickListener = itemClickListener;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView() {
+        View view = View.inflate(context, R.layout.dialog_bottom_list, null);
+        mBinding = DataBindingUtil.bind(view);
+        mBinding.rvList.setLayoutManager(new LinearLayoutManager(context));
+        HorizontalDividerItemDecoration decoration = new HorizontalDividerItemDecoration.Builder(context)
+                .color(ContextCompat.getColor(context, R.color.base_bg_e6))
+                .size(1).build();
+        mBinding.rvList.addItemDecoration(decoration);
+        ItemAdapter mItemAdapter = new ItemAdapter();
+        mBinding.rvList.setAdapter(mItemAdapter);
+        mItemAdapter.setItems(titles);
+        return view;
+    }
+
+    @Override
+    public boolean setUiBeforeShow() {
+        return true;
+    }
+
+    class ItemAdapter extends BaseBindingListAdapter<String, ItemBottomListBinding> {
+
+        @Override
+        protected int getItemLayout(int viewType) {
+            return R.layout.item_bottom_list;
+        }
+
+        @Override
+        protected void onBindItem(ItemBottomListBinding binding, final int position) {
+            binding.setString(mItems.get(position));
+            binding.executePendingBindings();
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                    if (mClickListener != null) {
+                        mClickListener.onItemClickListener(v, position);
+                    }
+                }
+            });
+        }
+    }
+}

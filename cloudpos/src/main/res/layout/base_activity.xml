@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data></data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:fitsSystemWindows="true"
+                  android:orientation="vertical"
+                  tools:ignore="SpUsage,ContentDescription,UseCompoundDrawables">
+
+        <ViewStub
+            android:id="@+id/view_stub_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/stub_tool_bar"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/fl_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ViewStub
+                android:id="@+id/view_stub_init_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout="@layout/stub_init_loading"
+                />
+
+            <ViewStub
+                android:id="@+id/view_stub_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout="@layout/stub_no_data"/>
+
+            <ViewStub
+                android:id="@+id/view_stub_net_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout="@layout/stub_net_error"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
+

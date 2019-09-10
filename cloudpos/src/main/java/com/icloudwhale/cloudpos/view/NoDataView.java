@@ -1,0 +1,39 @@
+package com.icloudwhale.cloudpos.view;
+
+import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.widget.RelativeLayout;
+
+import com.icloudwhale.cloudpos.R;
+import com.icloudwhale.cloudpos.databinding.ViewNoDataBinding;
+
+
+/**
+ * 无数据View
+ *
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
+public class NoDataView extends RelativeLayout {
+
+    private final ViewNoDataBinding mBinding;
+
+    public NoDataView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.view_no_data, this, true);
+    }
+
+    public void setNoDataBackground(@ColorRes int colorResId) {
+        mBinding.rlNoDataRoot.setBackgroundColor(ContextCompat.getColor(getContext(), colorResId));
+    }
+
+    public void setNoDataView(@DrawableRes int imgResId) {
+        mBinding.imgNoData.setImageResource(imgResId);
+    }
+}
