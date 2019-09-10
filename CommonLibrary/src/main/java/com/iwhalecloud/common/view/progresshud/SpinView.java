@@ -3,12 +3,17 @@ package com.iwhalecloud.common.view.progresshud;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 import com.iwhalecloud.common.commonlibrary.R;
 
+import androidx.appcompat.widget.AppCompatImageView;
 
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
 public class SpinView extends AppCompatImageView implements Indeterminate {
 
     private float mRotateDegrees;

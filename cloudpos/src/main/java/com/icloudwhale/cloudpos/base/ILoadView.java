@@ -1,6 +1,6 @@
 package com.icloudwhale.cloudpos.base;
 
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 
 /**
  * 加载

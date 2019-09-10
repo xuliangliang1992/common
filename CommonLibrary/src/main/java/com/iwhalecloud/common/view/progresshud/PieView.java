@@ -24,6 +24,11 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
 public class PieView extends View implements Determinate {
 
     private Paint mWhitePaint;
@@ -47,7 +52,7 @@ public class PieView extends View implements Determinate {
         init();
     }
 
-    private void init(){
+    private void init() {
         mWhitePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mWhitePaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mWhitePaint.setStrokeWidth(Helper.dpToPixel(0.1f, getContext()));
@@ -74,7 +79,7 @@ public class PieView extends View implements Determinate {
         float mAngle = mProgress * 360f / mMax;
         canvas.drawArc(mBound, 270, mAngle, true, mWhitePaint);
         int padding = Helper.dpToPixel(4, getContext());
-        canvas.drawCircle(getWidth()/2, getHeight()/2, getWidth()/2-padding, mGreyPaint);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, getWidth() / 2 - padding, mGreyPaint);
     }
 
     @Override

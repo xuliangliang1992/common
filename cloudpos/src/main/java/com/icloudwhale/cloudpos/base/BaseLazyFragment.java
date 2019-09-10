@@ -1,8 +1,8 @@
 package com.icloudwhale.cloudpos.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.UiThread;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 
 /**
  * fragment懒加载

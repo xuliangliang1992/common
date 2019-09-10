@@ -1,11 +1,7 @@
 package com.iwhalecloud.common.dialog;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.databinding.ObservableArrayList;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.iwhalecloud.common.base.adapter.BaseBindingListAdapter;
@@ -14,6 +10,11 @@ import com.iwhalecloud.common.commonlibrary.databinding.DialogBottomListBinding;
 import com.iwhalecloud.common.commonlibrary.databinding.ItemBottomListBinding;
 import com.iwhalecloud.common.dialog.base.BottomBaseDialog;
 import com.iwhalecloud.common.view.decoration.HorizontalDividerItemDecoration;
+
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableArrayList;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 /**

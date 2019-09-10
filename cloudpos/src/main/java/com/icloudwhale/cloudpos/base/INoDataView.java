@@ -1,6 +1,6 @@
 package com.icloudwhale.cloudpos.base;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 /**
  * 无数据

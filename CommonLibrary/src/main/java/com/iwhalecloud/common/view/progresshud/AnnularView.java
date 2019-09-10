@@ -26,7 +26,11 @@ import android.view.View;
 
 import com.iwhalecloud.common.commonlibrary.R;
 
-
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
 public class AnnularView extends View implements Determinate {
 
     private Paint mWhitePaint;
@@ -50,7 +54,7 @@ public class AnnularView extends View implements Determinate {
         init(context);
     }
 
-    private void init(Context context){
+    private void init(Context context) {
         mWhitePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mWhitePaint.setStyle(Paint.Style.STROKE);
         mWhitePaint.setStrokeWidth(Helper.dpToPixel(3, getContext()));

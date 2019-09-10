@@ -11,7 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         //指定room.schemaLocation生成的文件路径
         javaCompileOptions {
@@ -30,7 +30,7 @@ android {
         }
     }
 
-    dataBinding{
+    dataBinding {
         enabled = true
     }
     compileOptions {
@@ -49,11 +49,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testImplementation 'junit:junit:4.12'
-
     implementation project(':CommonLibrary')
 
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
 
     compileOnly "org.projectlombok:lombok:1.16.18"
+    implementation 'org.glassfish:javax.annotation:10.0-b28' //java注解
 }

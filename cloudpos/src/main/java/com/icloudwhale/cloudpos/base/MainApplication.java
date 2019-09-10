@@ -1,14 +1,7 @@
 package com.icloudwhale.cloudpos.base;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.migration.Migration;
-import android.support.annotation.NonNull;
-
 import com.iwhalecloud.common.base.APP;
 import com.umeng.commonsdk.UMConfigure;
-
-import java.util.logging.Logger;
 
 
 /**

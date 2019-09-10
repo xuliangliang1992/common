@@ -1,10 +1,11 @@
 package com.iwhalecloud.common.view.materialRefreshLayout;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.FrameLayout;
+
+import androidx.core.view.ViewCompat;
 
 public class MaterialHeaderView extends FrameLayout implements MaterialHeadListener {
 

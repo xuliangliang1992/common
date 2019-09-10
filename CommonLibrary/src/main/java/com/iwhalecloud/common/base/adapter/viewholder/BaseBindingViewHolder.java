@@ -1,7 +1,8 @@
 package com.iwhalecloud.common.base.adapter.viewholder;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by zmy on 2018/1/19.

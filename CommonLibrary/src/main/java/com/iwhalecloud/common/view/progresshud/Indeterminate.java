@@ -17,9 +17,9 @@
 package com.iwhalecloud.common.view.progresshud;
 
 /**
- * If a view implements this interface passed to the HUD as a custom view, its animation
- * speed can be change by calling setAnimationSpeed() on the HUD.
- * This interface only provides convenience, how animation speed work depends on the view implementation.
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
 public interface Indeterminate {
     void setAnimationSpeed(float scale);

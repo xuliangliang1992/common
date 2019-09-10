@@ -1,9 +1,9 @@
 package com.icloudwhale.cloudpos.view;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.ColorRes;
-import android.support.v4.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;

@@ -1,8 +1,6 @@
 
 package com.iwhalecloud.common.view.expandablerecycleradapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
 public abstract class BaseExpandableRecyclerViewAdapter
         <GroupBean extends BaseExpandableRecyclerViewAdapter.BaseGroupBean<ChildBean>,
                 ChildBean,
@@ -449,7 +455,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
         /**
          * optimize for partial invalidate,
          * when switching fold status.
-         * Default implementation is update the whole {android.support.v7.widget.RecyclerView.ViewHolder#itemView}.
+         * Default implementation is update the whole {androidx.v7.widget.RecyclerView.ViewHolder#itemView}.
          * <p>
          * Warning:If the itemView is invisible , the callback will not be called.
          *

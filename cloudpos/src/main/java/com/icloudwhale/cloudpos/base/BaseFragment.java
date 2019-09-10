@@ -3,10 +3,6 @@ package com.icloudwhale.cloudpos.base;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +15,11 @@ import com.iwhalecloud.common.subscriber.HttpObserver;
 import com.iwhalecloud.common.util.FileUtil;
 import com.iwhalecloud.common.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 /**
  * Fragment基类

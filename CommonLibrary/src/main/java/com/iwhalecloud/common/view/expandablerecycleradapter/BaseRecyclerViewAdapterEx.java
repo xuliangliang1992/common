@@ -1,12 +1,18 @@
 
 package com.iwhalecloud.common.view.expandablerecycleradapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import java.util.List;
 
-public abstract class RecyclerViewAdapterEx<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import androidx.recyclerview.widget.RecyclerView;
+
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
+public abstract class BaseRecyclerViewAdapterEx<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_EMPTY = ViewProducer.VIEW_TYPE_EMPTY;
     private static final int TYPE_HEADER = ViewProducer.VIEW_TYPE_HEADER;

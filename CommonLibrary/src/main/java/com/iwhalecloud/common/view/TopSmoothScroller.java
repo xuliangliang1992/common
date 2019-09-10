@@ -1,8 +1,9 @@
 package com.iwhalecloud.common.view;
 
 import android.content.Context;
-import android.support.v7.widget.LinearSmoothScroller;
 import android.util.DisplayMetrics;
+
+import androidx.recyclerview.widget.LinearSmoothScroller;
 
 /**
  * @author xll
@@ -15,12 +16,12 @@ public class TopSmoothScroller extends LinearSmoothScroller {
 
     @Override
     protected int getHorizontalSnapPreference() {
-        return SNAP_TO_START;//具体见源码注释
+        return SNAP_TO_START;
     }
 
     @Override
     protected int getVerticalSnapPreference() {
-        return SNAP_TO_START;//具体见源码注释
+        return SNAP_TO_START;
     }
 
     @Override

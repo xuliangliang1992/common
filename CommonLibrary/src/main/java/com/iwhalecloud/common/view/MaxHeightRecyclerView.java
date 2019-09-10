@@ -2,10 +2,11 @@ package com.iwhalecloud.common.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.iwhalecloud.common.commonlibrary.R;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author xll

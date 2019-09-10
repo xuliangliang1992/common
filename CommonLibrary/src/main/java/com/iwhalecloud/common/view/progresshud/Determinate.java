@@ -17,11 +17,12 @@
 package com.iwhalecloud.common.view.progresshud;
 
 /**
- * If a view implements this interface passed to the HUD as a custom view, its progress
- * can be updated by calling setMax() and setProgress() on the HUD.
- * This interface only provides convenience, how progress work depends on the view implementation.
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
 public interface Determinate {
     void setMax(int max);
+
     void setProgress(int progress);
 }

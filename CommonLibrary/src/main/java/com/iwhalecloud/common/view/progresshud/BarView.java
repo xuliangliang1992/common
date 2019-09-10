@@ -24,6 +24,11 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
 public class BarView extends View implements Determinate {
 
     private Paint mOuterPaint;
@@ -76,8 +81,8 @@ public class BarView extends View implements Determinate {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRoundRect(mBound, mBound.height()/2, mBound.height()/2, mOuterPaint);
-        canvas.drawRoundRect(mInBound, mInBound.height()/2, mInBound.height()/2, mInnerPaint);
+        canvas.drawRoundRect(mBound, mBound.height() / 2, mBound.height() / 2, mOuterPaint);
+        canvas.drawRoundRect(mInBound, mInBound.height() / 2, mInBound.height() / 2, mInnerPaint);
     }
 
     @Override

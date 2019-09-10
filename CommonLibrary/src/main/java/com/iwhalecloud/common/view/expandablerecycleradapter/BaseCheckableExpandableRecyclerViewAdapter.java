@@ -1,6 +1,5 @@
 package com.iwhalecloud.common.view.expandablerecycleradapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.HashSet;
@@ -8,6 +7,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
 public abstract class BaseCheckableExpandableRecyclerViewAdapter
         <GroupBean extends BaseCheckableExpandableRecyclerViewAdapter.CheckableGroupItem<ChildBean>,
                 ChildBean,
@@ -17,7 +23,7 @@ public abstract class BaseCheckableExpandableRecyclerViewAdapter
 
     private static final String TAG = BaseCheckableExpandableRecyclerViewAdapter.class.getSimpleName();
 
-    private final Object PAYLOAD_CHECKMODE = this;
+    private final Object PAYLOAD_CHECK_MODE = this;
     public static final int CHECK_MODE_NONE = 0;
     public static final int CHECK_MODE_PARTIAL = CHECK_MODE_NONE + 1;
     public static final int CHECK_MODE_ALL = CHECK_MODE_NONE + 2;
@@ -86,7 +92,7 @@ public abstract class BaseCheckableExpandableRecyclerViewAdapter
     @Override
     protected void onBindGroupViewHolder(GroupViewHolder groupViewHolder, GroupBean groupBean, boolean isExpand, List<Object> payload) {
         if (payload != null && payload.size() != 0) {
-            if (payload.contains(PAYLOAD_CHECKMODE)) {
+            if (payload.contains(PAYLOAD_CHECK_MODE)) {
                 groupViewHolder.setCheckMode(getGroupCheckedMode(groupBean));
             }
             return;
@@ -114,7 +120,7 @@ public abstract class BaseCheckableExpandableRecyclerViewAdapter
     @Override
     protected void onBindChildViewHolder(ChildViewHolder holder, GroupBean groupBean, ChildBean childBean, List<Object> payload) {
         if (payload != null && payload.size() != 0) {
-            if (payload.contains(PAYLOAD_CHECKMODE)) {
+            if (payload.contains(PAYLOAD_CHECK_MODE)) {
                 holder.setCheckMode(getChildCheckedMode(childBean));
             }
             return;
@@ -203,7 +209,7 @@ public abstract class BaseCheckableExpandableRecyclerViewAdapter
                 }
                 if (!onInterceptChildCheckStatusChanged(groupBean, childBean, true)) {
                     addToCheckedList(groupBean, childBean);
-                    notifyItemChanged(groupAdapterPosition + i + 1, PAYLOAD_CHECKMODE);
+                    notifyItemChanged(groupAdapterPosition + i + 1, PAYLOAD_CHECK_MODE);
                 }
             } else {
                 if (!isItemSelected(childBean)) {
@@ -211,7 +217,7 @@ public abstract class BaseCheckableExpandableRecyclerViewAdapter
                 }
                 if (!onInterceptChildCheckStatusChanged(groupBean, childBean, false)
                         && removeFromCheckedList(groupBean, childBean)) {
-                    notifyItemChanged(groupAdapterPosition + i + 1, PAYLOAD_CHECKMODE);
+                    notifyItemChanged(groupAdapterPosition + i + 1, PAYLOAD_CHECK_MODE);
                 }
             }
 
@@ -240,7 +246,7 @@ public abstract class BaseCheckableExpandableRecyclerViewAdapter
         }
 
         if (changeFlag && getGroupCheckedMode(groupBean) != originalGroupMode) {
-            notifyItemChanged(getAdapterPosition(getGroupIndex(groupBean)), PAYLOAD_CHECKMODE);
+            notifyItemChanged(getAdapterPosition(getGroupIndex(groupBean)), PAYLOAD_CHECK_MODE);
         }
     }
 
@@ -299,10 +305,10 @@ public abstract class BaseCheckableExpandableRecyclerViewAdapter
             iter.remove();
             final int groupAdapterPosition = getAdapterPosition(coord[0]);
             final int adapterPosition = groupAdapterPosition + coord[1] + 1;
-            notifyItemChanged(adapterPosition, PAYLOAD_CHECKMODE);
+            notifyItemChanged(adapterPosition, PAYLOAD_CHECK_MODE);
             final int currentGroupCheckedStatus = getGroupCheckedMode(groupBean);
             if (coord[1] >= 0 && currentGroupCheckedStatus != originalGroupCheckedStatus) {
-                notifyItemChanged(groupAdapterPosition, PAYLOAD_CHECKMODE);
+                notifyItemChanged(groupAdapterPosition, PAYLOAD_CHECK_MODE);
             }
         }
     }

@@ -3,15 +3,18 @@ package com.iwhalecloud.common.view.decoration;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DimenRes;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import androidx.annotation.DimenRes;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
- * Created by yqritc on 2015/01/15.
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
-public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
+public class VerticalDividerItemDecoration extends BaseFlexibleDividerDecoration {
 
     private MarginProvider mMarginProvider;
 
@@ -116,7 +119,7 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
         int dividerBottomMargin(int position, RecyclerView parent);
     }
 
-    public static class Builder extends FlexibleDividerDecoration.Builder<Builder> {
+    public static class Builder extends BaseFlexibleDividerDecoration.Builder<Builder> {
 
         private MarginProvider mMarginProvider = new MarginProvider() {
             @Override

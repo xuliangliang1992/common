@@ -1,12 +1,6 @@
 package com.icloudwhale.cloudpos.base;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewStub;
 
@@ -20,6 +14,13 @@ import com.icloudwhale.cloudpos.databinding.StubToolBarBinding;
 import com.iwhalecloud.common.constant.RouterUrl;
 import com.iwhalecloud.common.util.FitUtil;
 import com.umeng.analytics.MobclickAgent;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author xuliangliang
@@ -53,9 +54,9 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
     protected void setText(@StringRes int titleId) {
         if (!binding.viewStubToolbar.isInflated()) {
             initTooBar();
-        } else {
-            mStubToolBarBinding.tvTitle.setText(titleId);
         }
+        mStubToolBarBinding.tvTitle.setText(titleId);
+
     }
 
     /**
@@ -66,9 +67,8 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
     protected void setText(String title) {
         if (!binding.viewStubToolbar.isInflated()) {
             initTooBar();
-        } else {
-            mStubToolBarBinding.tvTitle.setText(title);
         }
+        mStubToolBarBinding.tvTitle.setText(title);
     }
 
     /**

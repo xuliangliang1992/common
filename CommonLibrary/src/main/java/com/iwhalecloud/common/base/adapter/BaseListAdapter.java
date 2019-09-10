@@ -1,7 +1,7 @@
 package com.iwhalecloud.common.base.adapter;
 
-import android.databinding.ObservableArrayList;
-import android.support.v7.widget.RecyclerView;
+import androidx.databinding.ObservableArrayList;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by zmy on 2017/12/7.

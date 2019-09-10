@@ -1,10 +1,16 @@
 
 package com.iwhalecloud.common.view.expandablerecycleradapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
 public interface ViewProducer {
     int VIEW_TYPE_EMPTY = 1 << 30;
     int VIEW_TYPE_HEADER = VIEW_TYPE_EMPTY >> 1;

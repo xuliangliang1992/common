@@ -1,6 +1,6 @@
 package com.iwhalecloud.common.schedulers;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.reactivex.Scheduler;
 

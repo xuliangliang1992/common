@@ -1,16 +1,17 @@
 package com.icloudwhale.cloudpos.test;
 
-import android.databinding.DataBindingUtil;
 import android.view.View;
 
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.base.BaseRefreshFragment;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableArrayList;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -20,7 +21,10 @@ import io.reactivex.functions.Consumer;
  */
 public class TestFragment extends BaseRefreshFragment<User> implements TestContract.View {
     private TestContract.Presenter mPresenter;
-    private TestFragmentBinding binding;
+    private ObservableArrayList<User> mUsers;
+    private TestFragmentBinding mBinding;
+    private TestAdapter mTestAdapter;
+    private int page = 1;
 
     public static TestFragment newInstance() {
         return new TestFragment();
@@ -35,7 +39,11 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
     protected void initView(View view) {
         enableLoadMore(true);
         autoLoadData();
-        binding = DataBindingUtil.bind(view);
+        mBinding = DataBindingUtil.bind(view);
+        mBinding.rvList.setLayoutManager(new LinearLayoutManager(mActivity));
+
+        mTestAdapter = new TestAdapter();
+        mBinding.rvList.setAdapter(mTestAdapter);
     }
 
     /**
@@ -55,23 +63,17 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
 
     @Override
     protected void initData() {
+        mActivity.showInitLoadView();
+        mUsers = new ObservableArrayList<>();
 
-        //        mActivity.showNetWorkErrView();
-        //                mActivity.showInitLoadView();
-        //        mActivity.showNoDataView();
-        //        RxView.clicks(binding.getRoot())
-        //                .compose(new ObservableTransformer<Unit, Object>() {
-        //                    @Override
-        //                    public ObservableSource<Object> apply(Observable<Unit> upstream) {
-        //                        return null;
-        //                    }
-        //                })
-        //                .subscribe(new Consumer<Object>() {
-        //                    @Override
-        //                    public void accept(Object o) throws Exception {
-        //                        Logger.d("0-0-");
-        //                    }
-        //                });
+        Observable.timer(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        mActivity.hideInitLoadView();
+                    }
+                });
     }
 
     @Override
@@ -100,11 +102,15 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
      */
     @Override
     public void onRefreshEvent() {
+        page = 1;
+        mUsers.clear();
+        getData();
         Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
+                        mTestAdapter.setItems(mUsers);
                         stopRefresh();
                     }
                 });
@@ -115,14 +121,23 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
      */
     @Override
     public void onLoadMoreEvent() {
+        page++;
+        getData();
         Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
+                        mTestAdapter.setItems(mUsers);
                         stopLoadMore();
                     }
                 });
+    }
+
+    private void getData() {
+        for (int i = 10 * (page - 1); i < 10 * page; i++) {
+            mUsers.add(new User("名称" + i));
+        }
     }
 
     /**
@@ -130,13 +145,15 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
      */
     @Override
     public void onAutoLoadEvent() {
-        Logger.d("onAutoLoadEvent");
+        getData();
         Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
+                        mTestAdapter.setItems(mUsers);
                         stopRefresh();
                     }
-                });}
+                });
+    }
 }

@@ -28,17 +28,18 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
-import android.widget.ImageView;
 
 import com.iwhalecloud.common.commonlibrary.R;
 
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.view.ViewCompat;
 
-public class CircleProgressBar extends ImageView implements MaterialHeadListener {
+
+public class CircleProgressBar extends AppCompatImageView implements MaterialHeadListener {
 
     private static final int KEY_SHADOW_COLOR = 0x1E000000;
     private static final int FILL_SHADOW_COLOR = 0x3D000000;
@@ -193,7 +194,7 @@ public class CircleProgressBar extends ImageView implements MaterialHeadListener
             } else {
                 OvalShape oval = new OvalShadow(mShadowRadius, mDiameter - mShadowRadius * 2);
                 mBgCircle = new ShapeDrawable(oval);
-                ViewCompat.setLayerType(this, ViewCompat.LAYER_TYPE_SOFTWARE, mBgCircle.getPaint());
+                ViewCompat.setLayerType(this, View.LAYER_TYPE_SOFTWARE, mBgCircle.getPaint());
                 mBgCircle.getPaint().setShadowLayer(mShadowRadius, shadowXOffset, shadowYOffset,
                         KEY_SHADOW_COLOR);
                 final int padding = (int) mShadowRadius;

@@ -18,6 +18,11 @@ package com.iwhalecloud.common.view.progresshud;
 
 import android.content.Context;
 
+/**
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
+ */
 public class Helper {
 
     private static float scale;
