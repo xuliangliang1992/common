@@ -63,6 +63,8 @@ ext {
     roomVersion = '2.1.0'
     databaseSqlcipher = '3.5.4'
 
+    eventbusVersion = '3.1.1'
+
     jpushVersion = '3.0.3'
     jcoreVersion = '1.1.1'
 

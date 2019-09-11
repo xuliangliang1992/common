@@ -12,7 +12,7 @@ import androidx.annotation.UiThread;
  * @date 2019/9/4
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
-public abstract class BaseLazyFragment extends BaseRefreshFragment {
+public abstract class BaseLazyFragment<T, P extends BasePresenter> extends BaseRefreshFragment<T, P> {
 
     /**
      * 标志位，标志fragment是否可见。

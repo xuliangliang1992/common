@@ -4,6 +4,9 @@ import android.view.View;
 
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.base.BaseRefreshFragment;
+import com.icloudwhale.cloudpos.base.event.EventBusUtil;
+import com.icloudwhale.cloudpos.base.event.EventCode;
+import com.icloudwhale.cloudpos.base.event.EventMessage;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
 import com.orhanobut.logger.Logger;
 
@@ -56,7 +59,10 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
 
     @Override
     public void initListener() {
-        mTestAdapter.setItemClickListener((user, position) -> Logger.d("onItemClick " + position));
+        mTestAdapter.setItemClickListener((user, position) -> {
+            Logger.d("onItemClick " + position);
+            EventBusUtil.post(new EventMessage<String>(EventCode.EVENT_A, user.getName()));
+        });
         mTestAdapter.setOnItemLongClickListener((user, position) -> Logger.d("onItemLongClick " + position));
 
     }
@@ -69,6 +75,14 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
         addDisposable(Observable.timer(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aLong -> mActivity.hideInitLoadView()));
+    }
+
+    @Override
+    public void onReceiveEvent(EventMessage event) {
+        super.onReceiveEvent(event);
+        if (event.getCode() == EventCode.EVENT_A) {
+            Logger.d(event.toString());
+        }
     }
 
     @Override
@@ -94,6 +108,11 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     public void onLoadMoreEvent() {
         page++;
         mPresenter.loadMoreData();
+    }
+
+    @Override
+    protected boolean isRegisteredEventBus() {
+        return true;
     }
 
     private void getData() {

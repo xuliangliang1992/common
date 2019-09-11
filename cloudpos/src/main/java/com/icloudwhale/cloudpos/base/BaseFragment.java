@@ -8,11 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.icloudwhale.cloudpos.base.event.EventBusUtil;
+import com.icloudwhale.cloudpos.base.event.EventMessage;
 import com.iwhalecloud.common.base.PermissionListener;
 import com.iwhalecloud.common.constant.BaseConstant;
 import com.iwhalecloud.common.constant.RouterUrl;
 import com.iwhalecloud.common.util.FileUtil;
 import com.iwhalecloud.common.util.ToastUtil;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +46,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     private PermissionListener mPermissionListener;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         onAttachToContext(context);
         mCompositeDisposable = new CompositeDisposable();
@@ -53,6 +59,9 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isRegisteredEventBus()) {
+            EventBusUtil.register(this);
+        }
     }
 
     @Nullable
@@ -80,32 +89,10 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
     public void onDestroy() {
+        if (isRegisteredEventBus()) {
+            EventBusUtil.unregister(this);
+        }
         mCompositeDisposable.clear();
         super.onDestroy();
     }
@@ -119,6 +106,33 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         ARouter.getInstance()
                 .build(RouterUrl.HAND_MAIN)
                 .navigation();
+    }
+
+    /**
+     * 是否注册事件分发
+     *
+     * @return true 注册；false 不注册，默认不注册
+     */
+    protected boolean isRegisteredEventBus() {
+        return false;
+    }
+
+    /**
+     * 接收到分发的事件
+     *
+     * @param event 事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReceiveEvent(EventMessage event) {
+    }
+
+    /**
+     * 接收到分发的粘性事件
+     *
+     * @param event 粘性事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onReceiveStickyEvent(EventMessage event) {
     }
 
     /**
