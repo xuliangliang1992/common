@@ -21,7 +21,5 @@ public class TestActivity extends BaseActivity {
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
 
-        //        new TestPresenter(Injection.provideLoanRepository(), fragment, Injection.provideSchedulerProvider());
-
     }
 }

@@ -9,12 +9,13 @@ import com.iwhalecloud.common.view.refresh.DaisyRefreshLayout;
  * @date 2019-09-09
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
-public abstract class BaseRefreshFragment<T> extends BaseFragment implements BaseRefreshView<T> {
+public abstract class BaseRefreshFragment<T,P extends BasePresenter> extends BaseMvpFragment<P> implements BaseRefreshView<T> {
 
-    protected DaisyRefreshLayout mRefreshLayout;
+    private DaisyRefreshLayout mRefreshLayout;
 
     @Override
     protected void initCommonView(View view) {
+        super.initCommonView(view);
         mRefreshLayout = view.findViewById(onBindRefreshLayout());
         // 下拉刷新
         mRefreshLayout.setOnRefreshListener(this::onRefreshEvent);

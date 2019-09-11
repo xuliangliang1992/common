@@ -7,7 +7,6 @@ import com.icloudwhale.cloudpos.base.BaseRefreshFragment;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
 import com.orhanobut.logger.Logger;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.databinding.DataBindingUtil;
@@ -15,29 +14,27 @@ import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author xll
  */
-public class TestFragment extends BaseRefreshFragment<User> implements TestContract.View {
-    private TestContract.Presenter mPresenter;
+public class TestFragment extends BaseRefreshFragment<User, TestPresenter> implements TestContract.View {
     private ObservableArrayList<User> mUsers;
     private TestFragmentBinding mBinding;
     private TestAdapter mTestAdapter;
     private int page = 1;
 
-    public static TestFragment newInstance() {
+    static TestFragment newInstance() {
         return new TestFragment();
     }
 
     @Override
-    protected int setLayout() {
+    public int setLayout() {
         return R.layout.test_fragment;
     }
 
     @Override
-    protected void initView(View view) {
+    public void initView(View view) {
         enableLoadMore(true);
         autoLoadData();
         mBinding = DataBindingUtil.bind(view);
@@ -58,14 +55,14 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
     }
 
     @Override
-    protected void initListener() {
+    public void initListener() {
         mTestAdapter.setItemClickListener((user, position) -> Logger.d("onItemClick " + position));
         mTestAdapter.setOnItemLongClickListener((user, position) -> Logger.d("onItemLongClick " + position));
 
     }
 
     @Override
-    protected void initData() {
+    public void initData() {
         mActivity.showInitLoadView();
         mUsers = new ObservableArrayList<>();
 
@@ -75,25 +72,9 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
     }
 
     @Override
-    public void setPresenter(TestContract.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
-
-    @Override
     public void onDestroy() {
-        super.onDestroy();
-        mPresenter.unSubscriber();
         mTestAdapter.destroy();
-    }
-
-    @Override
-    public void refreshData(List<User> data) {
-
-    }
-
-    @Override
-    public void loadMoreData(List<User> data) {
-
+        super.onDestroy();
     }
 
     /**
@@ -103,14 +84,7 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
     public void onRefreshEvent() {
         page = 1;
         mUsers.clear();
-        getData();
-        addDisposable(Observable.timer(2, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> {
-                    getData();
-                    mTestAdapter.refresh(mUsers);
-                    stopRefresh();
-                }));
+        mPresenter.refreshData();
     }
 
     /**
@@ -119,17 +93,7 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
     @Override
     public void onLoadMoreEvent() {
         page++;
-        getData();
-        addDisposable(Observable.timer(2, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        getData();
-                        mTestAdapter.loadMore(mUsers);
-                        stopLoadMore();
-                    }
-                }));
+        mPresenter.loadMoreData();
     }
 
     private void getData() {
@@ -151,5 +115,47 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
                     mTestAdapter.refresh(mUsers);
                     stopRefresh();
                 }));
+    }
+
+    /**
+     * 刷新数据
+     *
+     * @param data
+     */
+    @Override
+    public void refreshData(ObservableArrayList<User> data) {
+        getData();
+        addDisposable(Observable.timer(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> {
+                    getData();
+                    mTestAdapter.refresh(mUsers);
+                    stopRefresh();
+                }));
+    }
+
+    /**
+     * 加载更多
+     *
+     * @param data
+     */
+    @Override
+    public void loadMoreData(ObservableArrayList<User> data) {
+        getData();
+        addDisposable(Observable.timer(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> {
+                    getData();
+                    mTestAdapter.loadMore(mUsers);
+                    stopLoadMore();
+                }));
+    }
+
+    /**
+     * 设置presenter对象
+     */
+    @Override
+    public void setPresenter() {
+        mPresenter = new TestPresenter(this);
     }
 }

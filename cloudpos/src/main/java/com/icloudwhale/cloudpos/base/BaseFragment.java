@@ -11,7 +11,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.iwhalecloud.common.base.PermissionListener;
 import com.iwhalecloud.common.constant.BaseConstant;
 import com.iwhalecloud.common.constant.RouterUrl;
-import com.iwhalecloud.common.subscriber.HttpObserver;
 import com.iwhalecloud.common.util.FileUtil;
 import com.iwhalecloud.common.util.ToastUtil;
 
@@ -24,11 +23,12 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * Fragment基类
+ *
  * @author xuliangliang
  * @date 2019/9/4
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
-public abstract class BaseFragment extends Fragment implements HttpObserver {
+public abstract class BaseFragment extends Fragment implements BaseView {
 
     /**
      * Activity的context
@@ -106,8 +106,8 @@ public abstract class BaseFragment extends Fragment implements HttpObserver {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         mCompositeDisposable.clear();
+        super.onDestroy();
     }
 
     @Override
@@ -115,38 +115,17 @@ public abstract class BaseFragment extends Fragment implements HttpObserver {
         super.onDetach();
     }
 
-    /**
-     * 设置布局
-     *
-     * @return 布局id
-     */
-    protected abstract int setLayout();
-
-    /**
-     * 初始化控件
-     * onViewCreated时调用
-     *
-     * @param view view
-     */
-    protected abstract void initView(View view);
-
-    /**
-     * 初始化监听器
-     */
-    protected abstract void initListener();
-
-    /**
-     * 初始化数据
-     * onActivityCreated
-     */
-    protected abstract void initData();
-
     protected void toHome() {
         ARouter.getInstance()
                 .build(RouterUrl.HAND_MAIN)
                 .navigation();
     }
 
+    /**
+     * 添加rxJava订阅
+     *
+     * @param disposable 订阅
+     */
     protected void addDisposable(Disposable disposable) {
         mCompositeDisposable.add(disposable);
     }

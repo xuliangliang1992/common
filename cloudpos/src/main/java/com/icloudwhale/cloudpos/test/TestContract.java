@@ -1,7 +1,7 @@
 package com.icloudwhale.cloudpos.test;
 
-import com.icloudwhale.cloudpos.base.BasePresenter;
-import com.icloudwhale.cloudpos.base.BaseView;
+import com.icloudwhale.cloudpos.base.BaseRefreshContract;
+import com.icloudwhale.cloudpos.base.BaseRefreshView;
 
 /**
  * Test控制器
@@ -10,11 +10,11 @@ import com.icloudwhale.cloudpos.base.BaseView;
  */
 class TestContract {
 
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseRefreshView<User> {
 
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BaseRefreshContract.Presenter {
 
     }
 }

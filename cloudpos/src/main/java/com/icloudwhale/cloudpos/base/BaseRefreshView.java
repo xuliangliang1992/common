@@ -1,23 +1,25 @@
 package com.icloudwhale.cloudpos.base;
 
-import java.util.List;
+import androidx.databinding.ObservableArrayList;
 
 /**
- * Description: <BaseRefreshView><br>
- * Author:      mxdl<br>
- * Date:        2018/2/26<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
+ * @author xuliangliang
+ * @date 2019/9/4
+ * * @param <T>
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
 public interface BaseRefreshView<T> extends BaseRefreshContract.View {
     /**
      * 刷新数据
+     *
+     * @param data 数据
      */
-
-    void refreshData(List<T> data);
+    void refreshData(ObservableArrayList<T> data);
 
     /**
      * 加载更多
+     *
+     * @param data 数据
      */
-    void loadMoreData(List<T> data);
+    void loadMoreData(ObservableArrayList<T> data);
 }

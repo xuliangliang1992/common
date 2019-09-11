@@ -1,11 +1,9 @@
 package com.icloudwhale.cloudpos.base;
 
 /**
- * Description: <基本的刷新数据协议><br>
- * Author:      mxdl<br>
- * Date:        2018/2/25<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
 public interface BaseRefreshContract {
     interface Presenter {
@@ -20,7 +18,7 @@ public interface BaseRefreshContract {
         void loadMoreData();
     }
 
-    interface View {
+    interface View extends BaseView {
         /**
          * 是否启用下拉刷新
          *

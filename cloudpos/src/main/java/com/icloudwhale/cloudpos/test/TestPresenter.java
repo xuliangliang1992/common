@@ -1,34 +1,31 @@
-//package com.icloudwhale.cloudpos.test;
-//
-//import com.icloudwhale.cloudpos.test.TestContract;
-//import com.iwhalecloud.common.schedulers.BaseSchedulerProvider;
-//
-//import io.reactivex.disposables.CompositeDisposable;
-//
-///**
-// * @author xll
-// */
-//public class TestPresenter implements TestContract.Presenter {
-//    private TestContract.View mView;
-//    private CompositeDisposable mCompositeSubscription;
-//    private BaseSchedulerProvider mSchedulerProvider;
-//    private LoanDataSource mLoanDataSource;
-//
-//    TestPresenter(LoanDataSource loanDataSource, TestContract.View view, BaseSchedulerProvider schedulerProvider) {
-//        this.mView = view;
-//        this.mLoanDataSource = loanDataSource;
-//        this.mSchedulerProvider = schedulerProvider;
-//        mView.setPresenter(this);
-//        mCompositeSubscription = new CompositeDisposable();
-//    }
-//
-//    @Override
-//    public void subscriber() {
-//
-//    }
-//
-//    @Override
-//    public void unSubscriber() {
-//        mCompositeSubscription.clear();
-//    }
-//}
+package com.icloudwhale.cloudpos.test;
+
+import com.icloudwhale.cloudpos.base.BasePresenter;
+
+import androidx.databinding.ObservableArrayList;
+
+/**
+ * @author xll
+ */
+public class TestPresenter extends BasePresenter<TestContract.View> implements TestContract.Presenter {
+
+    TestPresenter(TestContract.View view) {
+        super(view);
+    }
+
+    /**
+     * 刷新数据
+     */
+    @Override
+    public void refreshData() {
+        mView.refreshData(new ObservableArrayList<>());
+    }
+
+    /**
+     * 加载更多
+     */
+    @Override
+    public void loadMoreData() {
+        mView.loadMoreData(new ObservableArrayList<>());
+    }
+}
