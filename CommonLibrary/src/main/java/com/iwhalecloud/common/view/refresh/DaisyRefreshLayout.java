@@ -3,8 +3,6 @@ package com.iwhalecloud.common.view.refresh;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.orhanobut.logger.Logger;
-
 /**
  * 小菊花样式的刷新控件
  *
@@ -38,7 +36,6 @@ public class DaisyRefreshLayout extends BaseRefreshLayout {
 
             @Override
             public void onPullEnable(boolean enable) {
-                Logger.d("onPullEnable  "+enable);
                 mDaisyHeaderView.onPullEnable(enable);
             }
         });

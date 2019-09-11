@@ -1,13 +1,13 @@
 package com.icloudwhale.cloudpos.base;
 
-
 import com.iwhalecloud.common.subscriber.HttpObserver;
 
 /**
- * @author xll
- * @date 2018/1/1
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
-public interface BaseView<T> extends HttpObserver {
+public interface BaseView<T extends BasePresenter> extends HttpObserver {
 
     /**
      * 设置presenter对象

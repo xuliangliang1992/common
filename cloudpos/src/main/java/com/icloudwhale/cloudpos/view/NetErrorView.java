@@ -1,15 +1,16 @@
 package com.icloudwhale.cloudpos.view;
 
 import android.content.Context;
-import androidx.databinding.DataBindingUtil;
-import androidx.annotation.ColorRes;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.databinding.ViewNetErrorBinding;
+
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * 无网络View
@@ -37,6 +38,6 @@ public class NetErrorView extends RelativeLayout {
     }
 
     public void setNetErrorBackground(@ColorRes int colorResId) {
-        mBinding.rlNetErrorRoot.setBackgroundColor(ContextCompat.getColor(getContext(),colorResId));
+        mBinding.rlNetErrorRoot.setBackgroundColor(ContextCompat.getColor(getContext(), colorResId));
     }
 }

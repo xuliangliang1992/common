@@ -39,11 +39,11 @@ public class DaisyHeaderView extends RelativeLayout implements PullContract {
         LayoutInflater.from(context).inflate(R.layout.layout_daisy, this);
         mTxtLoading = findViewById(R.id.txt_loading);
         mTxtLoading.setText("下拉刷新");
+
         ImageView imgDaisy = findViewById(R.id.img_daisy);
         mRotation = ObjectAnimator.ofFloat(imgDaisy, "rotation", 0, 360).setDuration(800);
         mRotation.setRepeatCount(ValueAnimator.INFINITE);
         mRotation.setInterpolator(new LinearInterpolator());
-
     }
 
     @Override

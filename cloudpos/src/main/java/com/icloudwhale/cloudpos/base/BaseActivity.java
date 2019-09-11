@@ -22,7 +22,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-/**
+/**Activity基类
  * @author xuliangliang
  * @date 2019/9/4
  * copyright(c) 浩鲸云计算科技股份有限公司

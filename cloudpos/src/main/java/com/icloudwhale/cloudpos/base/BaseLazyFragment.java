@@ -1,17 +1,18 @@
 package com.icloudwhale.cloudpos.base;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 
 /**
- * fragment懒加载
+ * 懒加载
  *
- * @author xll
- * @date 2018/12/3
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
-
-public abstract class BaseLazyFragment extends BaseFragment {
+public abstract class BaseLazyFragment extends BaseRefreshFragment {
 
     /**
      * 标志位，标志fragment是否可见。
@@ -57,7 +58,7 @@ public abstract class BaseLazyFragment extends BaseFragment {
         if (!isPrepared || !isVisible || !isFirst) {
             return;
         }
-//        showProgressDialog();
+        //        showProgressDialog();
         onLazyLoad();
         isFirst = false;
     }

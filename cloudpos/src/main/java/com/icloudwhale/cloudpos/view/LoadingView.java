@@ -1,16 +1,17 @@
 package com.icloudwhale.cloudpos.view;
 
 import android.content.Context;
-import androidx.databinding.DataBindingUtil;
 import android.graphics.drawable.AnimationDrawable;
-import androidx.annotation.ColorRes;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.databinding.ViewLoadingBinding;
+
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * 加载中View
@@ -30,7 +31,7 @@ public class LoadingView extends RelativeLayout {
     }
 
     public void setLoadingBackgroundColor(@ColorRes int colorResId) {
-        binding.rlLoadingRoot.setBackgroundColor(ContextCompat.getColor(getContext(),colorResId));
+        binding.rlLoadingRoot.setBackgroundColor(ContextCompat.getColor(getContext(), colorResId));
     }
 
     private void startLoading() {

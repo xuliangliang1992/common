@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.orhanobut.logger.Logger;
-
 /**
  * @author xuliangliang
  * @date 2019/9/4
@@ -85,7 +83,6 @@ public abstract class BaseRefreshLayout extends SuperSwipeRefreshLayout {
      * @param enableLoadMore true 可以上拉
      */
     public void setEnableLoadMore(boolean enableLoadMore) {
-        Logger.d("setEnableLoadMore  " + enableLoadMore);
         isEnableLoadMore = enableLoadMore;
     }
 
@@ -93,14 +90,11 @@ public abstract class BaseRefreshLayout extends SuperSwipeRefreshLayout {
      * 自动刷新
      */
     public void autoRefresh() {
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showRefresh();
-                setRefreshing(true);
-                if (mOnAutoLoadListener != null) {
-                    mOnAutoLoadListener.onAutoLoad();
-                }
+        postDelayed(() -> {
+            showRefresh();
+            setRefreshing(true);
+            if (mOnAutoLoadListener != null) {
+                mOnAutoLoadListener.onAutoLoad();
             }
         }, 1000);
     }

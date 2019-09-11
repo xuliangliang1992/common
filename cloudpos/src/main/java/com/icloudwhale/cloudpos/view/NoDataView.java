@@ -1,10 +1,6 @@
 package com.icloudwhale.cloudpos.view;
 
 import android.content.Context;
-import androidx.databinding.DataBindingUtil;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
@@ -12,6 +8,10 @@ import android.widget.RelativeLayout;
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.databinding.ViewNoDataBinding;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 /**
  * 无数据View

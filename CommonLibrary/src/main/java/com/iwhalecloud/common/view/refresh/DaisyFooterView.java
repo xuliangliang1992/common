@@ -43,7 +43,6 @@ public class DaisyFooterView extends RelativeLayout implements PushContract {
         mRotation = ObjectAnimator.ofFloat(imgDaisy, "rotation", 0, 360).setDuration(800);
         mRotation.setRepeatCount(ValueAnimator.INFINITE);
         mRotation.setInterpolator(new LinearInterpolator());
-
     }
 
     @Override
