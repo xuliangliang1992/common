@@ -29,6 +29,10 @@ android {
         enabled = true
     }
 
+    compileOptions {
+        sourceCompatibility = rootProject.ext.jdkVersion
+        targetCompatibility = rootProject.ext.jdkVersion
+    }
 }
 
 dependencies {

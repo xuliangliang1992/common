@@ -1,13 +1,14 @@
-package com.iwhalecloud.common.base.adapter.viewholder;
+package com.iwhalecloud.common.base.adapter;
 
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Created by zmy on 2018/1/19.
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
-
 public class BaseBindingViewHolder<B> extends RecyclerView.ViewHolder {
     private B binding;
 

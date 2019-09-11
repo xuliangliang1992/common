@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.iwhalecloud.common.base.adapter.BaseBindingListAdapter;
+import com.iwhalecloud.common.base.adapter.BaseBindingAdapter;
 import com.iwhalecloud.common.commonlibrary.R;
 import com.iwhalecloud.common.commonlibrary.databinding.DialogBottomListBinding;
 import com.iwhalecloud.common.commonlibrary.databinding.ItemBottomListBinding;
@@ -50,7 +50,7 @@ public class BottomListDialog extends BottomBaseDialog {
         mBinding.rvList.addItemDecoration(decoration);
         ItemAdapter mItemAdapter = new ItemAdapter();
         mBinding.rvList.setAdapter(mItemAdapter);
-        mItemAdapter.setItems(titles);
+        mItemAdapter.refresh(titles);
         return view;
     }
 
@@ -59,7 +59,7 @@ public class BottomListDialog extends BottomBaseDialog {
         return true;
     }
 
-    class ItemAdapter extends BaseBindingListAdapter<String, ItemBottomListBinding> {
+    class ItemAdapter extends BaseBindingAdapter<String, ItemBottomListBinding> {
 
         @Override
         protected int getItemLayout(int viewType) {

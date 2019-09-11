@@ -3,12 +3,12 @@ package com.icloudwhale.cloudpos.test;
 
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.databinding.TestItemBinding;
-import com.iwhalecloud.common.base.adapter.BaseBindingListAdapter;
+import com.iwhalecloud.common.base.adapter.BaseBindingAdapter;
 
 /**
  * @author xll
  */
-public class TestAdapter extends BaseBindingListAdapter<User, TestItemBinding> {
+public class TestAdapter extends BaseBindingAdapter<User, TestItemBinding> {
 
     @Override
     protected int getItemLayout(int viewType) {

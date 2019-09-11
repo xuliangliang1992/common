@@ -14,12 +14,13 @@ import com.iwhalecloud.common.constant.RouterUrl;
 import com.iwhalecloud.common.subscriber.HttpObserver;
 import com.iwhalecloud.common.util.FileUtil;
 import com.iwhalecloud.common.util.ToastUtil;
-import com.orhanobut.logger.Logger;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Fragment基类
@@ -33,12 +34,15 @@ public abstract class BaseFragment extends Fragment implements HttpObserver {
      */
     protected BaseActivity mActivity;
 
+    private CompositeDisposable mCompositeDisposable;
+
     private PermissionListener mPermissionListener;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         onAttachToContext(context);
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     private void onAttachToContext(Context context) {
@@ -59,7 +63,6 @@ public abstract class BaseFragment extends Fragment implements HttpObserver {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Logger.d("BaseFragment onViewCreated");
         initCommonView(view);
         initView(view);
         initListener();
@@ -103,6 +106,7 @@ public abstract class BaseFragment extends Fragment implements HttpObserver {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mCompositeDisposable.clear();
     }
 
     @Override
@@ -140,6 +144,10 @@ public abstract class BaseFragment extends Fragment implements HttpObserver {
         ARouter.getInstance()
                 .build(RouterUrl.HAND_MAIN)
                 .navigation();
+    }
+
+    protected void addDisposable(Disposable disposable) {
+        mCompositeDisposable.add(disposable);
     }
 
     /**

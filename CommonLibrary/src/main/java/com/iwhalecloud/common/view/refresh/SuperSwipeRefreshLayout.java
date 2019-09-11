@@ -15,7 +15,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +28,8 @@ import android.view.animation.Transformation;
 import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+
+import com.orhanobut.logger.Logger;
 
 import androidx.core.view.MotionEventCompat;
 import androidx.core.view.ViewCompat;
@@ -55,7 +56,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 @SuppressLint("ClickableViewAccessibility")
 @SuppressWarnings({"deprecation", "AlibabaMethodTooLong"})
 public class SuperSwipeRefreshLayout extends ViewGroup {
-    private static final String LOG_TAG = "SwipeRefreshLayout";
     private static final int HEADER_VIEW_HEIGHT = 50;
 
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
@@ -491,7 +491,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         final int childTop = getPaddingTop() + distance - pushDistance;
         final int childWidth = width - getPaddingLeft() - getPaddingRight();
         final int childHeight = height - getPaddingTop() - getPaddingBottom();
-        Log.d(LOG_TAG, "debug:onLayout childHeight = " + childHeight);
+        Logger.d("debug:onLayout childHeight = " + childHeight);
         // 更新目标View的位置
         child.layout(childLeft, childTop, childLeft + childWidth, childTop
                 + childHeight);
@@ -661,7 +661,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                 mInitialMotionY = initialMotionY;
             case MotionEvent.ACTION_MOVE:
                 if (mActivePointerId == INVALID_POINTER) {
-                    Log.e(LOG_TAG, "Got ACTION_MOVE event but don't have an active pointer id.");
+                    Logger.e("Got ACTION_MOVE event but don't have an active pointer id.");
                     return false;
                 }
                 final float y = getMotionEventY(ev, mActivePointerId);
@@ -752,7 +752,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_MOVE: {
                 final int pointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                 if (pointerIndex < 0) {
-                    Log.e(LOG_TAG, "Got ACTION_MOVE event but have an invalid active pointer id.");
+                    Logger.e("Got ACTION_MOVE event but have an invalid active pointer id.");
                     return false;
                 }
                 final float y = MotionEventCompat.getY(ev, pointerIndex);
@@ -815,7 +815,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_CANCEL: {
                 if (mActivePointerId == INVALID_POINTER) {
                     if (action == MotionEvent.ACTION_UP) {
-                        Log.e(LOG_TAG, "Got ACTION_UP event but don't have an active pointer id.");
+                        Logger.e("Got ACTION_UP event but don't have an active pointer id.");
                     }
                     return false;
                 }
@@ -872,14 +872,13 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_DOWN:
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                 mIsBeingDragged = false;
-                Log.d(LOG_TAG, "debug:onTouchEvent ACTION_DOWN");
+                Logger.d("debug:onTouchEvent ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE: {
                 final int pointerIndex = MotionEventCompat.findPointerIndex(ev,
                         mActivePointerId);
                 if (pointerIndex < 0) {
-                    Log.e(LOG_TAG,
-                            "Got ACTION_MOVE event but have an invalid active pointer id.");
+                    Logger.e("Got ACTION_MOVE event but have an invalid active pointer id.");
                     return false;
                 }
                 final float y = MotionEventCompat.getY(ev, pointerIndex);
@@ -906,8 +905,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_CANCEL: {
                 if (mActivePointerId == INVALID_POINTER) {
                     if (action == MotionEvent.ACTION_UP) {
-                        Log.e(LOG_TAG,
-                                "Got ACTION_UP event but don't have an active pointer id.");
+                        Logger.e("Got ACTION_UP event but don't have an active pointer id.");
                     }
                     return false;
                 }
@@ -1058,8 +1056,9 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
 
         int headViewWidth = mHeadViewContainer.getMeasuredWidth();
         int headViewHeight = mHeadViewContainer.getMeasuredHeight();
+        // 更新头布局的位置
         mHeadViewContainer.layout((width / 2 - headViewWidth / 2),
-                -headViewHeight, (width / 2 + headViewWidth / 2), 0);// 更新头布局的位置
+                -headViewHeight, (width / 2 + headViewWidth / 2), 0);
         int footViewWidth = mFooterViewContainer.getMeasuredWidth();
         int footViewHeight = mFooterViewContainer.getMeasuredHeight();
         mFooterViewContainer.layout((width / 2 - footViewWidth / 2), height,
@@ -1079,7 +1078,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             }
             targetTop = (mFrom + (int) ((endTarget - mFrom) * interpolatedTime));
             int offset = targetTop - mHeadViewContainer.getTop();
-            setTargetOffsetTopAndBottom(offset, false /* requires update */);
+            setTargetOffsetTopAndBottom(offset, false);
         }
 
         @Override
@@ -1092,7 +1091,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         int targetTop = 0;
         targetTop = (mFrom + (int) ((mOriginalOffsetTop - mFrom) * interpolatedTime));
         int offset = targetTop - mHeadViewContainer.getTop();
-        setTargetOffsetTopAndBottom(offset, false /* requires update */);
+        setTargetOffsetTopAndBottom(offset, false);
     }
 
     private final Animation mAnimateToStartPosition = new Animation() {

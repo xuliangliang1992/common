@@ -5,6 +5,7 @@ import android.view.View;
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.base.BaseRefreshFragment;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -58,6 +59,8 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
 
     @Override
     protected void initListener() {
+        mTestAdapter.setItemClickListener((user, position) -> Logger.d("onItemClick " + position));
+        mTestAdapter.setOnItemLongClickListener((user, position) -> Logger.d("onItemLongClick " + position));
 
     }
 
@@ -66,14 +69,9 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
         mActivity.showInitLoadView();
         mUsers = new ObservableArrayList<>();
 
-        Observable.timer(1, TimeUnit.SECONDS)
+        addDisposable(Observable.timer(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        mActivity.hideInitLoadView();
-                    }
-                });
+                .subscribe(aLong -> mActivity.hideInitLoadView()));
     }
 
     @Override
@@ -85,6 +83,7 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
     public void onDestroy() {
         super.onDestroy();
         mPresenter.unSubscriber();
+        mTestAdapter.destroy();
     }
 
     @Override
@@ -105,15 +104,13 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
         page = 1;
         mUsers.clear();
         getData();
-        Observable.timer(2, TimeUnit.SECONDS)
+        addDisposable(Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        mTestAdapter.setItems(mUsers);
-                        stopRefresh();
-                    }
-                });
+                .subscribe(aLong -> {
+                    getData();
+                    mTestAdapter.refresh(mUsers);
+                    stopRefresh();
+                }));
     }
 
     /**
@@ -123,18 +120,20 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
     public void onLoadMoreEvent() {
         page++;
         getData();
-        Observable.timer(2, TimeUnit.SECONDS)
+        addDisposable(Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        mTestAdapter.setItems(mUsers);
+                        getData();
+                        mTestAdapter.loadMore(mUsers);
                         stopLoadMore();
                     }
-                });
+                }));
     }
 
     private void getData() {
+        mUsers.clear();
         for (int i = 10 * (page - 1); i < 10 * page; i++) {
             mUsers.add(new User("名称" + i));
         }
@@ -145,15 +144,12 @@ public class TestFragment extends BaseRefreshFragment<User> implements TestContr
      */
     @Override
     public void onAutoLoadEvent() {
-        getData();
-        Observable.timer(2, TimeUnit.SECONDS)
+        addDisposable(Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        mTestAdapter.setItems(mUsers);
-                        stopRefresh();
-                    }
-                });
+                .subscribe(aLong -> {
+                    getData();
+                    mTestAdapter.refresh(mUsers);
+                    stopRefresh();
+                }));
     }
 }

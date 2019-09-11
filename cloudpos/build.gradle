@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.icloudwhale.cloudpos"
-        minSdkVersion 24
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -34,8 +33,8 @@ android {
         enabled = true
     }
     compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        sourceCompatibility = rootProject.ext.jdkVersion
+        targetCompatibility = rootProject.ext.jdkVersion
     }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
