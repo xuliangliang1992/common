@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.iwhalecloud.common.base.adapter.BaseBindingAdapter;
+import com.iwhalecloud.common.base.adapter.BaseSingleBindingAdapter;
 import com.iwhalecloud.common.commonlibrary.R;
 import com.iwhalecloud.common.commonlibrary.databinding.DialogBottomListBinding;
 import com.iwhalecloud.common.commonlibrary.databinding.ItemBottomListBinding;
@@ -59,10 +59,10 @@ public class BottomListDialog extends BottomBaseDialog {
         return true;
     }
 
-    class ItemAdapter extends BaseBindingAdapter<String, ItemBottomListBinding> {
+    class ItemAdapter extends BaseSingleBindingAdapter<String, ItemBottomListBinding> {
 
         @Override
-        protected int getItemLayout(int viewType) {
+        protected int getItemLayout() {
             return R.layout.item_bottom_list;
         }
 

@@ -140,7 +140,11 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     private void getData() {
         mUsers.clear();
         for (int i = 10 * (page - 1); i < 10 * page; i++) {
-            mUsers.add(new User("名称" + i));
+            if (i % 2 == 0) {
+                mUsers.add(new User("名称" + i, true));
+            } else {
+                mUsers.add(new User("名称" + i, false));
+            }
         }
     }
 

@@ -10,9 +10,11 @@ import lombok.Data;
 @Data
 public class User {
     private String name;
+    private boolean type;
 
-    public User(String name) {
+    public User(String name,boolean type) {
         this.name = name;
+        this.type = type;
     }
 
     public String getName() {
@@ -21,5 +23,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isType() {
+        return type;
+    }
+
+    public void setType(boolean type) {
+        this.type = type;
     }
 }
