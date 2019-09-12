@@ -3,7 +3,7 @@
 
     <data>
 
-        <import type="com.icloudwhale.cloudpos.test.User"/>
+        <import type="com.icloudwhale.cloudpos.fun.test.User"/>
 
         <variable
             name="user"

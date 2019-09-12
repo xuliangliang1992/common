@@ -97,11 +97,6 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         super.onDestroy();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
     protected void toHome() {
         ARouter.getInstance()
                 .build(RouterUrl.HAND_MAIN)

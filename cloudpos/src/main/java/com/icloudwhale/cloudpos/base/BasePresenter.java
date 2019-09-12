@@ -3,7 +3,6 @@ package com.icloudwhale.cloudpos.base;
 import com.icloudwhale.cloudpos.http.request.LoanDataSource;
 import com.icloudwhale.cloudpos.injection.Injection;
 import com.iwhalecloud.common.schedulers.BaseSchedulerProvider;
-import com.orhanobut.logger.Logger;
 
 import io.reactivex.disposables.CompositeDisposable;
 

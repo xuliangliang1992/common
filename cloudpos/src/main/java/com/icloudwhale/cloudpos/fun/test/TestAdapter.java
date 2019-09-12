@@ -1,4 +1,4 @@
-package com.icloudwhale.cloudpos.test;
+package com.icloudwhale.cloudpos.fun.test;
 
 
 import com.icloudwhale.cloudpos.R;

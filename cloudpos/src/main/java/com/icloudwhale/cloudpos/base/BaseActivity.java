@@ -6,6 +6,8 @@ import android.view.ViewStub;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.icloudwhale.cloudpos.R;
+import com.icloudwhale.cloudpos.base.event.EventBusUtil;
+import com.icloudwhale.cloudpos.base.event.EventMessage;
 import com.icloudwhale.cloudpos.databinding.BaseActivityBinding;
 import com.icloudwhale.cloudpos.databinding.StubInitLoadingBinding;
 import com.icloudwhale.cloudpos.databinding.StubNetErrorBinding;
@@ -15,6 +17,9 @@ import com.iwhalecloud.common.constant.RouterUrl;
 import com.iwhalecloud.common.util.FitUtil;
 import com.umeng.analytics.MobclickAgent;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -22,7 +27,9 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-/**Activity基类
+/**
+ * Activity基类
+ *
  * @author xuliangliang
  * @date 2019/9/4
  * copyright(c) 浩鲸云计算科技股份有限公司
@@ -44,6 +51,9 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         binding.viewStubInitLoading.setOnInflateListener(this);
         binding.viewStubNoData.setOnInflateListener(this);
         binding.viewStubNetError.setOnInflateListener(this);
+        if (isRegisteredEventBus()) {
+            EventBusUtil.register(this);
+        }
     }
 
     /**
@@ -90,14 +100,14 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
 
     @Override
     protected void onResume() {
-        super.onResume();
         MobclickAgent.onResume(this);
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         MobclickAgent.onPause(this);
+        super.onPause();
     }
 
     @Override
@@ -107,6 +117,9 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
 
     @Override
     protected void onDestroy() {
+        if (isRegisteredEventBus()) {
+            EventBusUtil.unregister(this);
+        }
         super.onDestroy();
     }
 
@@ -248,5 +261,32 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
 
                 break;
         }
+    }
+
+    /**
+     * 是否注册事件分发
+     *
+     * @return true 注册；false 不注册，默认不注册
+     */
+    protected boolean isRegisteredEventBus() {
+        return false;
+    }
+
+    /**
+     * 接收到分发的事件
+     *
+     * @param event 事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReceiveEvent(EventMessage event) {
+    }
+
+    /**
+     * 接收到分发的粘性事件
+     *
+     * @param event 粘性事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onReceiveStickyEvent(EventMessage event) {
     }
 }

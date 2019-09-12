@@ -1,5 +1,6 @@
-package com.icloudwhale.cloudpos.test;
+package com.icloudwhale.cloudpos.fun.test;
 
+import android.content.Context;
 import android.view.View;
 
 import com.icloudwhale.cloudpos.R;
@@ -8,8 +9,11 @@ import com.icloudwhale.cloudpos.base.event.EventBusUtil;
 import com.icloudwhale.cloudpos.base.event.EventCode;
 import com.icloudwhale.cloudpos.base.event.EventMessage;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
+import com.iwhalecloud.common.util.PermissionUtil;
 import com.orhanobut.logger.Logger;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.databinding.DataBindingUtil;
@@ -61,6 +65,24 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     public void initListener() {
         mTestAdapter.setItemClickListener((user, position) -> {
             Logger.d("onItemClick " + position);
+            PermissionUtil.launchCamera(
+                    new PermissionUtil.RequestPermission() {
+                        @Override
+                        public void onRequestPermissionSuccess() {
+                        }
+
+                        @Override
+                        public void onRequestPermissionFailure(List<String> permissions) {
+
+                        }
+
+                        @Override
+                        public void onRequestPermissionFailureWithAskNeverAgain(List<String> permissions) {
+
+                        }
+                    },
+                    new RxPermissions(TestFragment.this)
+            );
             EventBusUtil.post(new EventMessage<String>(EventCode.EVENT_A, user.getName()));
         });
         mTestAdapter.setOnItemLongClickListener((user, position) -> Logger.d("onItemLongClick " + position));
