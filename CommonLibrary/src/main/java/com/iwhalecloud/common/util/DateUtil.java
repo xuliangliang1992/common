@@ -1,12 +1,12 @@
 package com.iwhalecloud.common.util;
 
-import com.orhanobut.logger.Logger;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import timber.log.Timber;
 
 /**
  * 时间操作工具类
@@ -120,7 +120,7 @@ public class DateUtil {
             return years;
         } catch (ParseException e) {
             e.printStackTrace();
-            Logger.t(TAG).i(e.getMessage());
+            Timber.tag(TAG).i(e);
         }
         return 0;
     }
@@ -383,7 +383,7 @@ public class DateUtil {
         try {
             Date beginDate = simpleDateFormat.parse(beginTime);
             Date endDate = simpleDateFormat.parse(endTime);
-            Logger.d(beginTime + " " + endTime + " " + beginDate.before(endDate));
+            Timber.tag(TAG).d(beginTime + " " + endTime + " " + beginDate.before(endDate));
             return beginDate.before(endDate);
         } catch (ParseException e) {
             e.printStackTrace();

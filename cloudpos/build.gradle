@@ -17,15 +17,32 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
                 includeCompileClasspath = true
             }
         }
     }
 
+    signingConfigs {
+        config {
+            storeFile file('/Users/xuliangliang/icloud.jks')
+            storePassword "icloud"
+            keyAlias "icloud"
+            keyPassword "icloud"
+        }
+    }
+
     buildTypes {
+        debug {
+            minifyEnabled true
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

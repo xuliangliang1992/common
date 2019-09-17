@@ -7,7 +7,8 @@ import com.icloudwhale.cloudpos.base.BaseActivity;
 import com.icloudwhale.cloudpos.base.event.EventCode;
 import com.icloudwhale.cloudpos.base.event.EventMessage;
 import com.iwhalecloud.common.util.ActivityUtil;
-import com.orhanobut.logger.Logger;
+
+import timber.log.Timber;
 
 /**
  * @author xll
@@ -35,7 +36,7 @@ public class TestActivity extends BaseActivity {
     public void onReceiveEvent(EventMessage event) {
         super.onReceiveEvent(event);
         if (event.getCode() == EventCode.EVENT_A) {
-            Logger.d(event.toString()+"  TestActivity");
+            Timber.d(event.toString()+"  TestActivity");
         }
     }
 }

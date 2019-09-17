@@ -76,5 +76,6 @@ ext {
 
     glideVersion = '4.9.0'
 
-    arouterCompilerVersion = '1.2.1'
+    arouterCompilerVersion = '1.2.2'
+    arouterApiVersion = '1.5.0'
 }

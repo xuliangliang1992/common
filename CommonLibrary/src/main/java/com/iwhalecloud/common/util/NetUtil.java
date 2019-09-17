@@ -5,9 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.iwhalecloud.common.base.BaseApplication;
-import com.orhanobut.logger.Logger;
 
 import androidx.annotation.NonNull;
+import timber.log.Timber;
 
 /**
  * 网络工具类
@@ -74,18 +74,18 @@ public class NetUtil {
         if (activeNetwork != null) {
             if (activeNetwork.isConnected()) {
                 if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
-                    Logger.v("当前WiFi连接可用 ");
+                    Timber.v("当前WiFi连接可用 ");
                     return NetType.WIFI;
                 } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                    Logger.v("当前移动网络连接可用 ");
+                    Timber.v("当前移动网络连接可用 ");
                     return NetType.NET_4G;
                 }
             } else {
-                Logger.v("当前没有网络连接，请确保你已经打开网络 ");
+                Timber.v("当前没有网络连接，请确保你已经打开网络 ");
                 return NetType.NO_NET;
             }
         } else {
-            Logger.v("当前没有网络连接，请确保你已经打开网络 ");
+            Timber.v("当前没有网络连接，请确保你已经打开网络 ");
             return NetType.NO_NET;
         }
         return NetType.NO_NET;

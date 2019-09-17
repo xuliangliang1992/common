@@ -3,12 +3,13 @@ package com.iwhalecloud.common.util;
 import android.Manifest;
 import android.annotation.SuppressLint;
 
-import com.orhanobut.logger.Logger;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 
 /**
@@ -83,17 +84,17 @@ public class PermissionUtil {
                             }
                         }
                         if (failurePermissions.size() > 0) {
-                            Logger.d("Request permissions failure");
+                            Timber.d("Request permissions failure");
                             requestPermission.onRequestPermissionFailure(failurePermissions);
                         }
 
                         if (askNeverAgainPermissions.size() > 0) {
-                            Logger.d("Request permissions failure with ask never again");
+                            Timber.d("Request permissions failure with ask never again");
                             requestPermission.onRequestPermissionFailureWithAskNeverAgain(askNeverAgainPermissions);
                         }
 
                         if (failurePermissions.size() == 0 && askNeverAgainPermissions.size() == 0) {
-                            Logger.d("Request permissions success");
+                            Timber.d("Request permissions success");
                             requestPermission.onRequestPermissionSuccess();
                         }
                     });

@@ -10,8 +10,10 @@ import com.icloudwhale.cloudpos.base.event.EventCode;
 import com.icloudwhale.cloudpos.base.event.EventMessage;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
 import com.iwhalecloud.common.util.PermissionUtil;
-import com.orhanobut.logger.Logger;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,6 +26,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.functions.ObjectHelper;
+import timber.log.Timber;
 
 /**
  * @author xll
@@ -33,7 +36,8 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     private TestFragmentBinding mBinding;
     private TestAdapter mTestAdapter;
 
-
+    @Contract(" -> new")
+    @NotNull
     static TestFragment newInstance() {
         return new TestFragment();
     }
@@ -87,7 +91,7 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
             );
             EventBusUtil.post(new EventMessage<>(EventCode.EVENT_A, user.getName()));
         });
-        mTestAdapter.setOnItemLongClickListener((user, position) -> Logger.d("onItemLongClick " + position));
+        mTestAdapter.setOnItemLongClickListener((user, position) -> Timber.d("onItemLongClick " + position));
 
     }
 
@@ -100,16 +104,16 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
         Observable.interval(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aLong -> {
-                            Logger.d("onNext " + aLong);
+                            Timber.d("onNext " + aLong);
                             if (aLong == 10) {
-                                ObjectHelper.requireNonNull(aLong,"");
+                                ObjectHelper.requireNonNull(aLong, "");
                                 throw new NullPointerException();
                             }
                         },
-                        throwable -> Logger.d("onError " + throwable.getMessage()),
-                        () -> Logger.d("onComplete"),
+                        throwable -> Timber.d("onError " + throwable.getMessage()),
+                        () -> Timber.d("onComplete"),
                         disposable -> {
-                            Logger.d("onSubscribe");
+                            Timber.d("onSubscribe");
                             addDisposable(disposable);
                         });
         Observable.interval(1, TimeUnit.SECONDS)
@@ -143,7 +147,7 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     public void onReceiveEvent(EventMessage event) {
         super.onReceiveEvent(event);
         if (event.getCode() == EventCode.EVENT_A) {
-            Logger.d(event.toString());
+            Timber.d(event.toString());
         }
     }
 

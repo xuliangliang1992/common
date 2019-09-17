@@ -9,15 +9,16 @@ import android.os.Environment;
 import android.util.DisplayMetrics;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.iwhalecloud.common.commonlibrary.BuildConfig;
 import com.iwhalecloud.common.constant.BaseConstant;
 import com.iwhalecloud.common.util.FileUtil;
-import com.orhanobut.logger.LogLevel;
-import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Locale;
 import java.util.Properties;
+
+import timber.log.Timber;
 
 /**
  * application基类 主要做一些共有的初始化动作
@@ -65,7 +66,7 @@ public class BaseApplication extends Application {
         init();
         initLogger();
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        Logger.i("width = " + displayMetrics.widthPixels + "\n" + "height = " + displayMetrics.heightPixels);
+        Timber.i("width = " + displayMetrics.widthPixels + "\n" + "height = " + displayMetrics.heightPixels);
         initRouter(this);
     }
 
@@ -86,11 +87,20 @@ public class BaseApplication extends Application {
      * 打release版的时候 改为NONE
      */
     private void initLogger() {
-        Logger.init(BaseApplication.class.getSimpleName()).methodCount(3)
-                .hideThreadInfo()
-                .logLevel(LogLevel.FULL)
-                .methodCount(1)
-                .methodOffset(5);
+        if (BuildConfig.LOG_DEBUG) {//Timber初始化
+            //Timber 是一个日志框架容器,外部使用统一的Api,内部可以动态的切换成任何日志框架(打印策略)进行日志打印
+            //并且支持添加多个日志框架(打印策略),做到外部调用一次 Api,内部却可以做到同时使用多个策略
+            //比如添加三个策略,一个打印日志,一个将日志保存本地,一个将日志上传服务器
+            Timber.plant(new Timber.DebugTree());
+            // 如果你想将框架切换为 Logger 来打印日志,请使用下面的代码,如想切换为其他日志框架请根据下面的方式扩展
+            //                    Logger.addLogAdapter(new AndroidLogAdapter());
+            //                    Timber.plant(new Timber.DebugTree() {
+            //                        @Override
+            //                        protected void log(int priority, String tag, String message, Throwable t) {
+            //                            Logger.log(priority, tag, message, t);
+            //                        }
+            //                    });
+        }
     }
 
     /**
@@ -110,7 +120,7 @@ public class BaseApplication extends Application {
             final PackageInfo pi = pm.getPackageInfo(getPackageName(), 0);
 
             APP_NAME = getString(pi.applicationInfo.labelRes);
-            Logger.d("info", "APP_NAME == " + APP_NAME);
+            Timber.d("APP_NAME == " + APP_NAME);
             APP_VERSION_CODE = pi.versionCode;
             APP_VERSION_NAME = pi.versionName;
             APP_PACKAGE = pi.packageName;
@@ -121,28 +131,28 @@ public class BaseApplication extends Application {
             MODEL = Build.MODEL;
             SERIAL = Build.SERIAL;
 
-            Logger.i(APP_NAME + " (" + APP_PACKAGE + ")" + APP_VERSION_NAME + "(" + pi.versionCode + ")");
-            Logger.i("Root             dir: " + Environment.getRootDirectory());
-            Logger.i("Data             dir: " + Environment.getDataDirectory());
-            Logger.i("External storage dir: " + extStorage);
-            Logger.i("Files            dir: " + FileUtil.getAbsolutePath(getFilesDir()));
-            Logger.i("Cache            dir: " + FileUtil.getAbsolutePath(getCacheDir()));
-            Logger.i("System locale       : " + defLocale);
-            Logger.i("BOARD       : " + Build.BOARD);
-            Logger.i("BRAND       : " + Build.BRAND);
-            Logger.i("CPU_ABI     : " + buildProps.getProperty("ro.product.cpu.abi"));
-            Logger.i("CPU_ABI2    : " + buildProps.getProperty("ro.product.cpu.abi2"));
-            Logger.i("DEVICE      : " + Build.DEVICE);
-            Logger.i("DISPLAY     : " + Build.DISPLAY);
-            Logger.i("FINGERPRINT : " + Build.FINGERPRINT);
-            Logger.i("ID          : " + Build.ID);
-            Logger.i("MANUFACTURER: " + buildProps.getProperty("ro.product.manufacturer"));
-            Logger.i("MODEL       : " + Build.MODEL);
-            Logger.i("PRODUCT     : " + Build.PRODUCT);
-            Logger.i("RELEASE VERSION:" + Build.VERSION.RELEASE);
-            Logger.i("SERIAL" + Build.SERIAL);
+            Timber.i(APP_NAME + " (" + APP_PACKAGE + ")" + APP_VERSION_NAME + "(" + pi.versionCode + ")");
+            Timber.i("Root             dir: " + Environment.getRootDirectory());
+            Timber.i("Data             dir: " + Environment.getDataDirectory());
+            Timber.i("External storage dir: " + extStorage);
+            Timber.i("Files            dir: " + FileUtil.getAbsolutePath(getFilesDir()));
+            Timber.i("Cache            dir: " + FileUtil.getAbsolutePath(getCacheDir()));
+            Timber.i("System locale       : " + defLocale);
+            Timber.i("BOARD       : " + Build.BOARD);
+            Timber.i("BRAND       : " + Build.BRAND);
+            Timber.i("CPU_ABI     : " + buildProps.getProperty("ro.product.cpu.abi"));
+            Timber.i("CPU_ABI2    : " + buildProps.getProperty("ro.product.cpu.abi2"));
+            Timber.i("DEVICE      : " + Build.DEVICE);
+            Timber.i("DISPLAY     : " + Build.DISPLAY);
+            Timber.i("FINGERPRINT : " + Build.FINGERPRINT);
+            Timber.i("ID          : " + Build.ID);
+            Timber.i("MANUFACTURER: " + buildProps.getProperty("ro.product.manufacturer"));
+            Timber.i("MODEL       : " + Build.MODEL);
+            Timber.i("PRODUCT     : " + Build.PRODUCT);
+            Timber.i("RELEASE VERSION:" + Build.VERSION.RELEASE);
+            Timber.i("SERIAL" + Build.SERIAL);
         } catch (final PackageManager.NameNotFoundException e) {
-            Logger.w("init NameNotFoundException", e);
+            Timber.w("init NameNotFoundException" + e);
         }
     }
 

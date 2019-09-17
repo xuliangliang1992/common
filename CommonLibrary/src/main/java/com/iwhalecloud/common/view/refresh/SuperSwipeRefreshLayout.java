@@ -29,14 +29,13 @@ import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-//import com.orhanobut.logger.Logger;
-
 import androidx.core.view.MotionEventCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import timber.log.Timber;
 
 /**
  * 支持下拉刷新和上拉加载更多<br>
@@ -56,6 +55,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 @SuppressLint("ClickableViewAccessibility")
 @SuppressWarnings({"deprecation", "AlibabaMethodTooLong"})
 public class SuperSwipeRefreshLayout extends ViewGroup {
+    private static final String TAG = "SuperSwipeRefreshLayout";
     private static final int HEADER_VIEW_HEIGHT = 50;
 
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
@@ -660,7 +660,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                 mInitialMotionY = initialMotionY;
             case MotionEvent.ACTION_MOVE:
                 if (mActivePointerId == INVALID_POINTER) {
-//                    Logger.e("Got ACTION_MOVE event but don't have an active pointer id.");
+                    Timber.e("Got ACTION_MOVE event but don't have an active pointer id.");
                     return false;
                 }
                 final float y = getMotionEventY(ev, mActivePointerId);
@@ -751,7 +751,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_MOVE: {
                 final int pointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                 if (pointerIndex < 0) {
-//                    Logger.e("Got ACTION_MOVE event but have an invalid active pointer id.");
+                    Timber.e("Got ACTION_MOVE event but have an invalid active pointer id.");
                     return false;
                 }
                 final float y = MotionEventCompat.getY(ev, pointerIndex);
@@ -814,7 +814,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_CANCEL: {
                 if (mActivePointerId == INVALID_POINTER) {
                     if (action == MotionEvent.ACTION_UP) {
-//                        Logger.e("Got ACTION_UP event but don't have an active pointer id.");
+                        Timber.e("Got ACTION_UP event but don't have an active pointer id.");
                     }
                     return false;
                 }
@@ -871,13 +871,13 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_DOWN:
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                 mIsBeingDragged = false;
-//                Logger.d("debug:onTouchEvent ACTION_DOWN");
+                Timber.d("debug:onTouchEvent ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE: {
                 final int pointerIndex = MotionEventCompat.findPointerIndex(ev,
                         mActivePointerId);
                 if (pointerIndex < 0) {
-//                    Logger.e("Got ACTION_MOVE event but have an invalid active pointer id.");
+                    Timber.e("Got ACTION_MOVE event but have an invalid active pointer id.");
                     return false;
                 }
                 final float y = MotionEventCompat.getY(ev, pointerIndex);
@@ -904,7 +904,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             case MotionEvent.ACTION_CANCEL: {
                 if (mActivePointerId == INVALID_POINTER) {
                     if (action == MotionEvent.ACTION_UP) {
-//                        Logger.e("Got ACTION_UP event but don't have an active pointer id.");
+                        Timber.e("Got ACTION_UP event but don't have an active pointer id.");
                     }
                     return false;
                 }
