@@ -6,8 +6,8 @@
 /build
 /captures
 .externalNativeBuild
-/proguardMapping.txt
-/seeds..txt
-/unused.txt
+/cloudpos/proguardMapping.txt
+/cloudpos/seeds.txt
+/cloudpos/unused.txt
+/cloudpos/release
 *.apk
-/release
