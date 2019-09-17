@@ -25,7 +25,8 @@ import java.util.Properties;
  * @author xll
  * @date 2018/1/1
  */
-public class APP extends Application {
+public class BaseApplication extends Application {
+    protected static BaseApplication instance;
 
     public static int APP_VERSION_CODE;
     public static String APP_VERSION_NAME;
@@ -60,11 +61,16 @@ public class APP extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         init();
         initLogger();
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         Logger.i("width = " + displayMetrics.widthPixels + "\n" + "height = " + displayMetrics.heightPixels);
         initRouter(this);
+    }
+
+    public static BaseApplication getInstance() {
+        return instance;
     }
 
     public static void initRouter(Application application) {
@@ -80,7 +86,7 @@ public class APP extends Application {
      * 打release版的时候 改为NONE
      */
     private void initLogger() {
-        Logger.init(APP.class.getSimpleName()).methodCount(3)
+        Logger.init(BaseApplication.class.getSimpleName()).methodCount(3)
                 .hideThreadInfo()
                 .logLevel(LogLevel.FULL)
                 .methodCount(1)

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.icloudwhale.cloudpos"
@@ -50,8 +51,8 @@ dependencies {
 
     implementation project(':CommonLibrary')
 
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompilerVersion"
 
-    compileOnly "org.projectlombok:lombok:1.16.18"
+    compileOnly "org.projectlombok:lombok:1.18.10"
     implementation 'org.glassfish:javax.annotation:10.0-b28' //java注解
 }

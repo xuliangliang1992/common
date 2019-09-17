@@ -14,6 +14,7 @@ import com.icloudwhale.cloudpos.databinding.StubNetErrorBinding;
 import com.icloudwhale.cloudpos.databinding.StubNoDataBinding;
 import com.icloudwhale.cloudpos.databinding.StubToolBarBinding;
 import com.iwhalecloud.common.constant.RouterUrl;
+import com.iwhalecloud.common.util.DeviceUtils;
 import com.iwhalecloud.common.util.FitUtil;
 import com.umeng.analytics.MobclickAgent;
 
@@ -100,14 +101,14 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
 
     @Override
     protected void onResume() {
-        MobclickAgent.onResume(this);
         super.onResume();
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
-        MobclickAgent.onPause(this);
         super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -229,9 +230,9 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         if (!binding.viewStubNetError.isInflated()) {
             binding.viewStubNetError.getViewStub().inflate();
             mStubNetErrorBinding.viewNetError.setRefreshBtnClickListener(v -> {
-                //                    if (!NetUtil.checkNetToast()) {
-                //                        return;
-                //                    }
+                if (!DeviceUtils.hasInternet(this)) {
+                    return;
+                }
                 hideNetWorkErrView();
             });
         }

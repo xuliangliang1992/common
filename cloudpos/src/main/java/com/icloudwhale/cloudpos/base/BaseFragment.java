@@ -1,7 +1,6 @@
 package com.icloudwhale.cloudpos.base;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,7 @@ import android.view.ViewGroup;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.icloudwhale.cloudpos.base.event.EventBusUtil;
 import com.icloudwhale.cloudpos.base.event.EventMessage;
-import com.iwhalecloud.common.base.PermissionListener;
-import com.iwhalecloud.common.constant.BaseConstant;
 import com.iwhalecloud.common.constant.RouterUrl;
-import com.iwhalecloud.common.util.FileUtil;
 import com.iwhalecloud.common.util.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -22,7 +18,6 @@ import org.jetbrains.annotations.NotNull;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -41,9 +36,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      */
     protected BaseActivity mActivity;
 
-    private CompositeDisposable mCompositeDisposable;
-
-    private PermissionListener mPermissionListener;
+    protected CompositeDisposable mCompositeDisposable;
 
     @Override
     public void onAttach(@NotNull Context context) {
@@ -139,67 +132,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         mCompositeDisposable.add(disposable);
     }
 
-    /**
-     * 动态申请权限
-     *
-     * @param permissions        权限
-     * @param requestCode        请求码
-     * @param permissionListener 回调
-     */
-    public void requestPermission(String[] permissions, int requestCode, PermissionListener permissionListener) {
-        mPermissionListener = permissionListener;
-        boolean b = false;
-        for (String permission : permissions) {
-            b = b || ContextCompat.checkSelfPermission(mActivity, permission) != PackageManager.PERMISSION_GRANTED;
-        }
-        if (b) {
-            requestPermissions(permissions, requestCode);
-        } else {
-            if (mPermissionListener != null) {
-                mPermissionListener.requestPermissionSuccess();
-            }
-        }
-    }
-
     public void showToast(String msg) {
         ToastUtil.showToast(getActivity(), msg);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        boolean b = true;
-        for (int grantResult : grantResults) {
-            b = b && grantResult == PackageManager.PERMISSION_GRANTED;
-        }
-        switch (requestCode) {
-            //调用系统相机申请拍照权限回调
-            case BaseConstant.CAMERA_PERMISSIONS_REQUEST_CODE: {
-                if (grantResults.length > 0 && b) {
-                    if (FileUtil.sdCardExist()) {
-                        if (mPermissionListener != null) {
-                            mPermissionListener.requestPermissionSuccess();
-                        }
-                    } else {
-                        ToastUtil.showToast(getActivity(), ("没有内存卡"));
-                    }
-                } else {
-                    ToastUtil.showToast(getActivity(), "请打开权限");
-                }
-                break;
-            }
-            //调用系统相册申请Sdcard权限回调
-            case BaseConstant.STORAGE_PERMISSIONS_REQUEST_CODE:
-                if (grantResults.length > 0 && b) {
-                    if (mPermissionListener != null) {
-                        mPermissionListener.requestPermissionSuccess();
-                    }
-                } else {
-                    ToastUtil.showToast(getActivity(), "请打开权限");
-                }
-                break;
-            default:
-        }
     }
 
     @Override
@@ -209,7 +143,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void httpException(int code) {
-        ToastUtil.showToast(getContext(), "errorCode = " + code + "网络请求出错，请检查网络设置或联系系统管理员");
+        ToastUtil.showToast(mActivity, "errorCode = " + code + "网络请求出错，请检查网络设置或联系系统管理员");
     }
 
     @Override
@@ -219,8 +153,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void httpOtherException(String message) {
-        ToastUtil.showToast(getActivity(), "网络请求失败");
+        ToastUtil.showToast(mActivity, "网络请求失败");
     }
-
 
 }

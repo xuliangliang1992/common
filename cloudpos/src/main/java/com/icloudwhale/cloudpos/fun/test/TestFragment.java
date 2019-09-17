@@ -1,6 +1,6 @@
 package com.icloudwhale.cloudpos.fun.test;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.view.View;
 
 import com.icloudwhale.cloudpos.R;
@@ -20,7 +20,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.functions.ObjectHelper;
 
 /**
  * @author xll
@@ -29,7 +32,7 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     private ObservableArrayList<User> mUsers;
     private TestFragmentBinding mBinding;
     private TestAdapter mTestAdapter;
-    private int page = 1;
+
 
     static TestFragment newInstance() {
         return new TestFragment();
@@ -64,7 +67,6 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     @Override
     public void initListener() {
         mTestAdapter.setItemClickListener((user, position) -> {
-            Logger.d("onItemClick " + position);
             PermissionUtil.launchCamera(
                     new PermissionUtil.RequestPermission() {
                         @Override
@@ -83,20 +85,58 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
                     },
                     new RxPermissions(TestFragment.this)
             );
-            EventBusUtil.post(new EventMessage<String>(EventCode.EVENT_A, user.getName()));
+            EventBusUtil.post(new EventMessage<>(EventCode.EVENT_A, user.getName()));
         });
         mTestAdapter.setOnItemLongClickListener((user, position) -> Logger.d("onItemLongClick " + position));
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void initData() {
-        mActivity.showInitLoadView();
+        //        mActivity.showInitLoadView();
         mUsers = new ObservableArrayList<>();
-
-        addDisposable(Observable.timer(1, TimeUnit.SECONDS)
+        //        mActivity.showNetWorkErrView();
+        Observable.interval(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> mActivity.hideInitLoadView()));
+                .subscribe(aLong -> {
+                            Logger.d("onNext " + aLong);
+                            if (aLong == 10) {
+                                ObjectHelper.requireNonNull(aLong,"");
+                                throw new NullPointerException();
+                            }
+                        },
+                        throwable -> Logger.d("onError " + throwable.getMessage()),
+                        () -> Logger.d("onComplete"),
+                        disposable -> {
+                            Logger.d("onSubscribe");
+                            addDisposable(disposable);
+                        });
+        Observable.interval(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        mCompositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        if (aLong == 4) {
+                            onDestroy();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -118,7 +158,6 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
      */
     @Override
     public void onRefreshEvent() {
-        page = 1;
         mUsers.clear();
         mPresenter.refreshData();
     }
@@ -128,7 +167,6 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
      */
     @Override
     public void onLoadMoreEvent() {
-        page++;
         mPresenter.loadMoreData();
     }
 

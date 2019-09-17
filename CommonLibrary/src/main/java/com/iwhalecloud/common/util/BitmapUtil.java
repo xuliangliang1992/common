@@ -7,11 +7,12 @@ import android.graphics.Rect;
 import android.util.Log;
 
 /**
- * Created by zhicheng.liu on 2018/4/4
- * address :liuzhicheng@sunmi.com
- * description :
+ * bitmap工具类
+ *
+ * @author xuliangliang
+ * @date 2019/9/4
+ * copyright(c) 浩鲸云计算科技股份有限公司
  */
-
 public class BitmapUtil {
 
     private static final String TAG = "BitmapUtils";
@@ -72,8 +73,6 @@ public class BitmapUtil {
     }
 
 
-
-
     public static Bitmap scale(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
         int height = bm.getHeight();
@@ -116,7 +115,6 @@ public class BitmapUtil {
         newBmp.setPixels(pixels, 0, width, 0, 0, width, height);
         return newBmp;
     }
-
 
 
     /**

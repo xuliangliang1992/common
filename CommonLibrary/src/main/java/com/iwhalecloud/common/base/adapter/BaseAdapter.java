@@ -21,13 +21,13 @@ public abstract class BaseAdapter<M, VH extends RecyclerView.ViewHolder> extends
     private ListChangedCallbackProxy mItemsChangeCallback;
     private CompositeDisposable mCompositeDisposable;
 
-    public BaseAdapter() {
+    BaseAdapter() {
         mItems = new ObservableArrayList<>();
         this.mItemsChangeCallback = new ListChangedCallbackProxy(this);
         mCompositeDisposable = new CompositeDisposable();
     }
 
-    public void addDisposable(Disposable disposable) {
+    protected void addDisposable(Disposable disposable) {
         mCompositeDisposable.add(disposable);
     }
 

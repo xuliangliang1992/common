@@ -3,13 +3,12 @@ package com.iwhalecloud.common.util;
 import android.os.Environment;
 import android.text.TextUtils;
 
-import com.iwhalecloud.common.base.APP;
+import com.iwhalecloud.common.base.BaseApplication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
 
 /**
  * @author xll
@@ -20,15 +19,15 @@ public class FileUtil {
     /**
      * 图片保存路径
      */
-    public static String IMAGE_SD_PATH = Environment.getExternalStorageDirectory() + File.separator + APP.APP_PACKAGE + File.separator + "Photo_Sp/";
+    public static String IMAGE_SD_PATH = Environment.getExternalStorageDirectory() + File.separator + BaseApplication.APP_PACKAGE + File.separator + "Photo_Sp/";
     /**
      * apk保存路径
      */
-    private static String APK_SD_PATH = Environment.getExternalStorageDirectory() + File.separator + APP.APP_PACKAGE + File.separator + "Apk_Sp/";
+    private static String APK_SD_PATH = Environment.getExternalStorageDirectory() + File.separator + BaseApplication.APP_PACKAGE + File.separator + "Apk_Sp/";
     /**
      * 合同保存路径
      */
-    public static String CONTRACT_SD_PATH = Environment.getExternalStorageDirectory() + File.separator + APP.APP_PACKAGE + File.separator + "Contract/";
+    public static String CONTRACT_SD_PATH = Environment.getExternalStorageDirectory() + File.separator + BaseApplication.APP_PACKAGE + File.separator + "Contract/";
     /**
      * 文件类型0:图片 1:apk
      */

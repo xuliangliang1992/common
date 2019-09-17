@@ -9,20 +9,31 @@ import com.iwhalecloud.common.view.refresh.DaisyRefreshLayout;
  * @date 2019-09-09
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
-public abstract class BaseRefreshFragment<T,P extends BasePresenter> extends BaseMvpFragment<P> implements BaseRefreshView<T> {
+public abstract class BaseRefreshFragment<T, P extends BasePresenter> extends BaseMvpFragment<P> implements BaseRefreshView<T> {
 
     private DaisyRefreshLayout mRefreshLayout;
+    protected int page;
 
     @Override
     protected void initCommonView(View view) {
         super.initCommonView(view);
+        page = 1;
         mRefreshLayout = view.findViewById(onBindRefreshLayout());
         // 下拉刷新
-        mRefreshLayout.setOnRefreshListener(this::onRefreshEvent);
+        mRefreshLayout.setOnRefreshListener(() -> {
+            page = 1;
+            onRefreshEvent();
+        });
         // 上拉加载
-        mRefreshLayout.setOnLoadMoreListener(this::onLoadMoreEvent);
+        mRefreshLayout.setOnLoadMoreListener(() -> {
+            page++;
+            onLoadMoreEvent();
+        });
         // 自动加载
-        mRefreshLayout.setOnAutoLoadListener(this::onAutoLoadEvent);
+        mRefreshLayout.setOnAutoLoadListener(() -> {
+            page = 1;
+            onAutoLoadEvent();
+        });
     }
 
     /**
