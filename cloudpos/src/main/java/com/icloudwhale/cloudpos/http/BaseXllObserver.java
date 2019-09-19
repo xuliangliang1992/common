@@ -8,7 +8,6 @@ import com.iwhalecloud.common.subscriber.SubscriberOnErrorListener;
  * @author xll
  * @date 2018/12/4
  */
-
 public abstract class BaseXllObserver<T> extends BaseObserver<T> {
 
     private SubscriberOnCompleteListener mOnCompleteListener;

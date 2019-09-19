@@ -29,6 +29,10 @@ public class FileUtil {
      */
     public static String CONTRACT_SD_PATH = Environment.getExternalStorageDirectory() + File.separator + BaseApplication.APP_PACKAGE + File.separator + "Contract/";
     /**
+     * 缓存地址
+     */
+    public static String CACHE_SD_PATH = Environment.getExternalStorageDirectory() + File.separator + BaseApplication.APP_PACKAGE + File.separator + "Cache/";
+    /**
      * 文件类型0:图片 1:apk
      */
     public static final int FILE_TYPE_IMAGE = 0;

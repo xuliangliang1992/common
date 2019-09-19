@@ -1,6 +1,9 @@
 package com.icloudwhale.cloudpos.http.request;
 
+import com.icloudwhale.cloudpos.http.response.LoginBean;
+
 import io.reactivex.Observable;
+import io.rx_cache2.Reply;
 
 /**
  * @author xll
@@ -17,4 +20,12 @@ public interface LoanDataSource {
      * @return Observable
      */
     Observable<String> getAccessToken(long userId, long shopId, String dbName);
+    /**
+     * 登录
+     *
+     * @param userName 账号
+     * @param password 密码
+     * @return Observable
+     */
+    Observable<Reply<LoginBean>> login(String userName, String password);
 }

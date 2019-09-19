@@ -10,7 +10,6 @@ import android.util.DisplayMetrics;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.iwhalecloud.common.commonlibrary.BuildConfig;
-import com.iwhalecloud.common.constant.BaseConstant;
 import com.iwhalecloud.common.util.FileUtil;
 
 import java.io.File;
@@ -75,7 +74,7 @@ public class BaseApplication extends Application {
     }
 
     public static void initRouter(Application application) {
-        if (BaseConstant.IS_DEBUG) {
+        if (BuildConfig.LOG_DEBUG) {
             ARouter.openLog();     // 打印日志
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }

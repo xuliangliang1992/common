@@ -22,10 +22,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.internal.functions.ObjectHelper;
 import timber.log.Timber;
 
 /**
@@ -71,10 +68,12 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     @Override
     public void initListener() {
         mTestAdapter.setItemClickListener((user, position) -> {
+            Timber.d("request");
             PermissionUtil.launchCamera(
                     new PermissionUtil.RequestPermission() {
                         @Override
                         public void onRequestPermissionSuccess() {
+                            mPresenter.login();
                         }
 
                         @Override
@@ -98,49 +97,51 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     @SuppressLint("CheckResult")
     @Override
     public void initData() {
+
         //        mActivity.showInitLoadView();
         mUsers = new ObservableArrayList<>();
         //        mActivity.showNetWorkErrView();
-        Observable.interval(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> {
-                            Timber.d("onNext " + aLong);
-                            if (aLong == 10) {
-                                ObjectHelper.requireNonNull(aLong, "");
-                                throw new NullPointerException();
-                            }
-                        },
-                        throwable -> Timber.d("onError " + throwable.getMessage()),
-                        () -> Timber.d("onComplete"),
-                        disposable -> {
-                            Timber.d("onSubscribe");
-                            addDisposable(disposable);
-                        });
-        Observable.interval(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Long>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        mCompositeDisposable.add(d);
-                    }
-
-                    @Override
-                    public void onNext(Long aLong) {
-                        if (aLong == 4) {
-                            onDestroy();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        Observable.interval(1, TimeUnit.SECONDS)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(aLong -> {
+//                    mPresenter.login();
+//                            Timber.d("onNext " + aLong);
+//                            if (aLong == 10) {
+//                                ObjectHelper.requireNonNull(aLong, "");
+//                                throw new NullPointerException();
+//                            }
+//                        },
+//                        throwable -> Timber.d("onError " + throwable.getMessage()),
+//                        () -> Timber.d("onComplete"),
+//                        disposable -> {
+//                            Timber.d("onSubscribe");
+//                            addDisposable(disposable);
+//                        });
+//        Observable.interval(1, TimeUnit.SECONDS)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<Long>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        mCompositeDisposable.add(d);
+//                    }
+//
+//                    @Override
+//                    public void onNext(Long aLong) {
+//                        if (aLong == 4) {
+//                            onDestroy();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
     }
 
     @Override
@@ -162,6 +163,7 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
      */
     @Override
     public void onRefreshEvent() {
+        mPresenter.login();
         mUsers.clear();
         mPresenter.refreshData();
     }

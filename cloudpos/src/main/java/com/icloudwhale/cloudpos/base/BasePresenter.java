@@ -12,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
 public abstract class BasePresenter<V extends BaseView> implements IBasePresenter {
-    private CompositeDisposable mCompositeDisposable;
+    protected CompositeDisposable mCompositeDisposable;
     protected BaseSchedulerProvider mSchedulerProvider;
     protected LoanDataSource mLoanDataSource;
     protected V mView;

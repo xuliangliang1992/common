@@ -17,5 +17,6 @@ public class Constant extends BaseConstant {
 
     public static final String SHARED_PREFERENCE_FILE_NAME = "";
 
+    public static String LOGIN_URL = "https://cloudshop.iwhalecloud.com/";
 
 }

@@ -15,6 +15,6 @@ class TestContract {
     }
 
     interface Presenter extends BaseRefreshContract.Presenter {
-
+void login();
     }
 }

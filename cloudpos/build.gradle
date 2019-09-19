@@ -50,16 +50,26 @@ android {
     dataBinding {
         enabled = true
     }
+
     compileOptions {
         sourceCompatibility = rootProject.ext.jdkVersion
         targetCompatibility = rootProject.ext.jdkVersion
     }
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
 //        exclude 'META-INF/NOTICE'
 //        exclude 'META-INF/LICENSE'
 //        exclude 'META-INF/LICENSE.txt'
 //        exclude 'META-INF/NOTICE.txt'
+    }
+
+    allprojects {
+        gradle.projectsEvaluated {
+            tasks.withType(JavaCompile) {
+                options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            }
+        }
     }
 }
 

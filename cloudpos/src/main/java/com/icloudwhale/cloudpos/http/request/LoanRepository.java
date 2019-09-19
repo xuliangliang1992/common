@@ -1,9 +1,12 @@
 package com.icloudwhale.cloudpos.http.request;
 
 
+import com.icloudwhale.cloudpos.http.response.LoginBean;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import io.reactivex.Observable;
+import io.rx_cache2.Reply;
 
 /**
  * @author xll
@@ -32,5 +35,15 @@ public class LoanRepository implements LoanDataSource {
         return mRemoteLoanDataSource.getAccessToken(userId, shopId, dbName);
     }
 
-
+    /**
+     * 登录
+     *
+     * @param userName 账号
+     * @param password 密码
+     * @return Observable
+     */
+    @Override
+    public Observable<Reply<LoginBean>> login(String userName, String password) {
+        return mRemoteLoanDataSource.login(userName, password);
+    }
 }

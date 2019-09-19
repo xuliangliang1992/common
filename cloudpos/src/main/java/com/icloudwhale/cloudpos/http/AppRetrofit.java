@@ -3,6 +3,7 @@ package com.icloudwhale.cloudpos.http;
 
 import com.icloudwhale.cloudpos.base.MainApplication;
 import com.icloudwhale.cloudpos.constant.Constant;
+import com.iwhalecloud.common.commonlibrary.BuildConfig;
 import com.iwhalecloud.common.util.SharePreferenceUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -69,10 +70,9 @@ public class AppRetrofit {
                             .addHeader("token", token)
                             .build();
                     return chain.proceed(newRequest);
-                })
-                .cache(cache);
+                });
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(level(Constant.IS_LOG));
+        interceptor.level(level(BuildConfig.LOG_DEBUG));
         builder.addInterceptor(interceptor);
         builder.connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS);
         builder.readTimeout(readTimeOut, TimeUnit.SECONDS);
@@ -91,7 +91,7 @@ public class AppRetrofit {
                     return chain.proceed(newRequest);
                 });
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(level(Constant.IS_LOG));
+        interceptor.level(level(BuildConfig.LOG_DEBUG));
         builder.addInterceptor(interceptor);
         builder.connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS);
         builder.readTimeout(readTimeOut, TimeUnit.SECONDS);
