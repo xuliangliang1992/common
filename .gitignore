@@ -1,0 +1,13 @@
+*.iml
+.gradle
+.idea
+/local.properties
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/cloudpos/proguardMapping.txt
+/cloudpos/seeds.txt
+/cloudpos/unused.txt
+/cloudpos/release
+*.apk
