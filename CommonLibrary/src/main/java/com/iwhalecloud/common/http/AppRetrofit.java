@@ -1,9 +1,9 @@
-package com.icloudwhale.cloudpos.http;
+package com.iwhalecloud.common.http;
 
 
-import com.icloudwhale.cloudpos.base.MainApplication;
-import com.icloudwhale.cloudpos.constant.Constant;
+import com.iwhalecloud.common.base.BaseApplication;
 import com.iwhalecloud.common.commonlibrary.BuildConfig;
+import com.iwhalecloud.common.constant.BaseConstant;
 import com.iwhalecloud.common.util.SharePreferenceUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -31,14 +31,14 @@ public class AppRetrofit {
         retrofit = new Retrofit.Builder().client(initBuilder().build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(Constant.BASE_URL)
+                .baseUrl(BaseConstant.BASE_URL)
                 .build();
     }
     public AppRetrofit(boolean isToken) {
         retrofit = new Retrofit.Builder().client(initBuilder(isToken).build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(Constant.BASE_URL)
+                .baseUrl(BaseConstant.BASE_URL)
                 .build();
     }
     public AppRetrofit(String url) {
@@ -54,17 +54,17 @@ public class AppRetrofit {
         retrofit = new Retrofit.Builder().client(initBuilder().build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(Constant.BASE_URL)
+                .baseUrl(BaseConstant.BASE_URL)
                 .build();
     }
 
     private OkHttpClient.Builder initBuilder() {
         //声明缓存地址和大小
-        Cache cache = new Cache(MainApplication.getInstance().getCacheDir(), 10 * 1024 * 1024);
+        Cache cache = new Cache(BaseApplication.getInstance().getCacheDir(), 10 * 1024 * 1024);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(chain -> {
-                    String token = (String) SharePreferenceUtil.getInstance().get(MainApplication.getInstance().getApplicationContext(),
-                            Constant.SHARED_PREFERENCE_FILE_NAME, SharePreferenceUtil.TOKEN, "");
+                    String token = (String) SharePreferenceUtil.getInstance().get(BaseApplication.getInstance().getApplicationContext(),
+                            BaseConstant.SHARED_PREFERENCE_FILE_NAME, SharePreferenceUtil.TOKEN, "");
 
                     Request newRequest = chain.request().newBuilder()
                             .addHeader("token", token)
@@ -83,8 +83,8 @@ public class AppRetrofit {
     private OkHttpClient.Builder initBuilder(final boolean isToken) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(chain -> {
-                    String token = (String) SharePreferenceUtil.getInstance().get(MainApplication.getInstance().getApplicationContext(),
-                            Constant.SHARED_PREFERENCE_FILE_NAME, SharePreferenceUtil.TOKEN, "");
+                    String token = (String) SharePreferenceUtil.getInstance().get(BaseApplication.getInstance().getApplicationContext(),
+                            BaseConstant.SHARED_PREFERENCE_FILE_NAME, SharePreferenceUtil.TOKEN, "");
                     Request newRequest = chain.request().newBuilder()
                             .addHeader("token", isToken ? token : "")
                             .build();
@@ -103,8 +103,7 @@ public class AppRetrofit {
         return isDebug ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE;
     }
 
-    public FaceIDService getFaceIDService() {
-        return retrofit.create(FaceIDService.class);
+    public Retrofit getRetrofit() {
+        return retrofit;
     }
-
 }

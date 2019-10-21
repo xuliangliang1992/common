@@ -46,7 +46,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        DialogManager.getInstance().dismissProgressHUD();
+        DialogManager.getInstance().dismissProgressDialog();
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
             switch (httpException.code()) {

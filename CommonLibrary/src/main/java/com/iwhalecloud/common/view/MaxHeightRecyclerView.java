@@ -9,6 +9,7 @@ import com.iwhalecloud.common.commonlibrary.R;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
+ * 可设置maxHeight的RecyclerView
  * @author xll
  * @date 2019-06-10
  */

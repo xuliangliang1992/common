@@ -9,9 +9,14 @@ import java.util.List;
  */
 public class BaseConstant {
 
-    public static final boolean IS_DEBUG = true;
     public static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
     public static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0x04;
+
+    public static final String BASE_URL = "";
+
+    public static final String SHARED_PREFERENCE_FILE_NAME = "";
+
+    public static String LOGIN_URL = "https://cloudshop.iwhalecloud.com/";
 
     public static final String PAID = "paid";
     public static final String DONE = "done";

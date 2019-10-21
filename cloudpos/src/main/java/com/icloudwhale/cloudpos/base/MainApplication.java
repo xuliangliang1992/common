@@ -1,7 +1,6 @@
 package com.icloudwhale.cloudpos.base;
 
 import com.iwhalecloud.common.base.BaseApplication;
-import com.umeng.commonsdk.UMConfigure;
 
 /**
  * MainApplication
@@ -18,8 +17,7 @@ public class MainApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
 
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
-        UMConfigure.setLogEnabled(true);
+
 
         //        initRoom();
     }

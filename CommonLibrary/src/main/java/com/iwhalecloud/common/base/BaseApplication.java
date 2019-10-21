@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.iwhalecloud.common.commonlibrary.BuildConfig;
 import com.iwhalecloud.common.util.FileUtil;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -67,6 +68,9 @@ public class BaseApplication extends Application {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         Timber.i("width = " + displayMetrics.widthPixels + "\n" + "height = " + displayMetrics.heightPixels);
         initRouter(this);
+
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.setLogEnabled(true);
     }
 
     public static BaseApplication getInstance() {
@@ -83,7 +87,6 @@ public class BaseApplication extends Application {
 
     /**
      * 初始化日志
-     * 打release版的时候 改为NONE
      */
     private void initLogger() {
         if (BuildConfig.LOG_DEBUG) {//Timber初始化

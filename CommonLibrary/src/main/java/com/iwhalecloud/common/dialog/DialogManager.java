@@ -16,8 +16,7 @@ public class DialogManager {
     private ProgressHUD hud;
     private BaseDialog mDialog;
 
-    private DialogManager() {
-
+    public DialogManager() {
     }
 
     public static DialogManager getInstance() {
@@ -31,14 +30,14 @@ public class DialogManager {
         return dialogManager;
     }
 
-    public void showProgressHUD(Context context) {
-        dismissProgressHUD();
+    public void showProgressDialog(Context context) {
+        dismissProgressDialog();
         hud = ProgressHUD.create(context)
                 .setStyle(ProgressHUD.Style.SPIN_INDETERMINATE);
         hud.show();
     }
 
-    public void dismissProgressHUD() {
+    public void dismissProgressDialog() {
         if (null != hud) {
             hud.dismiss();
             hud = null;

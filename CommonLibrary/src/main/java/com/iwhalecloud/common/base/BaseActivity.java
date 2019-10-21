@@ -168,7 +168,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
      * 显示加载ui
      */
     private void showLoadView() {
-        showLoadView(android.R.color.background_light);
+        showLoadView(android.R.color.transparent);
     }
 
     /**

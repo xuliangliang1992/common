@@ -52,6 +52,7 @@ public class TestPresenter extends BasePresenter<TestContract.View> implements T
                     @Override
                     public void onNext(Reply<LoginBean> loginBeanReply) {
                         Timber.d(loginBeanReply.toString());
+                        mView.loginSuccess();
                     }
                 });
     }

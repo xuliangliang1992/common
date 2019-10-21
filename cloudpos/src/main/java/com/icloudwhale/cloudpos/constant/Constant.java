@@ -11,7 +11,6 @@ import com.iwhalecloud.common.constant.BaseConstant;
  */
 public class Constant extends BaseConstant {
 
-    public static boolean IS_LOG = true;
 
     public static final String BASE_URL = "";
 

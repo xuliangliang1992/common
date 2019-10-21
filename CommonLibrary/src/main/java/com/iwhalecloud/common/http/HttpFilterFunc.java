@@ -33,7 +33,7 @@ public class HttpFilterFunc<T> implements Predicate<BaseResponse<T>> {
             }
             new Handler(Looper.getMainLooper()).post(
                     () -> {
-                        DialogManager.getInstance().dismissProgressHUD();
+                        DialogManager.getInstance().dismissProgressDialog();
                         ToastUtil.showToast(BaseApplication.getInstance().getApplicationContext(), msg);
                     }
             );

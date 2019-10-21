@@ -7,12 +7,12 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.icloudwhale.cloudpos.R;
+import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
+import com.icloudwhale.cloudpos.fun.HelloService;
 import com.iwhalecloud.common.base.BaseRefreshFragment;
 import com.iwhalecloud.common.base.event.EventBusUtil;
 import com.iwhalecloud.common.base.event.EventCode;
 import com.iwhalecloud.common.base.event.EventMessage;
-import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
-import com.icloudwhale.cloudpos.fun.HelloService;
 import com.iwhalecloud.common.util.PermissionUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -85,9 +85,8 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
                     new PermissionUtil.RequestPermission() {
                         @Override
                         public void onRequestPermissionSuccess() {
-                            ARouter.getInstance()
-                                    .build("/login/login")
-                                    .navigation();
+                            mActivity.showInitLoadView();
+                            mPresenter.login();
                         }
 
                         @Override
@@ -115,7 +114,6 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     @SuppressLint("CheckResult")
     @Override
     public void initData() {
-
         //        mActivity.showInitLoadView();
         mUsers = new ObservableArrayList<>();
         //        mActivity.showNetWorkErrView();
@@ -264,5 +262,13 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
     @Override
     public void setPresenter() {
         mPresenter = new TestPresenter(this);
+    }
+
+    @Override
+    public void loginSuccess() {
+        mActivity.hideInitLoadView();
+        ARouter.getInstance()
+                .build("/login/login")
+                .navigation();
     }
 }
