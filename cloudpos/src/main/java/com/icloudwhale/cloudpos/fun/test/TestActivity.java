@@ -4,9 +4,9 @@ import android.os.Bundle;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.icloudwhale.cloudpos.R;
-import com.icloudwhale.cloudpos.base.BaseActivity;
-import com.icloudwhale.cloudpos.base.event.EventCode;
-import com.icloudwhale.cloudpos.base.event.EventMessage;
+import com.iwhalecloud.common.base.BaseActivity;
+import com.iwhalecloud.common.base.event.EventCode;
+import com.iwhalecloud.common.base.event.EventMessage;
 import com.iwhalecloud.common.util.ActivityUtil;
 
 import timber.log.Timber;

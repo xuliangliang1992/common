@@ -1,7 +1,7 @@
 package com.icloudwhale.cloudpos.fun.test;
 
-import com.icloudwhale.cloudpos.base.BaseRefreshContract;
-import com.icloudwhale.cloudpos.base.BaseRefreshView;
+import com.iwhalecloud.common.base.BaseRefreshContract;
+import com.iwhalecloud.common.base.BaseRefreshView;
 
 /**
  * Test控制器

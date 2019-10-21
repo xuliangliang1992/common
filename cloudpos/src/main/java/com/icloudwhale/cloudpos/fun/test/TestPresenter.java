@@ -1,8 +1,10 @@
 package com.icloudwhale.cloudpos.fun.test;
 
-import com.icloudwhale.cloudpos.base.BasePresenter;
-import com.icloudwhale.cloudpos.http.BaseXllObserver;
+import com.iwhalecloud.common.http.BaseXllObserver;
+import com.icloudwhale.cloudpos.http.request.LoanDataSource;
+import com.icloudwhale.cloudpos.http.request.RemoteLoanDataSource;
 import com.icloudwhale.cloudpos.http.response.LoginBean;
+import com.iwhalecloud.common.base.BasePresenter;
 
 import androidx.databinding.ObservableArrayList;
 import io.reactivex.disposables.Disposable;
@@ -13,9 +15,11 @@ import timber.log.Timber;
  * @author xll
  */
 public class TestPresenter extends BasePresenter<TestContract.View> implements TestContract.Presenter {
+    private LoanDataSource mLoanDataSource;
 
     TestPresenter(TestContract.View view) {
         super(view);
+        mLoanDataSource = RemoteLoanDataSource.getInstance();
     }
 
     /**

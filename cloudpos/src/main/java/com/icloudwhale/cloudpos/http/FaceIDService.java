@@ -1,6 +1,6 @@
 package com.icloudwhale.cloudpos.http;
 
-import com.icloudwhale.cloudpos.http.response.BaseResponse;
+import com.iwhalecloud.common.http.response.BaseResponse;
 import com.icloudwhale.cloudpos.http.response.LoginBean;
 
 import java.util.Map;

@@ -7,10 +7,10 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.icloudwhale.cloudpos.R;
-import com.icloudwhale.cloudpos.base.BaseRefreshFragment;
-import com.icloudwhale.cloudpos.base.event.EventBusUtil;
-import com.icloudwhale.cloudpos.base.event.EventCode;
-import com.icloudwhale.cloudpos.base.event.EventMessage;
+import com.iwhalecloud.common.base.BaseRefreshFragment;
+import com.iwhalecloud.common.base.event.EventBusUtil;
+import com.iwhalecloud.common.base.event.EventCode;
+import com.iwhalecloud.common.base.event.EventMessage;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
 import com.icloudwhale.cloudpos.fun.HelloService;
 import com.iwhalecloud.common.util.PermissionUtil;

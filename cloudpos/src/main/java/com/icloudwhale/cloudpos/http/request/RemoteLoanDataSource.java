@@ -4,10 +4,10 @@ import com.icloudwhale.cloudpos.base.MainApplication;
 import com.icloudwhale.cloudpos.constant.Constant;
 import com.icloudwhale.cloudpos.http.AppRetrofit;
 import com.icloudwhale.cloudpos.http.CacheProvider;
-import com.icloudwhale.cloudpos.http.HttpFilterFunc;
-import com.icloudwhale.cloudpos.http.HttpMapToBean;
 import com.icloudwhale.cloudpos.http.HttpUrl;
 import com.icloudwhale.cloudpos.http.response.LoginBean;
+import com.iwhalecloud.common.http.HttpFilterFunc;
+import com.iwhalecloud.common.http.HttpMapToBean;
 
 import java.util.HashMap;
 import java.util.Map;
