@@ -369,6 +369,11 @@
 -dontwarn org.jetbrains.annotations.**
 
 
+##---------------Start: proguard configuration for 沉浸式  ----------
+-keep class com.gyf.immersionbar.* {*;}
+-dontwarn com.gyf.immersionbar.**
+##---------------End: proguard configuration for 沉浸式  ----------
+
 ## banner 的混淆代码
 #-keep class com.youth.banner.**{
 #     *;

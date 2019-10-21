@@ -2,6 +2,7 @@ package com.icloudwhale.cloudpos.fun.test;
 
 import android.os.Bundle;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.base.BaseActivity;
 import com.icloudwhale.cloudpos.base.event.EventCode;
@@ -24,7 +25,10 @@ public class TestActivity extends BaseActivity {
             fragment = TestFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
-
+        ImmersionBar.with(this)
+//                .statusBarColor(R.color.colorPrimaryDark)
+//                .navigationBarColor(R.color.colorPrimaryDark)
+                .init();
     }
 
     @Override
@@ -37,6 +41,6 @@ public class TestActivity extends BaseActivity {
         super.onReceiveEvent(event);
         if (event.getCode() == EventCode.EVENT_A) {
             Timber.d(event.toString()+"  TestActivity");
-        }
+            }
     }
 }

@@ -11,3 +11,8 @@
 /cloudpos/unused.txt
 /cloudpos/release
 *.apk
+
+/mine/test
+/mine/androidTest
+/login/test
+/login/androidTest

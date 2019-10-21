@@ -1,14 +1,18 @@
 package com.icloudwhale.cloudpos.fun.test;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.base.BaseRefreshFragment;
 import com.icloudwhale.cloudpos.base.event.EventBusUtil;
 import com.icloudwhale.cloudpos.base.event.EventCode;
 import com.icloudwhale.cloudpos.base.event.EventMessage;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
+import com.icloudwhale.cloudpos.fun.HelloService;
 import com.iwhalecloud.common.util.PermissionUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -67,13 +71,23 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
 
     @Override
     public void initListener() {
+        //        mBinding.goLogin.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View v) {
+        //                ARouter.getInstance()
+        //                        .build("/login/login")
+        //                        .navigation();
+        //            }
+        //        });
         mTestAdapter.setItemClickListener((user, position) -> {
             Timber.d("request");
-            PermissionUtil.launchCamera(
+            PermissionUtil.requestPermission(
                     new PermissionUtil.RequestPermission() {
                         @Override
                         public void onRequestPermissionSuccess() {
-                            mPresenter.login();
+                            ARouter.getInstance()
+                                    .build("/login/login")
+                                    .navigation();
                         }
 
                         @Override
@@ -87,10 +101,14 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
                         }
                     },
                     new RxPermissions(TestFragment.this)
+                    , Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
             );
             EventBusUtil.post(new EventMessage<>(EventCode.EVENT_A, user.getName()));
         });
-        mTestAdapter.setOnItemLongClickListener((user, position) -> Timber.d("onItemLongClick " + position));
+        mTestAdapter.setOnItemLongClickListener((user, position) -> {
+            Timber.tag("---------").d("onItemLongClick " + position);
+            mActivity.startService(new Intent(mActivity, HelloService.class));
+        });
 
     }
 
@@ -101,47 +119,47 @@ public class TestFragment extends BaseRefreshFragment<User, TestPresenter> imple
         //        mActivity.showInitLoadView();
         mUsers = new ObservableArrayList<>();
         //        mActivity.showNetWorkErrView();
-//        Observable.interval(1, TimeUnit.SECONDS)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(aLong -> {
-//                    mPresenter.login();
-//                            Timber.d("onNext " + aLong);
-//                            if (aLong == 10) {
-//                                ObjectHelper.requireNonNull(aLong, "");
-//                                throw new NullPointerException();
-//                            }
-//                        },
-//                        throwable -> Timber.d("onError " + throwable.getMessage()),
-//                        () -> Timber.d("onComplete"),
-//                        disposable -> {
-//                            Timber.d("onSubscribe");
-//                            addDisposable(disposable);
-//                        });
-//        Observable.interval(1, TimeUnit.SECONDS)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<Long>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//                        mCompositeDisposable.add(d);
-//                    }
-//
-//                    @Override
-//                    public void onNext(Long aLong) {
-//                        if (aLong == 4) {
-//                            onDestroy();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
+        //        Observable.interval(1, TimeUnit.SECONDS)
+        //                .observeOn(AndroidSchedulers.mainThread())
+        //                .subscribe(aLong -> {
+        //                    mPresenter.login();
+        //                            Timber.d("onNext " + aLong);
+        //                            if (aLong == 10) {
+        //                                ObjectHelper.requireNonNull(aLong, "");
+        //                                throw new NullPointerException();
+        //                            }
+        //                        },
+        //                        throwable -> Timber.d("onError " + throwable.getMessage()),
+        //                        () -> Timber.d("onComplete"),
+        //                        disposable -> {
+        //                            Timber.d("onSubscribe");
+        //                            addDisposable(disposable);
+        //                        });
+        //        Observable.interval(1, TimeUnit.SECONDS)
+        //                .observeOn(AndroidSchedulers.mainThread())
+        //                .subscribe(new Observer<Long>() {
+        //                    @Override
+        //                    public void onSubscribe(Disposable d) {
+        //                        mCompositeDisposable.add(d);
+        //                    }
+        //
+        //                    @Override
+        //                    public void onNext(Long aLong) {
+        //                        if (aLong == 4) {
+        //                            onDestroy();
+        //                        }
+        //                    }
+        //
+        //                    @Override
+        //                    public void onError(Throwable e) {
+        //
+        //                    }
+        //
+        //                    @Override
+        //                    public void onComplete() {
+        //
+        //                    }
+        //                });
     }
 
     @Override

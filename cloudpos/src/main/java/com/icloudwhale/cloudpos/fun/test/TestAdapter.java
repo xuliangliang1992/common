@@ -41,6 +41,10 @@ public class TestAdapter extends BaseMultiBindingAdapter<User, ViewDataBinding> 
                 addDisposable(RxView.clicks(holder.itemView)
                         .subscribe(o -> mItemClickListener.onItemClick(mItems.get(position), position)));
             }
+            if (mOnItemLongClickListener != null) {
+                addDisposable(RxView.longClicks(holder.itemView)
+                        .subscribe(o -> mOnItemLongClickListener.onItemLongClick(mItems.get(position), position)));
+            }
         } else if (getItemViewType(position) == 2) {
             TestItem2Binding binding = (TestItem2Binding) holder.getBinding();
             binding.setUser(mItems.get(position));
