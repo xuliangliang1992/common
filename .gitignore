@@ -12,7 +12,7 @@
 /cloudpos/release
 *.apk
 
-/mine/test
-/mine/androidTest
-/login/test
-/login/androidTest
+/mine/src/test
+/mine/src/androidTest
+/login/src/test
+/login/src/androidTest
