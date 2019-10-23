@@ -1,6 +1,9 @@
-package com.iwhalecloud.common.base;
+package com.iwhalecloud.common.base.fragment;
 
 import android.view.View;
+
+import com.iwhalecloud.common.base.BasePresenter;
+import com.iwhalecloud.common.base.BaseView;
 
 /**
  * @author xuliangliang

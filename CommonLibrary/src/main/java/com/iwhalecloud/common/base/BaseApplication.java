@@ -69,8 +69,8 @@ public class BaseApplication extends Application {
         Timber.i("width = " + displayMetrics.widthPixels + "\n" + "height = " + displayMetrics.heightPixels);
         initRouter(this);
 
+        UMConfigure.setLogEnabled(BuildConfig.LOG_DEBUG);
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
-        UMConfigure.setLogEnabled(true);
     }
 
     public static BaseApplication getInstance() {

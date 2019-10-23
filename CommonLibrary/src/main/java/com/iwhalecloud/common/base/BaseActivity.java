@@ -58,6 +58,18 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
     }
 
     /**
+     * 初始化ToolBar
+     */
+    private void initTooBar() {
+        binding.viewStubToolbar.getViewStub().inflate();
+        if (mStubToolBarBinding.toolBar != null) {
+            setSupportActionBar(mStubToolBarBinding.toolBar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            mStubToolBarBinding.toolBar.setNavigationOnClickListener(v -> onBackPressed());
+        }
+    }
+
+    /**
      * 设置toolbar标题
      *
      * @param titleId 资源id
@@ -80,18 +92,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
             initTooBar();
         }
         mStubToolBarBinding.tvTitle.setText(title);
-    }
-
-    /**
-     * 初始化ToolBar
-     */
-    private void initTooBar() {
-        binding.viewStubToolbar.getViewStub().inflate();
-        if (mStubToolBarBinding.toolBar != null) {
-            setSupportActionBar(mStubToolBarBinding.toolBar);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-            mStubToolBarBinding.toolBar.setNavigationOnClickListener(v -> onBackPressed());
-        }
     }
 
     @Override
@@ -118,10 +118,10 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         if (isRegisteredEventBus()) {
             EventBusUtil.unregister(this);
         }
-        super.onDestroy();
     }
 
     @Override

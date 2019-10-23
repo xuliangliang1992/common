@@ -9,15 +9,12 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.databinding.TestFragmentBinding;
 import com.icloudwhale.cloudpos.fun.HelloService;
-import com.iwhalecloud.common.base.BaseRefreshFragment;
 import com.iwhalecloud.common.base.event.EventBusUtil;
 import com.iwhalecloud.common.base.event.EventCode;
 import com.iwhalecloud.common.base.event.EventMessage;
+import com.iwhalecloud.common.base.fragment.BaseRefreshFragment;
 import com.iwhalecloud.common.util.PermissionUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -32,13 +29,11 @@ import timber.log.Timber;
 /**
  * @author xll
  */
-public class TestFragment extends BaseRefreshFragment<User, TestPresenter> implements TestContract.View {
+class TestFragment extends BaseRefreshFragment<User, TestPresenter> implements TestContract.View {
     private ObservableArrayList<User> mUsers;
     private TestFragmentBinding mBinding;
     private TestAdapter mTestAdapter;
 
-    @Contract(" -> new")
-    @NotNull
     static TestFragment newInstance() {
         return new TestFragment();
     }

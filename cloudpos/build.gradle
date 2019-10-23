@@ -83,6 +83,12 @@ dependencies {
     if (!loginRunAlone.toBoolean()) {
         implementation project(':login')
     }
+    if (!homeRunAlone.toBoolean()) {
+        implementation project(':home')
+    }
+    if (!discoverRunAlone.toBoolean()) {
+        implementation project(':discover')
+    }
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompilerVersion"
 
     compileOnly "org.projectlombok:lombok:1.18.10"

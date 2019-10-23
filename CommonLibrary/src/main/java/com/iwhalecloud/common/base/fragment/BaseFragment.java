@@ -1,4 +1,4 @@
-package com.iwhalecloud.common.base;
+package com.iwhalecloud.common.base.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.iwhalecloud.common.base.BaseActivity;
+import com.iwhalecloud.common.base.BaseView;
 import com.iwhalecloud.common.base.event.EventBusUtil;
 import com.iwhalecloud.common.base.event.EventMessage;
 import com.iwhalecloud.common.constant.RouterUrl;
@@ -83,11 +85,11 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         if (isRegisteredEventBus()) {
             EventBusUtil.unregister(this);
         }
         mCompositeDisposable.clear();
-        super.onDestroy();
     }
 
     protected void toHome() {

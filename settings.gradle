@@ -1,1 +1,1 @@
-include ':CommonLibrary', ':cloudpos', ':login', ':mine'
+include ':CommonLibrary', ':cloudpos', ':login', ':mine', ':home', ':discover'

@@ -1,6 +1,5 @@
 package com.icloudwhale.cloudpos.fun.test;
 
-
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.databinding.TestItem2Binding;
 import com.icloudwhale.cloudpos.databinding.TestItemBinding;
@@ -8,12 +7,14 @@ import com.iwhalecloud.common.base.adapter.BaseBindingViewHolder;
 import com.iwhalecloud.common.base.adapter.BaseMultiBindingAdapter;
 import com.jakewharton.rxbinding3.view.RxView;
 
+import java.util.concurrent.TimeUnit;
+
 import androidx.databinding.ViewDataBinding;
 
 /**
  * @author xll
  */
-public class TestAdapter extends BaseMultiBindingAdapter<User, ViewDataBinding> {
+class TestAdapter extends BaseMultiBindingAdapter<User, ViewDataBinding> {
 
     @Override
     protected int getItemLayout(int viewType) {
@@ -39,6 +40,7 @@ public class TestAdapter extends BaseMultiBindingAdapter<User, ViewDataBinding> 
             binding.executePendingBindings();
             if (mItemClickListener != null) {
                 addDisposable(RxView.clicks(holder.itemView)
+                        .throttleFirst(1, TimeUnit.SECONDS)
                         .subscribe(o -> mItemClickListener.onItemClick(mItems.get(position), position)));
             }
             if (mOnItemLongClickListener != null) {

@@ -1,10 +1,9 @@
 package com.icloudwhale.cloudpos.fun.test;
 
-import com.iwhalecloud.common.http.BaseXllObserver;
-import com.icloudwhale.cloudpos.http.request.LoanDataSource;
 import com.icloudwhale.cloudpos.http.request.RemoteLoanDataSource;
 import com.icloudwhale.cloudpos.http.response.LoginBean;
 import com.iwhalecloud.common.base.BasePresenter;
+import com.iwhalecloud.common.http.BaseXllObserver;
 
 import androidx.databinding.ObservableArrayList;
 import io.reactivex.disposables.Disposable;
@@ -14,12 +13,10 @@ import timber.log.Timber;
 /**
  * @author xll
  */
-public class TestPresenter extends BasePresenter<TestContract.View> implements TestContract.Presenter {
-    private LoanDataSource mLoanDataSource;
+class TestPresenter extends BasePresenter<TestContract.View> implements TestContract.Presenter {
 
     TestPresenter(TestContract.View view) {
         super(view);
-        mLoanDataSource = RemoteLoanDataSource.getInstance();
     }
 
     /**
@@ -40,7 +37,8 @@ public class TestPresenter extends BasePresenter<TestContract.View> implements T
 
     @Override
     public void login() {
-        mLoanDataSource.login("15021676796", "xll19921110")
+        RemoteLoanDataSource.getInstance()
+                .login("15021676796", "xll19921110")
                 .subscribeOn(mSchedulerProvider.io())
                 .observeOn(mSchedulerProvider.ui())
                 .subscribe(new BaseXllObserver<Reply<LoginBean>>(mView) {

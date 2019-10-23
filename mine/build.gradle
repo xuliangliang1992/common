@@ -55,7 +55,7 @@ android {
 
     sourceSets {
         main {
-            if (loginRunAlone.toBoolean()) {
+            if (mineRunAlone.toBoolean()) {
                 manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'

@@ -11,7 +11,7 @@ import com.iwhalecloud.common.base.BaseRefreshView;
 class TestContract {
 
     interface View extends BaseRefreshView<User> {
-void loginSuccess();
+        void loginSuccess();
     }
 
     interface Presenter extends BaseRefreshContract.Presenter {

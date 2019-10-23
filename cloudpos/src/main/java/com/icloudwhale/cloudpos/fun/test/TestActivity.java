@@ -14,7 +14,7 @@ import timber.log.Timber;
 /**
  * @author xll
  */
-public class TestActivity extends BaseActivity {
+class TestActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,8 @@ public class TestActivity extends BaseActivity {
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
         ImmersionBar.with(this)
-//                .statusBarColor(R.color.colorPrimaryDark)
-//                .navigationBarColor(R.color.colorPrimaryDark)
+                //                .statusBarColor(R.color.colorPrimaryDark)
+                //                .navigationBarColor(R.color.colorPrimaryDark)
                 .init();
     }
 
@@ -40,7 +40,7 @@ public class TestActivity extends BaseActivity {
     public void onReceiveEvent(EventMessage event) {
         super.onReceiveEvent(event);
         if (event.getCode() == EventCode.EVENT_A) {
-            Timber.d(event.toString()+"  TestActivity");
-            }
+            Timber.d(event.toString() + "  TestActivity");
+        }
     }
 }
