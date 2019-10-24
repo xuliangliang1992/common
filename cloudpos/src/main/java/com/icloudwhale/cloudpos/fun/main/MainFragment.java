@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.icloudwhale.cloudpos.R;
 import com.icloudwhale.cloudpos.databinding.MainFragmentBinding;
 import com.iwhalecloud.common.base.fragment.BaseFragment;
+import com.iwhalecloud.common.constant.RouterUrl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +52,9 @@ public class MainFragment extends BaseFragment implements MainContract.View {
         fragments = new ArrayList<>();
         titles = new String[]{"首页", "发现", "我的"};
 
-        mHomeFragment = (BaseFragment) ARouter.getInstance().build("/home/fragment/home").navigation();
-        mDiscoverFragment = (BaseFragment) ARouter.getInstance().build("/discover/fragment/discover").navigation();
-        mMineFragment = (BaseFragment) ARouter.getInstance().build("/mine/fragment/mine").navigation();
+        mHomeFragment = (BaseFragment) ARouter.getInstance().build(RouterUrl.HOME_FRAGMENT_HOME).navigation();
+        mDiscoverFragment = (BaseFragment) ARouter.getInstance().build(RouterUrl.DISCOVER_FRAGMENT_DISCOVER).navigation();
+        mMineFragment = (BaseFragment) ARouter.getInstance().build(RouterUrl.MINE_FRAGMENT_MINE).navigation();
 
         fragments.add(mHomeFragment);
         fragments.add(mDiscoverFragment);

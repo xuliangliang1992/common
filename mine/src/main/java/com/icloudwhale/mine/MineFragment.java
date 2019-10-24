@@ -6,6 +6,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.icloudwhale.mine.databinding.MineFragmentBinding;
 import com.iwhalecloud.common.base.fragment.BaseLazyFragment;
+import com.iwhalecloud.common.constant.RouterUrl;
 
 import androidx.databinding.DataBindingUtil;
 import timber.log.Timber;
@@ -15,7 +16,7 @@ import timber.log.Timber;
  * @date 20
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
-@Route(path = "/mine/fragment/mine")
+@Route(path = RouterUrl.MINE_FRAGMENT_MINE)
 public class MineFragment extends BaseLazyFragment<MinePresenter> implements MineContract.View {
     private MineContract.Presenter mPresenter;
     private MineFragmentBinding binding;

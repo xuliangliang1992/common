@@ -6,10 +6,10 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.icloudwhale.discover.R;
 import com.icloudwhale.discover.databinding.DiscoverFragmentBinding;
-import com.iwhalecloud.common.base.fragment.BaseLazyRefreshFragment;
+import com.iwhalecloud.common.base.fragment.BaseMvpFragment;
+import com.iwhalecloud.common.constant.RouterUrl;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableArrayList;
 import timber.log.Timber;
 
 /**
@@ -17,8 +17,8 @@ import timber.log.Timber;
  * @date 20
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
-@Route(path = "/discover/fragment/discover")
-public class DiscoverFragment extends BaseLazyRefreshFragment<DiscoverBean, DiscoverPresenter> implements DiscoverContract.View {
+@Route(path = RouterUrl.DISCOVER_FRAGMENT_DISCOVER)
+public class DiscoverFragment extends BaseMvpFragment<DiscoverPresenter> implements DiscoverContract.View {
     private DiscoverContract.Presenter mPresenter;
     private DiscoverFragmentBinding binding;
     private static String TAG = "DiscoverFragment";
@@ -54,37 +54,26 @@ public class DiscoverFragment extends BaseLazyRefreshFragment<DiscoverBean, Disc
     }
 
     @Override
-    public void onLazyLoad() {
+    public void onResume() {
+        super.onResume();
         Timber.tag(TAG).d("onResume");
     }
 
     @Override
-    protected int onBindRefreshLayout() {
-        return R.id.refresh_layout;
+    public void onPause() {
+        super.onPause();
+        Timber.tag(TAG).d("onPause");
     }
 
     @Override
-    public void refreshData(ObservableArrayList<DiscoverBean> data) {
-
+    public void onStart() {
+        super.onStart();
+        Timber.tag(TAG).d("onStart");
     }
 
     @Override
-    public void loadMoreData(ObservableArrayList<DiscoverBean> data) {
-
-    }
-
-    @Override
-    public void onRefreshEvent() {
-
-    }
-
-    @Override
-    public void onLoadMoreEvent() {
-
-    }
-
-    @Override
-    public void onAutoLoadEvent() {
-
+    public void onStop() {
+        super.onStop();
+        Timber.tag(TAG).d("onStop");
     }
 }

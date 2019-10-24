@@ -50,7 +50,6 @@ class TestAdapter extends BaseMultiBindingAdapter<User, ViewDataBinding> {
         } else if (getItemViewType(position) == 2) {
             TestItem2Binding binding = (TestItem2Binding) holder.getBinding();
             binding.setUser(mItems.get(position));
-            binding.setUser(mItems.get(position));
             binding.executePendingBindings();
         }
     }
