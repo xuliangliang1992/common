@@ -21,7 +21,7 @@ public abstract class BaseAdapter<M, VH extends RecyclerView.ViewHolder> extends
     private ListChangedCallbackProxy mItemsChangeCallback;
     private CompositeDisposable mCompositeDisposable;
 
-    BaseAdapter() {
+    public BaseAdapter() {
         mItems = new ObservableArrayList<>();
         this.mItemsChangeCallback = new ListChangedCallbackProxy(this);
         mCompositeDisposable = new CompositeDisposable();
@@ -40,13 +40,11 @@ public abstract class BaseAdapter<M, VH extends RecyclerView.ViewHolder> extends
         return mItems.size();
     }
 
-    public void loadMore(List<M> list) {
-        if (list != null && list.size() > 0) {
-            mItems.addAll(list);
-            notifyDataSetChanged();
-        }
-    }
-
+    /**
+     * 初始化或刷新
+     *
+     * @param list 数据
+     */
     public void refresh(List<M> list) {
         mItems.clear();
         if (list != null && list.size() > 0) {
@@ -55,35 +53,78 @@ public abstract class BaseAdapter<M, VH extends RecyclerView.ViewHolder> extends
         notifyDataSetChanged();
     }
 
+    /**
+     * 加载更多
+     *
+     * @param list 新增加数据
+     */
+    public void loadMore(List<M> list) {
+        if (list != null && list.size() > 0) {
+            mItems.addAll(list);
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * 移除列表某一条
+     *
+     * @param position 被移除数据的下标
+     */
     public void remove(int position) {
         mItems.remove(position);
         notifyDataSetChanged();
     }
 
+    /**
+     * 移除列表某一条
+     *
+     * @param m 被移除数据
+     */
     public void remove(M m) {
         mItems.remove(m);
         notifyDataSetChanged();
     }
 
+    /**
+     * 添加列表某一条
+     *
+     * @param m 被添加数据
+     */
     public void add(M m) {
         mItems.add(m);
         notifyDataSetChanged();
     }
 
+    /**
+     * 列表最后添加数据
+     *
+     * @param m 被添加数据
+     */
     public void addLast(M m) {
         add(m);
     }
 
+    /**
+     * 数据添加为第一项
+     *
+     * @param m 被添加数据
+     */
     public void addFirst(M m) {
         mItems.add(0, m);
         notifyDataSetChanged();
     }
 
+    /**
+     * 清空数据
+     */
     public void clear() {
         mItems.clear();
         notifyDataSetChanged();
     }
 
+    /**
+     * @return 当前列表数据
+     */
     public List<M> getDataList() {
         return mItems;
     }

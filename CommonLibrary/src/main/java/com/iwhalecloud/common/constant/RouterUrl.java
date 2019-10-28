@@ -18,6 +18,7 @@ public class RouterUrl {
 
     public static final String HOME = "/home";
     public static final String DISCOVER = "/discover";
+    public static final String CART = "/cart";
     public static final String MINE = "/mine";
     public static final String LOFIN = "/login";
 
@@ -25,6 +26,8 @@ public class RouterUrl {
     public static final String HOME_FRAGMENT_HOME = HOME + FRAGMENT + "home";
 
     public static final String DISCOVER_FRAGMENT_DISCOVER = DISCOVER + FRAGMENT + "discover";
+
+    public static final String CART_FRAGMENT_CART = CART + FRAGMENT + "cart";
 
     public static final String MINE_FRAGMENT_MINE = MINE + FRAGMENT + "mine";
 
