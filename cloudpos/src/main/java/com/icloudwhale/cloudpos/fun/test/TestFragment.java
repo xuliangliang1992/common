@@ -220,7 +220,7 @@ class TestFragment extends BaseRefreshFragment<User, TestPresenter> implements T
     /**
      * 刷新数据
      *
-     * @param data
+     * @param data 数据
      */
     @Override
     public void refreshData(ObservableArrayList<User> data) {

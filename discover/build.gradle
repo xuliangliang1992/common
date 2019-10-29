@@ -40,7 +40,7 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled MINIFY_ENABLED.toBoolean()
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -85,6 +85,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':CommonLibrary')
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    implementation "org.glassfish:javax.annotation:$lombokAnnotationVersion"
 
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompilerVersion"
 }

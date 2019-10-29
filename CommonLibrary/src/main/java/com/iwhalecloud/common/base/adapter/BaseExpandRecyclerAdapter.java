@@ -61,6 +61,9 @@ public abstract class BaseExpandRecyclerAdapter<G, C, M extends DataTree<G, C>, 
      */
     public void removeChild(int groupPosition, int childPosition) {
         mItems.get(groupPosition).getSubItems().remove(childPosition);
+        if (mItems.get(groupPosition).getSubItems().size() == 0) {
+            mItems.remove(groupPosition);
+        }
         initGroupItemStatus(groupItemStatus);
         notifyDataSetChanged();
     }
@@ -158,10 +161,18 @@ public abstract class BaseExpandRecyclerAdapter<G, C, M extends DataTree<G, C>, 
         return getCount();
     }
 
+    /**
+     * @param adapterPosition 列表中位置
+     * @return groupPosition
+     */
     public int getGroupPosition(int adapterPosition) {
         return getItemStatusByPosition(adapterPosition).getGroupPosition();
     }
 
+    /**
+     * @param adapterPosition 列表中位置
+     * @return childPosition
+     */
     public int getChildPosition(int adapterPosition) {
         return getItemStatusByPosition(adapterPosition).getChildPosition();
     }

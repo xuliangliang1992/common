@@ -1,4 +1,4 @@
-if (mineRunAlone.toBoolean()) {
+if (cartRunAlone.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -9,8 +9,8 @@ android {
     buildToolsVersion build_tools_version
 
     defaultConfig {
-        if (mineRunAlone.toBoolean()) {
-            applicationId "com.icloudwhale.mine"
+        if (cartRunAlone.toBoolean()) {
+            applicationId "com.icloudwhale.cart"
         }
         minSdkVersion min_sdk_version.toInteger()
         targetSdkVersion target_sdk_version.toInteger()
@@ -47,7 +47,7 @@ android {
         release {
             minifyEnabled true
             // 移除无用的resource文件
-            shrinkResources mineRunAlone.toBoolean()
+            shrinkResources cartRunAlone.toBoolean()
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -55,7 +55,7 @@ android {
 
     sourceSets {
         main {
-            if (mineRunAlone.toBoolean()) {
+            if (cartRunAlone.toBoolean()) {
                 manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
@@ -85,6 +85,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':CommonLibrary')
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
 
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompilerVersion"
 }

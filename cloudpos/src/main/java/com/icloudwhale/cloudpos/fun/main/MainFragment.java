@@ -25,7 +25,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     private MainContract.Presenter mPresenter;
     private MainFragmentBinding binding;
     private String[] titles;
-    private BaseFragment mHomeFragment, mDiscoverFragment, mMineFragment;
+    private BaseFragment mHomeFragment, mDiscoverFragment, mCartFragment, mMineFragment;
     private List<BaseFragment> fragments;
 
     static MainFragment newInstance() {
@@ -50,14 +50,16 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @Override
     public void initData() {
         fragments = new ArrayList<>();
-        titles = new String[]{"首页", "发现", "我的"};
+        titles = new String[]{"首页", "发现", "购物车", "我的"};
 
         mHomeFragment = (BaseFragment) ARouter.getInstance().build(RouterUrl.HOME_FRAGMENT_HOME).navigation();
         mDiscoverFragment = (BaseFragment) ARouter.getInstance().build(RouterUrl.DISCOVER_FRAGMENT_DISCOVER).navigation();
+        mCartFragment = (BaseFragment) ARouter.getInstance().build(RouterUrl.CART_FRAGMENT_CART).navigation();
         mMineFragment = (BaseFragment) ARouter.getInstance().build(RouterUrl.MINE_FRAGMENT_MINE).navigation();
 
         fragments.add(mHomeFragment);
         fragments.add(mDiscoverFragment);
+        fragments.add(mCartFragment);
         fragments.add(mMineFragment);
 
         MainPageAdapter mAdapter = new MainPageAdapter(getFragmentManager(), fragments);
