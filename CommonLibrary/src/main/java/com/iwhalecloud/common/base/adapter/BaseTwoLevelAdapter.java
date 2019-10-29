@@ -14,6 +14,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import timber.log.Timber;
 
 /**
  * 二级列表Adapter
@@ -24,12 +25,19 @@ import androidx.databinding.ViewDataBinding;
  */
 public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B extends ViewDataBinding> extends BaseAdapter<M, BaseBindingViewHolder<B>> {
     private SparseBooleanArray groupItemStatus;
-    protected OnGroupClickListener<G> mGroupClickListener;
-    protected OnChildClickListener<C> mChildClickListener;
+    protected OnGroupClickListener<G> mOnGroupClickListener;
+    protected OnChildClickListener<C> mOnChildClickListener;
+    protected OnGroupExpandListener mOnGroupExpandListener;
+    protected OnGroupCollapseListener mOnGroupCollapseListener;
+    private boolean groupClickable;
+    private boolean childClickable;
 
     public BaseTwoLevelAdapter() {
         super();
         groupItemStatus = new SparseBooleanArray();
+        //默认可点击
+        groupClickable = true;
+        childClickable = true;
     }
 
     @Override
@@ -57,18 +65,34 @@ public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B exte
     }
 
     private void initGroupItemStatus(SparseBooleanArray sparseBooleanArray) {
-        //设置初始值，所有 groupItem 默认为开启状态
+        //设置初始值，所有 groupItem 默认为关闭状态
         for (int i = 0; i < mItems.size(); i++) {
-            sparseBooleanArray.put(i, true);
+            sparseBooleanArray.put(i, false);
         }
     }
 
-    public void setGroupClickListener(OnGroupClickListener<G> groupClickListener) {
-        mGroupClickListener = groupClickListener;
+    public void setGroupClickable(boolean groupClickable) {
+        this.groupClickable = groupClickable;
     }
 
-    public void setChildClickListener(OnChildClickListener<C> childClickListener) {
-        mChildClickListener = childClickListener;
+    public void setChildClickable(boolean childClickable) {
+        this.childClickable = childClickable;
+    }
+
+    public void setOnGroupClickListener(OnGroupClickListener<G> groupClickListener) {
+        mOnGroupClickListener = groupClickListener;
+    }
+
+    public void setOnChildClickListener(OnChildClickListener<C> childClickListener) {
+        mOnChildClickListener = childClickListener;
+    }
+
+    public void setOnGroupExpandListener(OnGroupExpandListener groupExpandListener) {
+        mOnGroupExpandListener = groupExpandListener;
+    }
+
+    public void setOnGroupCollapseListener(OnGroupCollapseListener groupCollapseListener) {
+        mOnGroupCollapseListener = groupCollapseListener;
     }
 
     @Override
@@ -95,25 +119,97 @@ public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B exte
         final ItemStatus itemStatus = getItemStatusByPosition(position);
         final DataTree<G, C> dt = mItems.get(itemStatus.getGroupPosition());
         if (itemStatus.getViewType() == ItemStatus.VIEW_TYPE_GROUP_ITEM) {
-            onBindGroupItem(holder, itemStatus.getGroupPosition(), dt.getGroupItem());
+            onBindGroupItem(holder, itemStatus.getGroupPosition(), dt.getGroupItem(), dt.getSubItems());
             addDisposable(RxView.clicks(holder.itemView)
                     .throttleFirst(1, TimeUnit.SECONDS)
-                    .subscribe(unit -> mGroupClickListener.onGroupItemClick(dt.getGroupItem(), position)));
+                    .subscribe(unit -> {
+                        if (groupClickable) {
+                            if (mOnGroupClickListener == null || mOnGroupClickListener.onGroupItemClick(dt.getGroupItem(), itemStatus.getGroupPosition())) {
+                                if (itemStatus.isExpanded()) {
+                                    collapseGroup(itemStatus.getGroupPosition());
+                                } else {
+                                    expandGroup(itemStatus.getGroupPosition());
+                                }
+                                itemStatus.setExpanded(!itemStatus.isExpanded());
+                            }
+                        }
+
+                    }));
         } else if (itemStatus.getViewType() == ItemStatus.VIEW_TYPE_SUB_ITEM) {
             onBindChildItem(holder, itemStatus.getGroupPosition(), itemStatus.getChildPosition(), dt.getSubItems().get(itemStatus.getChildPosition()));
             addDisposable(RxView.clicks(holder.itemView)
                     .throttleFirst(1, TimeUnit.SECONDS)
-                    .subscribe(unit -> mChildClickListener.onChildItemClick(
-                            dt.getSubItems().get(itemStatus.getChildPosition()),
-                            itemStatus.getGroupPosition(),
-                            itemStatus.getChildPosition())));
+                    .subscribe(unit -> {
+                        if (childClickable && mOnChildClickListener != null) {
+                            Timber.d(position + "-  -  -" + itemStatus.getChildPosition() + "  " + holder.getAdapterPosition() + 1);
+                            mOnChildClickListener.onChildItemClick(
+                                    dt.getSubItems().get(itemStatus.getChildPosition()),
+                                    itemStatus.getGroupPosition(),
+                                    itemStatus.getChildPosition());
+                        }
+                    }));
         }
     }
-
 
     @Override
     public int getItemCount() {
         return getCount();
+    }
+
+    /**
+     * @param groupPosition 给定组
+     * @return 给定组当前是否已展开
+     */
+    public boolean isGroupExpanded(int groupPosition) {
+        return groupItemStatus.get(groupPosition);
+    }
+
+    /**
+     * 在分组列表视图中展开组
+     *
+     * @param groupPosition 给定组
+     */
+    public void expandGroup(int groupPosition) {
+        if (groupPosition < 0 || groupPosition > groupItemStatus.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (mOnGroupExpandListener != null) {
+            mOnGroupExpandListener.onGroupExpand(groupPosition);
+        }
+        groupItemStatus.put(groupPosition, true);
+        notifyItemRangeInserted(getAdapterPosition(groupPosition) + 1, mItems.get(groupPosition).getSubItems().size());
+    }
+
+    /**
+     * 在分组列表视图中折叠组
+     *
+     * @param groupPosition 给定组
+     */
+    public void collapseGroup(int groupPosition) {
+        if (groupPosition < 0 || groupPosition > groupItemStatus.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (mOnGroupCollapseListener != null) {
+            mOnGroupCollapseListener.onGroupCollapse(groupPosition);
+        }
+        groupItemStatus.put(groupPosition, false);
+        notifyItemRangeRemoved(getAdapterPosition(groupPosition) + 1, mItems.get(groupPosition).getSubItems().size());
+    }
+
+    /**
+     * @param groupPosition groupPosition
+     * @return 获取该组在列表中的位置
+     */
+    private int getAdapterPosition(int groupPosition) {
+        int adapterPosition = 0;
+        for (int i = 0; i < groupPosition; i++) {
+            adapterPosition++;
+            List<C> goodBeans = mItems.get(i).getSubItems();
+            if (groupItemStatus.get(i) && goodBeans != null) {
+                adapterPosition = adapterPosition + goodBeans.size();
+            }
+        }
+        return adapterPosition;
     }
 
     /**
@@ -148,6 +244,7 @@ public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B exte
         int i;
         //轮询 groupItem 的开关状态
         for (i = 0; i < groupItemStatus.size(); i++) {
+            itemStatus.setExpanded(groupItemStatus.get(i));
             if (count == position) {
                 //pos刚好等于计数时，item为groupItem
                 itemStatus.setViewType(ItemStatus.VIEW_TYPE_GROUP_ITEM);
@@ -193,44 +290,70 @@ public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B exte
     int getChildLayout();
 
     /**
+     * 一级数据
+     *
+     * @param holder        BaseBindingViewHolder
+     * @param groupPosition groupPosition
+     * @param g             一级对象
+     * @param cList         二级对象列表
+     */
+    protected abstract void onBindGroupItem(BaseBindingViewHolder<B> holder, int groupPosition, G g, List<C> cList);
+
+    /**
      * 二级数据
      *
-     * @param holder
-     * @param groupPosition 组Position
-     * @param childPosition 子Position
+     * @param holder        BaseBindingViewHolder
+     * @param groupPosition groupPosition
+     * @param childPosition childPosition
      * @param c             二级对象
      */
     protected abstract void onBindChildItem(BaseBindingViewHolder<B> holder, int groupPosition, int childPosition, C c);
 
-    /**
-     * 一级数据
-     *
-     * @param holder
-     * @param groupPosition 组Position
-     * @param g             一级对象
-     */
-    protected abstract void onBindGroupItem(BaseBindingViewHolder<B> holder, int groupPosition, G g);
-
     public interface OnGroupClickListener<G> {
         /**
-         * 一级item点击事件
+         * Group点击事件
          *
-         * @param g             bean
-         * @param groupPosition 下标
+         * @param g             GroupBean
+         * @param groupPosition groupPosition
+         * @return true可以展开折叠组, false不可
          */
-        void onGroupItemClick(G g, int groupPosition);
+        boolean onGroupItemClick(G g, int groupPosition);
 
     }
 
     public interface OnChildClickListener<C> {
         /**
-         * 二级item点击事件
+         * Child点击事件
          *
-         * @param c             bean
-         * @param groupPosition 组下标
-         * @param childPosition 子下标
+         * @param c             ChildBean
+         * @param groupPosition groupPosition
+         * @param childPosition childPosition
          */
         void onChildItemClick(C c, int groupPosition, int childPosition);
 
+    }
+
+    /**
+     * 组展开时监听
+     */
+    public interface OnGroupExpandListener {
+        /**
+         * 组已经展开
+         *
+         * @param groupPosition 给定组
+         */
+        void onGroupExpand(int groupPosition);
+    }
+
+    /**
+     * 组折叠时监听
+     */
+    public interface OnGroupCollapseListener {
+        /**
+         * 当组已经折叠
+         *
+         * @param groupPosition 给定组
+         */
+        void onGroupCollapse(int groupPosition);
     }
 }

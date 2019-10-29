@@ -24,6 +24,8 @@ public class ItemStatus {
      */
     private int childPosition = -1;
 
+    private boolean expanded;
+
     public ItemStatus() {
     }
 
@@ -51,5 +53,11 @@ public class ItemStatus {
         this.childPosition = childPosition;
     }
 
+    public boolean isExpanded() {
+        return expanded;
+    }
 
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
 }
