@@ -86,8 +86,8 @@ dependencies {
 
     implementation project(':CommonLibrary')
 
-    compileOnly "org.projectlombok:lombok:1.18.10"
-    implementation 'org.glassfish:javax.annotation:10.0-b28' //java注解
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    implementation "org.glassfish:javax.annotation:$lombokAnnotationVersion"
 
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompilerVersion"
 }

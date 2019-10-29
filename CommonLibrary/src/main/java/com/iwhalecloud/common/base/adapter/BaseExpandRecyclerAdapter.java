@@ -17,13 +17,14 @@ import androidx.databinding.ViewDataBinding;
 import timber.log.Timber;
 
 /**
- * 二级列表Adapter
+ * ExpandRecyclerViewAdapter
+ * 仿ExpandListView
  *
  * @author xuliangliang
  * @date 2019-10-28
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
-public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B extends ViewDataBinding> extends BaseAdapter<M, BaseBindingViewHolder<B>> {
+public abstract class BaseExpandRecyclerAdapter<G, C, M extends DataTree<G, C>, B extends ViewDataBinding> extends BaseAdapter<M, BaseBindingViewHolder<B>> {
     private SparseBooleanArray groupItemStatus;
     protected OnGroupClickListener<G> mOnGroupClickListener;
     protected OnChildClickListener<C> mOnChildClickListener;
@@ -32,7 +33,7 @@ public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B exte
     private boolean groupClickable;
     private boolean childClickable;
 
-    public BaseTwoLevelAdapter() {
+    public BaseExpandRecyclerAdapter() {
         super();
         groupItemStatus = new SparseBooleanArray();
         //默认可点击
@@ -67,7 +68,7 @@ public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B exte
     private void initGroupItemStatus(SparseBooleanArray sparseBooleanArray) {
         //设置初始值，所有 groupItem 默认为关闭状态
         for (int i = 0; i < mItems.size(); i++) {
-            sparseBooleanArray.put(i, false);
+            sparseBooleanArray.put(i, true);
         }
     }
 
@@ -120,10 +121,10 @@ public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B exte
         final DataTree<G, C> dt = mItems.get(itemStatus.getGroupPosition());
         if (itemStatus.getViewType() == ItemStatus.VIEW_TYPE_GROUP_ITEM) {
             onBindGroupItem(holder, itemStatus.getGroupPosition(), dt.getGroupItem(), dt.getSubItems());
-            addDisposable(RxView.clicks(holder.itemView)
-                    .throttleFirst(1, TimeUnit.SECONDS)
-                    .subscribe(unit -> {
-                        if (groupClickable) {
+            if (groupClickable) {
+                addDisposable(RxView.clicks(holder.itemView)
+                        .throttleFirst(1, TimeUnit.SECONDS)
+                        .subscribe(unit -> {
                             if (mOnGroupClickListener == null || mOnGroupClickListener.onGroupItemClick(dt.getGroupItem(), itemStatus.getGroupPosition())) {
                                 if (itemStatus.isExpanded()) {
                                     collapseGroup(itemStatus.getGroupPosition());
@@ -132,28 +133,37 @@ public abstract class BaseTwoLevelAdapter<G, C, M extends DataTree<G, C>, B exte
                                 }
                                 itemStatus.setExpanded(!itemStatus.isExpanded());
                             }
-                        }
-
-                    }));
+                        }));
+            }
         } else if (itemStatus.getViewType() == ItemStatus.VIEW_TYPE_SUB_ITEM) {
             onBindChildItem(holder, itemStatus.getGroupPosition(), itemStatus.getChildPosition(), dt.getSubItems().get(itemStatus.getChildPosition()));
-            addDisposable(RxView.clicks(holder.itemView)
-                    .throttleFirst(1, TimeUnit.SECONDS)
-                    .subscribe(unit -> {
-                        if (childClickable && mOnChildClickListener != null) {
-                            Timber.d(position + "-  -  -" + itemStatus.getChildPosition() + "  " + holder.getAdapterPosition() + 1);
-                            mOnChildClickListener.onChildItemClick(
-                                    dt.getSubItems().get(itemStatus.getChildPosition()),
-                                    itemStatus.getGroupPosition(),
-                                    itemStatus.getChildPosition());
-                        }
-                    }));
+            if (childClickable) {
+                addDisposable(RxView.clicks(holder.itemView)
+                        .throttleFirst(1, TimeUnit.SECONDS)
+                        .subscribe(unit -> {
+                            if (mOnChildClickListener != null) {
+                                Timber.d(position + "-  -  -" + itemStatus.getChildPosition() + "  " + holder.getAdapterPosition() + 1);
+                                mOnChildClickListener.onChildItemClick(
+                                        dt.getSubItems().get(itemStatus.getChildPosition()),
+                                        itemStatus.getGroupPosition(),
+                                        itemStatus.getChildPosition());
+                            }
+                        }));
+            }
         }
     }
 
     @Override
     public int getItemCount() {
         return getCount();
+    }
+
+    public int getGroupPosition(int adapterPosition) {
+        return getItemStatusByPosition(adapterPosition).getGroupPosition();
+    }
+
+    public int getChildPosition(int adapterPosition) {
+        return getItemStatusByPosition(adapterPosition).getChildPosition();
     }
 
     /**

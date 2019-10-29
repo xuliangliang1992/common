@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/ll_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -33,9 +33,12 @@
         <LinearLayout
             android:id="@+id/ll_hidden"
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:background="#ff0000"
-            android:gravity="center">
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/ll_show"
+            app:layout_constraintStart_toEndOf="@id/ll_show"
+            app:layout_constraintTop_toTopOf="@id/ll_show">
 
             <TextView
                 android:id="@+id/tv_item_delete"
@@ -45,7 +48,7 @@
                 android:textColor="#ffffff"
                 android:textSize="16sp" />
         </LinearLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
 

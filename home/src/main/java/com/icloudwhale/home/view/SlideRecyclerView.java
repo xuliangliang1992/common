@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
-import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 import com.icloudwhale.home.R;
+import com.iwhalecloud.common.util.SystemUtil;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
 public class SlideRecyclerView extends RecyclerView {
+    private int screenWidth;
     /**
      * 最小移动距离
      */
@@ -35,6 +36,7 @@ public class SlideRecyclerView extends RecyclerView {
      * 当前选中的item索引
      */
     private int curSelectPosition;
+    private int lastSelectPosition = -1;
     /**
      * 隐藏部分的长度
      */
@@ -66,14 +68,17 @@ public class SlideRecyclerView extends RecyclerView {
         super(context, attrs, defStyle);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         mScroller = new Scroller(context, new LinearInterpolator(context, null));
+        screenWidth = SystemUtil.getScreenWidth(context);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
+        boolean showDelete = mMoveWidth > 0;
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 xDown = (int) e.getX();
                 yDown = (int) e.getY();
+
                 int firstPosition = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
                 Rect itemRect = new Rect();
                 int count = getChildCount();
@@ -87,22 +92,14 @@ public class SlideRecyclerView extends RecyclerView {
                     }
                 }
                 isClick = true;
-                if (mMoveWidth > 0) {
+                if (showDelete && (curSelectPosition != lastSelectPosition || xDown <= screenWidth - mHiddenWidth)) {
                     scrollRight(mLastItemLayout, 0 - mMoveWidth);
                     isClick = false;
                 }
                 View item = getChildAt(curSelectPosition - firstPosition);
                 if (item != null) {
-                    mCurItemLayout = (LinearLayout) getChildViewHolder(item).itemView;
-                    //
+                    mCurItemLayout = (ViewGroup) getChildViewHolder(item).itemView;
                     mHiddenWidth = mCurItemLayout.findViewById(R.id.ll_hidden).getWidth();
-
-                    mCurItemLayout.findViewById(R.id.ll_hidden).setOnClickListener(v -> {
-                        scrollRight(mLastItemLayout, 0 - mMoveWidth);
-                        if (mSlideClickListener != null) {
-                            mSlideClickListener.onDelete(v, curSelectPosition);
-                        }
-                    });
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -132,14 +129,11 @@ public class SlideRecyclerView extends RecyclerView {
                     return false;
                 }
                 break;
+            case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 if (mMoveWidth < mTouchSlop) {
-                    if (mMoveWidth > 0) {
-                        scrollRight(mLastItemLayout, 0 - mMoveWidth);
-                    } else {
-                        if (isClick && mSlideClickListener != null) {
-                            mSlideClickListener.onClick(curSelectPosition);
-                        }
+                    if (mSlideClickListener != null && isClick) {
+                        mSlideClickListener.onClick(curSelectPosition);
                     }
                 } else {
                     if (mHiddenWidth > mMoveWidth) {
@@ -149,9 +143,20 @@ public class SlideRecyclerView extends RecyclerView {
                         } else {
                             scrollRight(mCurItemLayout, 0 - mMoveWidth);
                         }
+                    } else {
+                        if (showDelete && lastSelectPosition == curSelectPosition && xDown > screenWidth - mHiddenWidth && xDown < screenWidth) {
+                            if (e.getX() > screenWidth - mHiddenWidth) {
+                                scrollRight(mCurItemLayout, 0 - mMoveWidth);
+                                if (mSlideClickListener != null) {
+                                    mSlideClickListener.onDelete(curSelectPosition);
+                                }
+                            }
+                        }
                     }
+
                 }
                 mLastItemLayout = mCurItemLayout;
+                lastSelectPosition = curSelectPosition;
                 return true;
             default:
 
@@ -189,14 +194,13 @@ public class SlideRecyclerView extends RecyclerView {
         mSlideClickListener = slideClickListener;
     }
 
-   public interface SlideClickListener {
+    public interface SlideClickListener {
         /**
          * 删除
          *
-         * @param v
          * @param position
          */
-        void onDelete(View v, int position);
+        void onDelete(int position);
 
         /**
          * 点击事件
