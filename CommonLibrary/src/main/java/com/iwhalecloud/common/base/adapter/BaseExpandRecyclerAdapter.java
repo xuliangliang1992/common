@@ -14,11 +14,11 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import timber.log.Timber;
 
 /**
  * ExpandRecyclerViewAdapter
  * 仿ExpandListView
+ * 使用RecyclerViewAdapter即可
  *
  * @author xuliangliang
  * @date 2019-10-28
@@ -145,7 +145,6 @@ public abstract class BaseExpandRecyclerAdapter<G, C, M extends DataTree<G, C>, 
                         .throttleFirst(1, TimeUnit.SECONDS)
                         .subscribe(unit -> {
                             if (mOnChildClickListener != null) {
-                                Timber.d(position + "-  -  -" + itemStatus.getChildPosition() + "  " + holder.getAdapterPosition() + 1);
                                 mOnChildClickListener.onChildItemClick(
                                         dt.getSubItems().get(itemStatus.getChildPosition()),
                                         itemStatus.getGroupPosition(),

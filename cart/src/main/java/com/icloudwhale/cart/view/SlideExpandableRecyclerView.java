@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * item左滑RecyclerView
+ * ChildItem可左滑RecyclerView
+ * 与BaseExpandRecyclerAdapter配合使用
+ * 需禁用adapter的点击事件
  *
  * @author xuliangliang
  * @date 2019-10-24
@@ -233,7 +235,11 @@ public class SlideExpandableRecyclerView extends RecyclerView {
     }
 
     public interface OnGroupClickListener {
-
+        /**
+         * 点击事件
+         *
+         * @param position
+         */
         void onGroupClickListener(int position);
     }
 }
