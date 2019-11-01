@@ -42,14 +42,14 @@ android {
         debug {
             minifyEnabled MINIFY_ENABLED.toBoolean()
             signingConfig signingConfigs.config
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), PROGUARD_RULES_FILE
         }
         release {
             minifyEnabled true
             // 移除无用的resource文件
             shrinkResources loginRunAlone.toBoolean()
             signingConfig signingConfigs.config
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), PROGUARD_RULES_FILE
         }
     }
 
