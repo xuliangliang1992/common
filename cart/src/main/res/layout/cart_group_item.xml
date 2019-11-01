@@ -18,7 +18,7 @@
 
         <variable
             name="cart"
-            type="com.icloudwhale.cart.cart.CartBean" />
+            type="com.icloudwhale.cart.http.response.CartBean" />
 
     </data>
 </layout>

@@ -1,4 +1,4 @@
-package com.icloudwhale.cart.cart;
+package com.icloudwhale.cart.fun.cart;
 
 
 import android.view.View;
@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.icloudwhale.cart.R;
 import com.icloudwhale.cart.databinding.CartFragmentBinding;
+import com.icloudwhale.cart.http.response.CartBean;
+import com.icloudwhale.cart.http.response.GoodBean;
 import com.icloudwhale.cart.view.SlideExpandableRecyclerView;
 import com.iwhalecloud.common.base.fragment.BaseMvpFragment;
 import com.iwhalecloud.common.constant.RouterUrl;
@@ -140,7 +142,7 @@ public class CartFragment extends BaseMvpFragment<CartPresenter> implements Cart
         List<CartBean> cartBeans = gson.fromJson(json, new TypeToken<List<CartBean>>() {
         }.getType());
 
-        List<DataTree<CartBean, CartBean.GoodBean>> mData = new ArrayList<>();
+        List<DataTree<CartBean, GoodBean>> mData = new ArrayList<>();
         for (int i = 0; i < cartBeans.size(); i++) {
             mData.add(new DataTree<>(cartBeans.get(i), cartBeans.get(i).getGoods()));
         }

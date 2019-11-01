@@ -60,7 +60,7 @@
 
         <variable
             name="goodBean"
-            type="com.icloudwhale.cart.cart.CartBean.GoodBean" />
+            type="com.icloudwhale.cart.http.response.GoodBean" />
 
     </data>
 </layout>

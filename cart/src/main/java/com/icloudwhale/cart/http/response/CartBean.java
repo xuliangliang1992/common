@@ -1,5 +1,6 @@
-package com.icloudwhale.cart.cart;
+package com.icloudwhale.cart.http.response;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Data;
@@ -10,16 +11,9 @@ import lombok.Data;
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
 @Data
-public class CartBean {
+public class CartBean implements Serializable {
     public String shopName;
     public long shopId;
     public List<GoodBean> goods;
 
-    @Data
-    public class GoodBean {
-        public String goodName;
-        public long goodId;
-        public double price;
-        public int num;
-    }
 }

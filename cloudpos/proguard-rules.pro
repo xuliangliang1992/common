@@ -392,6 +392,32 @@
 #}
 
 
+-keepclasseswithmembernames class ** {
+    native <methods>;
+}
+-keepattributes Signature
+-keep class sun.misc.Unsafe { *; }
+-keep class com.taobao.** {*;}
+-keep class com.alibaba.** {*;}
+-keep class com.alipay.** {*;}
+-keep class com.ut.** {*;}
+-keep class com.ta.** {*;}
+-keep class anet.**{*;}
+-keep class anetwork.**{*;}
+-keep class org.android.spdy.**{*;}
+-keep class org.android.agoo.**{*;}
+-keep class android.os.**{*;}
+-keep class org.json.**{*;}
+-dontwarn com.taobao.**
+-dontwarn com.alibaba.**
+-dontwarn com.alipay.**
+-dontwarn anet.**
+-dontwarn org.android.spdy.**
+-dontwarn org.android.agoo.**
+-dontwarn anetwork.**
+-dontwarn com.ut.**
+-dontwarn com.ta.**
+
 #############################################
 #
 # 项目中特殊处理部分
@@ -409,6 +435,16 @@
 #-----------处理实体类---------------
 # 在开发的时候我们可以将所有的实体类放在一个包内，这样我们写一次混淆就行了。
 -keep class com.icloudwhale.cloudpos.http.response.** {
+    public void set*(***);
+    public *** get*();
+    public *** is*();
+}
+-keep class com.icloudwhale.cart.http.response.** {
+    public void set*(***);
+    public *** get*();
+    public *** is*();
+}
+-keep class com.icloudwhale.common.http.response.** {
     public void set*(***);
     public *** get*();
     public *** is*();
