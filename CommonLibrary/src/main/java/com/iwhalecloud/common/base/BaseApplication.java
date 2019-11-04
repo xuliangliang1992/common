@@ -183,6 +183,19 @@ public class BaseApplication extends Application {
                 Timber.tag(TAG).d("init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
             }
         });
+
+      /*  // 注册方法会自动判断是否支持小米系统推送，如不支持会跳过注册。
+        MiPushRegister.register(applicationContext, "小米AppID", "小米AppKey");
+        // 注册方法会自动判断是否支持华为系统推送，如不支持会跳过注册。
+        HuaWeiRegister.register(this);
+        //GCM/FCM辅助通道注册
+//        GcmRegister.register(this, sendId, applicationId); //sendId/applicationId为步骤获得的参数
+        // OPPO通道注册
+//        OppoRegister.register(applicationContext, appKey, appSecret); // appKey/appSecret在OPPO开发者平台获取
+        // 魅族通道注册
+        MeizuRegister.register(applicationContext, "appId", "appkey"); // appId/appkey在魅族开发者平台获取
+        // VIVO通道注册
+        VivoRegister.register(applicationContext);*/
     }
 
     /**
