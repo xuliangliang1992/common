@@ -418,6 +418,17 @@
 -dontwarn com.ut.**
 -dontwarn com.ta.**
 
+-keep class com.alibaba.sdk.android.**{*;}
+-keep class com.ut.**{*;}
+-keep class com.ta.**{*;}
+
+#hotfix
+-keep class com.taobao.sophix.**{*;}
+-keep class com.ta.utdid2.device.**{*;}
+-dontwarn com.alibaba.sdk.android.utils.**
+
+-applymapping mapping.txt
+
 #############################################
 #
 # 项目中特殊处理部分

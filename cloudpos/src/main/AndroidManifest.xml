@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 阿里云推送相关权限 -->
     <application
-        android:name=".base.MainApplication"
+        android:name="com.iwhalecloud.common.base.SophixStubApplication"
         android:allowBackup="true"
 
         android:icon="@mipmap/ic_launcher"

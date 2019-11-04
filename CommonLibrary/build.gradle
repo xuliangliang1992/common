@@ -13,7 +13,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'x86'
+            abiFilters "armeabi", "armeabi-v7a", "x86"
         }
         javaCompileOptions {
             annotationProcessorOptions {
@@ -102,4 +102,6 @@ dependencies {
     api "org.glassfish:javax.annotation:$lombokAnnotationVersion"
 
     api 'com.aliyun.ams:alicloud-android-push:3.1.6'
+    api 'com.aliyun.ams:alicloud-android-man:1.2.4'
+    api 'com.aliyun.ams:alicloud-android-hotfix:3.2.9'
 }

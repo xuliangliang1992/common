@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.icloudwhale.cloudpos.R;
 import com.iwhalecloud.common.base.BaseActivity;
 import com.iwhalecloud.common.util.ActivityUtil;
+import com.taobao.sophix.SophixManager;
 
 /**
  * @author xuliangliang
@@ -22,6 +23,7 @@ public class MainActivity extends BaseActivity {
             fragment = MainFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
+        SophixManager.getInstance().queryAndLoadNewPatch();
 
     }
 
