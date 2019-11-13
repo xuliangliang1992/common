@@ -19,18 +19,76 @@ import timber.log.Timber;
  */
 public class HelloService extends Service {
 
+    public static void main(String[] arr) {
+       /* int row = 7;
+        int column = 5;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (i == 0 || i == row - 1) {
+                    if (j == column / 2) {
+                        System.out.print('*');
+                    } else {
+                        System.out.print(' ');
+                    }
+                } else if (i == 1 || i == row - 2) {
+                    if (j % 2 == 0) {
+                        System.out.print('*');
+                    } else {
+                        System.out.print(' ');
+                    }
+                } else if (i == 2 || i == row - 3) {
+                    if (j == 0 || j == column - 1) {
+                        System.out.print(' ');
+                    } else {
+                        System.out.print('*');
+                    }
+                } else {
+                    System.out.print('*');
+                }
+            }
+            System.out.println();
+        }*/
+
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 5; j++) {
+                switch (i) {
+                    case 0:
+                    case 6:
+                        System.out.print(j == 2 ? '*' : ' ');
+                        break;
+                    case 1:
+                    case 5:
+                        System.out.print(j % 2 == 0 ? '*' : ' ');
+                        break;
+                    case 2:
+                    case 4:
+                        System.out.print(j == 0 || j == 4 ? ' ' : '*');
+                        break;
+                    case 3:
+                        System.out.print('*');
+                        break;
+                    default:
+                        break;
+                }
+            }
+            System.out.print('\n');
+        }
+    }
+
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
+
     // 处理从线程接收的消息
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
         }
+
         @Override
         public void handleMessage(Message msg) {
             // 通常我们在这里执行一些工作，比如下载文件。
             // 作为例子，我们只是睡个5秒钟。
-            long endTime = System.currentTimeMillis() + 5*1000;
+            long endTime = System.currentTimeMillis() + 5 * 1000;
             while (System.currentTimeMillis() < endTime) {
                 synchronized (this) {
                     try {

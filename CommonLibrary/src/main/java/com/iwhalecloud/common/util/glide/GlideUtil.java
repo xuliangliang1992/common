@@ -1,5 +1,6 @@
 package com.iwhalecloud.common.util.glide;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -16,6 +17,23 @@ import com.iwhalecloud.common.util.StringUtil;
  * @date 2018/12/7
  */
 public class GlideUtil {
+
+    /**
+     * 判断用于Glide的Context是否有效
+     *
+     * @param context 用于Glide的Context
+     * @return 用于Glide的Context是否有效
+     */
+    public static boolean isValidContextForGlide(final Context context) {
+        if (context == null) {
+            return false;
+        }
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            return !activity.isDestroyed() && !activity.isFinishing();
+        }
+        return true;
+    }
 
     public static void loadImage(Context mContext, String url, ImageView imageView) {
         if (StringUtil.isStringNull(url)) {

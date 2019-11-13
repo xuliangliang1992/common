@@ -52,7 +52,7 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
         Timber.tag(TAG).d("onViewCreated initListener");
         binding.rvHome.setSlideClickListener(new SlideRecyclerView.SlideClickListener() {
             @Override
-            public void onDelete( int position) {
+            public void onDelete(int position) {
                 Timber.tag(TAG).d("onDelete " + position);
             }
 

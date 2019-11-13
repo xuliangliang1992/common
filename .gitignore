@@ -6,7 +6,6 @@
 /build
 /captures
 .externalNativeBuild
-/cloudpos/proguardMapping.txt
 /cloudpos/seeds.txt
 /cloudpos/unused.txt
 /cloudpos/release

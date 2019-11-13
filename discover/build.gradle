@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         if (discoverRunAlone.toBoolean()) {
-            applicationId "com.icloudwhale.home"
+            applicationId "com.icloudwhale.discover"
         }
         minSdkVersion min_sdk_version.toInteger()
         targetSdkVersion target_sdk_version.toInteger()

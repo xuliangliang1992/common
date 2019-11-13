@@ -16,6 +16,7 @@ import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.iwhalecloud.common.commonlibrary.BuildConfig;
+import com.iwhalecloud.common.network.NetWorkManager;
 import com.iwhalecloud.common.util.FileUtil;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
@@ -91,6 +92,8 @@ public class BaseApplication extends Application {
 
         initCloudChannel(this);
         initManService(this);
+
+        NetWorkManager.getInstance().init(this);
     }
 
     private void initSophix() {

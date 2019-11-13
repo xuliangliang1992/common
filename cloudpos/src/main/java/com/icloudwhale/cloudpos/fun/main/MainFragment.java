@@ -8,6 +8,8 @@ import com.icloudwhale.cloudpos.databinding.MainFragmentBinding;
 import com.iwhalecloud.common.base.fragment.BaseFragment;
 import com.iwhalecloud.common.constant.RouterUrl;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +87,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
             this.mFragmentList = fragments;
         }
 
+        @NotNull
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);

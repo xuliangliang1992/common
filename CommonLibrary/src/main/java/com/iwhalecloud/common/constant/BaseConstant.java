@@ -33,4 +33,9 @@ public class BaseConstant {
 
     public final static List<String> PAYMENT_MODE_LIST = Arrays.asList("微信", "支付宝");
 
+
+    /**
+     * 系统网络改变广播
+     */
+    public static String ANDROID_NET_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
 }

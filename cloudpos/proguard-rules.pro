@@ -39,7 +39,7 @@
 -verbose
 
 # 指定不去忽略非公共库的类成员
--dontskipnonpubliclibraryclassmembers
+#-dontskipnonpubliclibraryclassmembers
 
 # 不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。
 -dontpreverify
@@ -55,7 +55,7 @@
 
 # 指定混淆是采用的算法，后面的参数是一个过滤器
 # 这个过滤器是谷歌推荐的算法，一般不做更改
--optimizations !code/simplification/cast,!field/*,!class/merging/*
+#-optimizations !code/simplification/cast,!field/*,!class/merging/*
 
 #优化 不优化输入的类文件
 -dontoptimize
@@ -65,7 +65,7 @@
 #混淆时所采用的算法，谷歌推荐，一般不改变
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 #保护代码中的Annotation不被混淆，在使用如fastJSON时的实体映射
--keepattributes *Annotation*
+#-keepattributes *Annotation*
 
 #忽略警告  ----- 不推荐全部忽略警告，如果确认哪些类和app无关，可以使用 -dontwarn org.apache.http.**来忽略
 #-ignorewarning
@@ -77,7 +77,6 @@
 -printseeds seeds.txt
 #列出从 apk 中删除的代码
 -printusage unused.txt
-
 #############################################
 #
 # Android开发中一些需要保留的公共部分
@@ -96,7 +95,8 @@
 -keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
 -keep class android.support.** {*;}
-
+# 不混淆Fragment的子类类名以及onCreate()、onCreateView()方法名
+-keep public class * extends androidx.fragment.app.Fragment
 # Androidx混淆
 # 因为这些子类都有可能被外部调用
 -keep class com.google.android.material.** {*;}
@@ -380,16 +380,16 @@
 #}
 #
 ## recyclerview-swipe
-#-keepclasseswithmembers class android.support.v7.widget.RecyclerView$ViewHolder {
-#   public final View *;
-#}
-#-dontwarn com.yanzhenjie.recyclerview.swipe.**
-#-keep class com.yanzhenjie.recyclerview.swipe.** {*;}
-#
-## Only required if you use AsyncExecutor
-#-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
-#    <init>(java.lang.Throwable);
-#}
+-keepclasseswithmembers class android.support.v7.widget.RecyclerView$ViewHolder {
+   public final View *;
+}
+-dontwarn com.yanzhenjie.recyclerview.swipe.**
+-keep class com.yanzhenjie.recyclerview.swipe.** {*;}
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
 
 
 -keepclasseswithmembernames class ** {
@@ -427,7 +427,7 @@
 -keep class com.ta.utdid2.device.**{*;}
 -dontwarn com.alibaba.sdk.android.utils.**
 
--applymapping mapping.txt
+#-applymapping proguardMapping.txt
 
 
 # 小米通道
