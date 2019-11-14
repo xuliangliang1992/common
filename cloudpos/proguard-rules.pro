@@ -427,7 +427,7 @@
 -keep class com.ta.utdid2.device.**{*;}
 -dontwarn com.alibaba.sdk.android.utils.**
 
--applymapping proguardMapping.txt
+#-applymapping proguardMapping.txt
 
 
 # 小米通道

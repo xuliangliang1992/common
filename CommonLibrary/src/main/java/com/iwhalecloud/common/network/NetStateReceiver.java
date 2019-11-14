@@ -39,7 +39,7 @@ public class NetStateReceiver extends BroadcastReceiver {
             if (time - lastTime > 1000) {
                 Timber.tag(TAG).e("监听网络变化！ " + time +" "+ lastTime);
                 mNetType = NetWorkUtil.getNetType();
-                if (NetWorkUtil.isNetworkAvaiable()) {
+                if (NetWorkUtil.isNetworkAvailable()) {
                     if (mNetChangeObserver != null) {
                         Timber.tag(TAG).e("网络连接成功！ " + mNetType.name());
                         mNetChangeObserver.onConnect(mNetType);

@@ -6,22 +6,35 @@ package com.iwhalecloud.common.network;
  * copyright(c) 浩鲸云计算科技股份有限公司
  */
 public enum NetType {
+
     /**
-     * 有网络，包括wifi gprs
+     * 蜂窝
      */
-    AUTO,
+    CELLULAR,
     /**
      * wifi
      */
     WIFI,
     /**
-     * 电脑 pad
+     * 蓝牙
      */
-    CMNET,
+    BLUETOOTH,
     /**
-     * 手机上网
+     * 以太网
      */
-    CMWAP,
+    ETHERNET,
+    /**
+     * VPN
+     */
+    VPN,
+    /**
+     * wifi感知
+     */
+    WIFI_AWARE,
+    /**
+     * LOWPAN
+     */
+    LOWPAN,
     /**
      * 无网络
      */
