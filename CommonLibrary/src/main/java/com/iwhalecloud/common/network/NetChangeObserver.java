@@ -8,7 +8,15 @@ package com.iwhalecloud.common.network;
  */
 public interface NetChangeObserver {
 
-   void onConnect(NetType type);
+    /**
+     * 网络连接且可用
+     *
+     * @param type 网络类型
+     */
+    void onConnect(NetType type);
 
-   void onDisConnect();
+    /**
+     * 网络断开或网络不可用
+     */
+    void onDisConnect();
 }

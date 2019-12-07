@@ -1,6 +1,8 @@
 package com.iwhalecloud.common.network;
 
 /**
+ * 网络类型
+ *
  * @author xuliangliang
  * @date 2019-11-05
  * copyright(c) 浩鲸云计算科技股份有限公司
@@ -8,35 +10,45 @@ package com.iwhalecloud.common.network;
 public enum NetType {
 
     /**
-     * 蜂窝
+     * 表示此网络使用蜂窝传输
      */
-    CELLULAR,
+    CELLULAR("蜂窝"),
     /**
-     * wifi
+     * 表示此网络使用Wi-Fi传输
      */
-    WIFI,
+    WIFI("Wi-Fi"),
     /**
-     * 蓝牙
+     * 表示此网络使用蓝牙传输
      */
-    BLUETOOTH,
+    BLUETOOTH("蓝牙"),
     /**
-     * 以太网
+     * 表示此网络使用以太网传输
      */
-    ETHERNET,
+    ETHERNET("以太网"),
     /**
-     * VPN
+     * 表示此网络使用VPN传输
      */
-    VPN,
+    VPN("VPN"),
     /**
-     * wifi感知
+     * 表示此网络使用Wi-Fi感知传输
      */
-    WIFI_AWARE,
+    WIFI_AWARE("Wi-Fi感知"),
     /**
-     * LOWPAN
+     * 表示此网络使用低泛传输
      */
-    LOWPAN,
+    LOWPAN("低泛"),
     /**
-     * 无网络
+     * 无网络连接
      */
-    NONE
+    NONE("无网络");
+
+    private String name;
+
+    NetType(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

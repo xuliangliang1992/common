@@ -16,8 +16,11 @@ import android.os.Build;
  */
 public class NetWorkUtil {
 
+    /**
+     * @return 网络是否可用
+     */
     @SuppressLint("MissingPermission")
-    public static boolean isNetworkAvailable() {
+    static boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) NetWorkManager.getInstance().getApplication()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager == null) {
@@ -33,9 +36,18 @@ public class NetWorkUtil {
             return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
         } else {
             //返回所有网络信息
-            NetworkInfo[] infos = connectivityManager.getAllNetworkInfo();
-            if (infos != null) {
-                for (NetworkInfo info : infos) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo == null) {
+                return false;
+            }
+            if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI
+                    || networkInfo.getType() == ConnectivityManager.TYPE_MOBILE
+                    || networkInfo.getType() == ConnectivityManager.TYPE_ETHERNET) {
+                return true;
+            }
+            NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
+            if (networkInfos != null) {
+                for (NetworkInfo info : networkInfos) {
                     if (info.getState() == NetworkInfo.State.CONNECTED) {
                         return true;
                     }
@@ -45,8 +57,11 @@ public class NetWorkUtil {
         }
     }
 
+    /**
+     * @return 当前网络类型
+     */
     @SuppressLint("MissingPermission")
-    public static NetType getNetType() {
+    static NetType getNetType() {
         ConnectivityManager connectivityManager = (ConnectivityManager) NetWorkManager.getInstance().getApplication()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager == null) {
@@ -65,6 +80,8 @@ public class NetWorkUtil {
                 return NetType.WIFI;
             } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH)) {
                 return NetType.BLUETOOTH;
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                return NetType.ETHERNET;
             } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
                 return NetType.VPN;
             } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE)) {
@@ -82,13 +99,10 @@ public class NetWorkUtil {
             int netType = networkInfo.getType();
             if (netType == ConnectivityManager.TYPE_MOBILE) {
                 return NetType.CELLULAR;
-                /*if (networkInfo.getExtraInfo().toLowerCase().equals("cmnet")) {
-                    return NetType.CMNET;
-                } else {
-                    return NetType.CMWAP;
-                }*/
             } else if (netType == ConnectivityManager.TYPE_WIFI) {
                 return NetType.WIFI;
+            } else if (netType == ConnectivityManager.TYPE_ETHERNET) {
+                return NetType.ETHERNET;
             }
             return NetType.NONE;
         }
