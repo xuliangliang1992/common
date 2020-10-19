@@ -2,46 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <meta-data
-            android:name="com.alibaba.app.appkey"
-            android:value="27907681" />
-        <meta-data
-            android:name="com.alibaba.app.appsecret"
-            android:value="8e90f03c2b99dfe4ba0979319289ba9b" />
-        <meta-data
-            android:name="com.taobao.android.hotfix.IDSECRET"
-            android:value="27907681-1" />
-        <meta-data
-            android:name="com.taobao.android.hotfix.APPSECRET"
-            android:value="8e90f03c2b99dfe4ba0979319289ba9b" />
-        <meta-data
-            android:name="com.taobao.android.hotfix.RSASECRET"
-            android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCNb9svmHeVYyB7s5Xhj0LgSNX+GxW1kEJEUeFUFx2PlRuw3Bzk7GV9R3i4OKzyc5gKZ4iqpWq4G+BIsi6x24T35ZdAXP2VWKL/hE9jq8kID7xazKl0v8ZC7bQk55JjOCIyJJBKXYfFtx345wu/t1Q/y+8NKx8LGwx0qvBcuIkhs8U9Si/PYtNKQ0kW3tLEI4tE+7IvrbnwXHD2XF2Tnt2PCsV3LDgpt85tCwcBZpdvtkSuZTZpNC8OKyeNGDkGftZyRomfKA9oL6QZHrGgT1OSoY3rgDe+p/t5Xwp+b8Cpnkpc81iWa8VgWoaXQe2y1IHeEa7rIFgoCyHhehSLgWFJAgMBAAECggEAVnM6bDsrTNpMLpA0WqxwWhrrAeiYOmQ0vQG3UujWHr8rL806tApydkLLXP73ZzKUijeCZ5u4QVR4oLaYqAnfmo5xBtxP+4s0Bi5fQDLuK8lCfdV+9meJzbrxU2VgKtlSvYdv0qScqpMk9NB0c/igvGXwdgIXdXhRArbBOEtrNnd1ZaShLDTUbM3UtNeVe+feKa3kPHwV9sp2/npJs5Vc2YgK23CWFtKVlh2IPZocQwJEXYdFcqOHGjq3267XMpHLQRo7bbGBkFJ6GdZC1qEno5V6whyhK1FNglmGnP74OvMIvV5hbBYea6t25Z/Gij3gVozGXclukNmK9GOttjgFIQKBgQD0pig1lK/7FYBET6ghjqf2Z706ls8oFqceQr19bSQaa6bl9kiu6iJSCURAxHqr+YM9FpJ+nTKXovFNibw1X5iAy/3ZCKBkfyeQqV280gwnxYu7+x6OgsZmIicOArnS/WPeDPHrB9JkTM5UHwvM+sCBRUwJF7un1sk2I0AFe0yChQKBgQCT/8mGRT5JTIIUQ9gH1Qm2AmzJqh9RWXtcSB7Klrt8HmMKLyEbgq6s8SuxzlI/wtiudNeyTStjdre5Ep20k6hE1hB5OBt251GNyqCtwriEGoIaO8vKSYDShx31ALRZNCnv3p0wzcFbPJBpUhfCC+9HCF9qbTt6oinayFHyXpwY9QKBgBtd1tOfjUv17MI3cuRGE+3RTu6V3hhq6EjPSGkWY1p9Pk8tDJZcZHhuxu7Dy8EfCRo1Qy/cn8Msm/eDd8U0q1eE+iFkAKUdQCzDdVPg3zE3vNjLT3C7mjvkiB/eGDFM3PYC1rDm0BceLFpmmqhUSGJtgQLnX7t3oExpBwlV8IoNAoGAI6j7NsYSZvjvUtCyCdkUGO3mpoS+PQyxg5/BA5FkJVjxBjAq6wUG75bAr3wGJ2TcbtSqcETV0oZ1aDuLEkqNveBSYdLaE0FTTjXnl1aWvQXiGU4VIW2qg4+Y8UK1MdU20ZwzBeJd14z1QttL7C6R/eyPiQY+0aKnMRcZX6vaMs0CgYEAkfQt18UhE2Cc3gHf27EU0s7Twf8ioa6IAxQAFGW1Aem9X/rCcumGKJyGQ/I3S02bzhAI0x3+q79SHvICm/Bl4zfgozsU/EFNed3Q+PmMTL1X9uwjfdSw6k3RUM2nEzTElCqT02xP1N6fq6KmZKibwkeAMkIA5KPk9DeESAcNIvA=" />
-
-       <!-- <meta-data
-            android:name="com.huawei.hms.client.appid"
-            android:value="appid=华为开放平台申请的ID信息" />
-        <meta-data
-            android:name="com.vivo.push.api_key"
-            android:value="请填写vivo平台上注册应用的appKey" />
-        <meta-data
-            android:name="com.vivo.push.app_id"
-            android:value="请填写vivo平台上注册应用的appID" />
-        -->
-        <!-- 消息接收监听器 （用户可自主扩展） -->
-        <receiver
-            android:name="com.iwhalecloud.common.receiver.MyMessageReceiver"
-            android:exported="false"> <!-- 为保证receiver安全，建议设置不可导出，如需对其他应用开放可通过android：permission进行限制 -->
-            <intent-filter>
-                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
-            </intent-filter>
-        </receiver>
 
     </application>
 

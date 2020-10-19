@@ -5,8 +5,6 @@ import android.view.View;
 import android.view.ViewStub;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.alibaba.sdk.android.man.MANService;
-import com.alibaba.sdk.android.man.MANServiceProvider;
 import com.iwhalecloud.common.base.event.EventBusUtil;
 import com.iwhalecloud.common.base.event.EventMessage;
 import com.iwhalecloud.common.commonlibrary.R;
@@ -105,16 +103,12 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-        MANService manService = MANServiceProvider.getService();
-        manService.getMANPageHitHelper().pageAppear(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
-        MANService manService = MANServiceProvider.getService();
-        manService.getMANPageHitHelper().pageDisAppear(this);
     }
 
     @Override

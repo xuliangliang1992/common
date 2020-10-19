@@ -8,7 +8,6 @@ import com.iwhalecloud.common.network.NetChangeObserver;
 import com.iwhalecloud.common.network.NetType;
 import com.iwhalecloud.common.network.NetWorkManager;
 import com.iwhalecloud.common.util.ActivityUtil;
-import com.taobao.sophix.SophixManager;
 
 import timber.log.Timber;
 
@@ -28,7 +27,6 @@ public class MainActivity extends BaseActivity implements NetChangeObserver {
             fragment = MainFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
-        SophixManager.getInstance().queryAndLoadNewPatch();
         NetWorkManager.getInstance().setNetChangeObserver(this);
     }
 
