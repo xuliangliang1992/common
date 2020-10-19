@@ -1,0 +1,7 @@
+<manifest package="com.highlands.train"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity android:name="com.highlands.train.fun.cart.CartActivity" />
+    </application>
+</manifest>

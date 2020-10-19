@@ -1,0 +1,7 @@
+<manifest package="com.highlands.information"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity android:name="com.highlands.information.discover.DiscoverActivity" />
+    </application>
+</manifest>

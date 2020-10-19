@@ -1,7 +1,7 @@
-<manifest package="com.icloudwhale.home"
+<manifest package="com.highlands.home"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity android:name=".home.HomeActivity" />
+        <activity android:name="com.highlands.home.home.HomeActivity" />
     </application>
 </manifest>

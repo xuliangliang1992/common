@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         if (loginRunAlone.toBoolean()) {
-            applicationId "com.icloudwhale.login"
+            applicationId "com.highlands.login"
         }
         minSdkVersion min_sdk_version.toInteger()
         targetSdkVersion target_sdk_version.toInteger()

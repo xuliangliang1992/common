@@ -54,6 +54,6 @@
 
         <variable
             name="model"
-            type="com.icloudwhale.home.home.HomeBean" />
+            type="com.highlands.home.home.HomeBean" />
     </data>
 </layout>

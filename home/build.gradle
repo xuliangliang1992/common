@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         if (homeRunAlone.toBoolean()) {
-            applicationId "com.icloudwhale.home"
+            applicationId "com.highlands.home"
         }
         minSdkVersion min_sdk_version.toInteger()
         targetSdkVersion target_sdk_version.toInteger()

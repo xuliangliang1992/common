@@ -1,0 +1,93 @@
+if (informationRunAlone.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion compile_sdk_version.toInteger()
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        if (informationRunAlone.toBoolean()) {
+            applicationId "com.highlands.information"
+        }
+        minSdkVersion min_sdk_version.toInteger()
+        targetSdkVersion target_sdk_version.toInteger()
+        versionCode version_code.toInteger()
+        versionName version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //指定room.schemaLocation生成的文件路径
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath = true
+            }
+        }
+    }
+
+    signingConfigs {
+        config {
+            storeFile file(STORE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_PASSWORD
+            keyPassword KEY_ALIAS
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled MINIFY_ENABLED.toBoolean()
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), PROGUARD_RULES_FILE
+        }
+        release {
+            minifyEnabled true
+            // 移除无用的resource文件
+            shrinkResources informationRunAlone.toBoolean()
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), PROGUARD_RULES_FILE
+        }
+    }
+
+    sourceSets {
+        main {
+            if (informationRunAlone.toBoolean()) {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility = jdk_version
+        targetCompatibility = jdk_version
+    }
+
+    allprojects {
+        gradle.projectsEvaluated {
+            tasks.withType(JavaCompile) {
+                options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':CommonLibrary')
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    implementation "org.glassfish:javax.annotation:$lombokAnnotationVersion"
+
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompilerVersion"
+}

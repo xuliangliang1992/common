@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         if (mineRunAlone.toBoolean()) {
-            applicationId "com.icloudwhale.mine"
+            applicationId "com.highlands.mine"
         }
         minSdkVersion min_sdk_version.toInteger()
         targetSdkVersion target_sdk_version.toInteger()
