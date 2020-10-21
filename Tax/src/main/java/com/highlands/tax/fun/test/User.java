@@ -1,13 +1,10 @@
 package com.highlands.tax.fun.test;
 
-import lombok.Data;
-
 /**
  * @author xuliangliang
  * @date 2019-09-10
  * copyright(c) Highlands
  */
-@Data
 public class User {
     private String name;
     private boolean type;

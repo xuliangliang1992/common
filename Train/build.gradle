@@ -24,7 +24,6 @@ android {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
-                includeCompileClasspath = true
             }
         }
     }
@@ -63,8 +62,8 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 
     compileOptions {
@@ -86,7 +85,5 @@ dependencies {
 
     implementation project(':CommonLibrary')
 
-    compileOnly "org.projectlombok:lombok:$lombokVersion"
-
-    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompilerVersion"
+    annotationProcessor "com.alibaba:arouter-compiler:$arouterCompilerVersion"
 }

@@ -18,7 +18,6 @@ android {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
-                includeCompileClasspath = true
             }
         }
     }
@@ -47,8 +46,8 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 
     compileOptions {
@@ -77,6 +76,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':CommonLibrary')
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     if (!loginRunAlone.toBoolean()) {
         implementation project(':login')
@@ -93,9 +93,6 @@ dependencies {
     if (!mineRunAlone.toBoolean()) {
         implementation project(':mine')
     }
-    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompilerVersion"
-
-    compileOnly "org.projectlombok:lombok:$lombokVersion"
-    implementation "org.glassfish:javax.annotation:$lombokAnnotationVersion"
+    annotationProcessor "com.alibaba:arouter-compiler:$arouterCompilerVersion"
 
 }

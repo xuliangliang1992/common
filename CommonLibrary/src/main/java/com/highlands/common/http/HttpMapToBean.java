@@ -1,6 +1,5 @@
 package com.highlands.common.http;
 
-
 import com.highlands.common.http.response.BaseResponse;
 
 import io.reactivex.functions.Function;

@@ -21,7 +21,7 @@ public class MainActivity extends BaseActivity implements NetChangeObserver {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setText("Main");
+
         MainFragment fragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.fl_content);
         if (null == fragment) {
             fragment = MainFragment.newInstance();

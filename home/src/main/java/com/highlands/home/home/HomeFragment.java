@@ -10,8 +10,12 @@ import com.highlands.home.databinding.HomeFragmentBinding;
 import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
 
+import java.util.List;
+
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import timber.log.Timber;
 
@@ -28,6 +32,7 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
     private static String TAG = "HomeFragment";
     private HomeAdapter mHomeAdapter;
     private ObservableArrayList<HomeBean> mHomeBeans;
+    private HomeViewModel mViewModel;
 
     static HomeFragment newInstance() {
         return new HomeFragment();
@@ -50,6 +55,16 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
     @Override
     public void initListener() {
         Timber.tag(TAG).d("onViewCreated initListener");
+        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        // Create the observer which updates the UI.
+        final Observer<List<HomeBean>> nameObserver = newName -> {
+            // Update the UI, in this case, a TextView.
+            mHomeAdapter.refresh(newName);
+        };
+
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        mViewModel.getHomeBeans().observe(this, nameObserver);
+
         binding.rvHome.setSlideClickListener(new SlideRecyclerView.SlideClickListener() {
             @Override
             public void onDelete(int position) {
@@ -63,16 +78,23 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
             }
         });
 
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHomeBeans.add(new HomeBean(111));
+                mViewModel.getHomeBeans().setValue(mHomeBeans);
+            }
+        });
     }
 
     @Override
     public void initData() {
         Timber.tag(TAG).d("onActivityCreated");
         mHomeBeans = new ObservableArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             mHomeBeans.add(new HomeBean(i));
         }
-        mHomeAdapter.refresh(mHomeBeans);
+        mViewModel.getHomeBeans().setValue(mHomeBeans);
     }
 
     @Override

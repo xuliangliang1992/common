@@ -2,8 +2,6 @@ package com.highlands.common.http.response;
 
 import java.util.List;
 
-import lombok.Data;
-
 /**
  * 封装bean
  *
@@ -11,7 +9,6 @@ import lombok.Data;
  * @date 2019-10-25
  * copyright(c) Highlands
  */
-@Data
 public class DataTree<K, V> {
     /**
      * 一级数据K
@@ -24,6 +21,22 @@ public class DataTree<K, V> {
 
     public DataTree(K groupItem, List<V> subItems) {
         this.groupItem = groupItem;
+        this.subItems = subItems;
+    }
+
+    public K getGroupItem() {
+        return groupItem;
+    }
+
+    public void setGroupItem(K groupItem) {
+        this.groupItem = groupItem;
+    }
+
+    public List<V> getSubItems() {
+        return subItems;
+    }
+
+    public void setSubItems(List<V> subItems) {
         this.subItems = subItems;
     }
 }
