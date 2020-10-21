@@ -32,7 +32,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.highlands.common.commonlibrary.R;
+import com.highlands.common.R;
 
 /**
  * @author xuliangliang

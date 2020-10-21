@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
-import com.highlands.common.commonlibrary.R;
+import com.highlands.common.R;
 
 import androidx.recyclerview.widget.RecyclerView;
 

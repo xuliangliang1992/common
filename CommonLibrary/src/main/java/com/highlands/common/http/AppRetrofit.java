@@ -1,8 +1,7 @@
 package com.highlands.common.http;
 
-
+import com.highlands.common.BuildConfig;
 import com.highlands.common.base.BaseApplication;
-import com.highlands.common.commonlibrary.BuildConfig;
 import com.highlands.common.constant.BaseConstant;
 import com.highlands.common.util.SharePreferenceUtil;
 
@@ -20,7 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author xll
  * @date 2018/12/4
  */
-
 public class AppRetrofit {
 
     private final Retrofit retrofit;

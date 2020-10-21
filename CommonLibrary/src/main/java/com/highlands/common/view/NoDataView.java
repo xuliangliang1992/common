@@ -5,8 +5,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 
-import com.highlands.common.commonlibrary.R;
-import com.highlands.common.commonlibrary.databinding.ViewNoDataBinding;
+import com.highlands.common.R;
+import com.highlands.common.databinding.ViewNoDataBinding;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;

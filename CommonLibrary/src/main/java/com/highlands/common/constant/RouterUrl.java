@@ -25,6 +25,7 @@ public class RouterUrl {
 
     public static final String HOME_FRAGMENT_HOME = HOME + FRAGMENT + "home";
 
+    public static final String INFORMATION_FRAGMENT_COLUMN = INFORMATION + FRAGMENT + "column";
     public static final String INFORMATION_FRAGMENT_DISCOVER = INFORMATION + FRAGMENT + "discover";
 
     public static final String TRAIN_FRAGMENT_CART = TRAIN + FRAGMENT + "cart";

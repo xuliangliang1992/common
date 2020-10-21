@@ -2,6 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity android:name="com.highlands.information.discover.DiscoverActivity" />
+        <activity android:name="com.highlands.information.fun.discover.DiscoverActivity" />
     </application>
 </manifest>

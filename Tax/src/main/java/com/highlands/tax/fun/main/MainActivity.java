@@ -2,6 +2,8 @@ package com.highlands.tax.fun.main;
 
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.highlands.common.constant.RouterUrl;
 import com.highlands.tax.R;
 import com.highlands.common.base.BaseActivity;
 import com.highlands.common.network.NetChangeObserver;
@@ -16,6 +18,7 @@ import timber.log.Timber;
  * @date 20
  * copyright(c) Highlands
  */
+@Route(path = RouterUrl.HAND_MAIN)
 public class MainActivity extends BaseActivity implements NetChangeObserver {
 
     @Override

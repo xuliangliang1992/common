@@ -9,7 +9,7 @@ import android.os.Environment;
 import android.util.DisplayMetrics;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.highlands.common.commonlibrary.BuildConfig;
+import com.highlands.common.BuildConfig;
 import com.highlands.common.network.NetWorkManager;
 import com.highlands.common.util.FileUtil;
 import com.umeng.commonsdk.UMConfigure;

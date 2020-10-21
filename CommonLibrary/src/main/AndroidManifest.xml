@@ -1,8 +1,13 @@
-<manifest package="com.highlands.common.commonlibrary"
+<manifest package="com.highlands.common"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5e776bfb0cafb21944000010" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

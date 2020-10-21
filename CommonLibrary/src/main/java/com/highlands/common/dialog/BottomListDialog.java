@@ -4,10 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.highlands.common.R;
 import com.highlands.common.base.adapter.BaseSingleBindingAdapter;
-import com.highlands.common.commonlibrary.R;
-import com.highlands.common.commonlibrary.databinding.DialogBottomListBinding;
-import com.highlands.common.commonlibrary.databinding.ItemBottomListBinding;
+import com.highlands.common.databinding.DialogBottomListBinding;
+import com.highlands.common.databinding.ItemBottomListBinding;
 import com.highlands.common.dialog.base.BottomBaseDialog;
 import com.highlands.common.view.decoration.HorizontalDividerItemDecoration;
 

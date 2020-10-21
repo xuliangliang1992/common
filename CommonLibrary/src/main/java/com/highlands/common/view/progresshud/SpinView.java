@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 
-import com.highlands.common.commonlibrary.R;
+import com.highlands.common.R;
 
 import androidx.appcompat.widget.AppCompatImageView;
 

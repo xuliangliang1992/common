@@ -7,8 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.highlands.common.commonlibrary.R;
-
+import com.highlands.common.R;
 
 /**
  * @author xll

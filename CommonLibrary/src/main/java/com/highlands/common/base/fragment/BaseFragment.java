@@ -33,6 +33,7 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class BaseFragment extends Fragment implements BaseView {
 
+    protected String TAG = this.getClass().getSimpleName();
     /**
      * Activity的context
      */

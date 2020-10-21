@@ -23,7 +23,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.highlands.common.commonlibrary.R;
+import com.highlands.common.R;
 
 /**
  * @author xuliangliang

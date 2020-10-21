@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.highlands.common.commonlibrary.R;
+import com.highlands.common.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -17,7 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 
-import com.highlands.common.commonlibrary.R;
+import com.highlands.common.R;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
