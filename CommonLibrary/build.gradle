@@ -100,4 +100,6 @@ dependencies {
     // fragment快速实现（可选）
     api "com.gyf.immersionbar:immersionbar-components:$immersionbar"
 
+    // 屏幕适配
+    api 'me.jessyan:autosize:1.2.1'
 }

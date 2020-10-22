@@ -4,7 +4,7 @@
     <application>
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5e776bfb0cafb21944000010" />
+            android:value="5f90f3b9fac90f1c19a8ac4e" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Umeng" />
