@@ -6,9 +6,9 @@
 /build
 /captures
 .externalNativeBuild
-/cloudpos/seeds.txt
-/cloudpos/unused.txt
-/cloudpos/release
+/Tax/seeds.txt
+/Tax/unused.txt
+/Tax/release
 *.apk
 
 /mine/src/test
@@ -17,7 +17,7 @@
 /login/src/androidTest
 /home/src/test
 /home/src/androidTest
-/discover/src/test
-/discover/src/androidTest
-/cart/src/test
-/cart/src/androidTest
+/Information/src/test
+/Information/src/androidTest
+/Train/src/test
+/Train/src/androidTest

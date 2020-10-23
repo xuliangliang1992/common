@@ -14,6 +14,8 @@ import com.highlands.common.databinding.StubNetErrorBinding;
 import com.highlands.common.databinding.StubNoDataBinding;
 import com.highlands.common.databinding.StubToolBarBinding;
 import com.highlands.common.constant.RouterUrl;
+import com.highlands.common.network.NetChangeObserver;
+import com.highlands.common.network.NetType;
 import com.highlands.common.util.DeviceUtils;
 import com.highlands.common.util.FitUtil;
 import com.umeng.analytics.MobclickAgent;
@@ -27,6 +29,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import timber.log.Timber;
 
 /**
  * Activity基类
@@ -35,7 +38,9 @@ import androidx.databinding.DataBindingUtil;
  * @date 2019/9/4
  * copyright(c) Highlands
  */
-public abstract class BaseActivity extends AppCompatActivity implements ILoadView, INoDataView, INetErrView, ViewStub.OnInflateListener {
+public abstract class BaseActivity extends AppCompatActivity implements ILoadView, INoDataView, INetErrView, ViewStub.OnInflateListener, NetChangeObserver {
+
+    protected String TAG = this.getClass().getSimpleName();
     private BaseActivityBinding binding;
     private StubToolBarBinding mStubToolBarBinding;
     private StubInitLoadingBinding mStubInitLoadingBinding;
@@ -240,7 +245,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
     }
 
     protected void toHome() {
-        ARouter.getInstance().build(RouterUrl.HAND_MAIN).navigation();
+        ARouter.getInstance().build(RouterUrl.TAX_MAIN).navigation();
     }
 
     @Override
@@ -281,5 +286,28 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
      */
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onReceiveStickyEvent(EventMessage event) {
+    }
+
+    /**
+     * 是否监听网络变化
+     *
+     * @return true 监听；false 不监听，默认不监听
+     */
+    protected boolean isRegisteredNetChange() {
+        return false;
+    }
+
+    @Override
+    public void onConnect(NetType type) {
+        if (isRegisteredNetChange()) {
+            Timber.tag(TAG).d("onConnect" + type.name());
+        }
+    }
+
+    @Override
+    public void onDisConnect() {
+        if (isRegisteredNetChange()) {
+            Timber.tag(TAG).d("onDisConnect");
+        }
     }
 }

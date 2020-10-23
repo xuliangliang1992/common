@@ -90,12 +90,14 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         if (isRegisteredEventBus()) {
             EventBusUtil.unregister(this);
         }
-        mCompositeDisposable.clear();
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
     }
 
     protected void toHome() {
         ARouter.getInstance()
-                .build(RouterUrl.HAND_MAIN)
+                .build(RouterUrl.TAX_MAIN)
                 .navigation();
     }
 
@@ -132,6 +134,9 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      * @param disposable 订阅
      */
     protected void addDisposable(Disposable disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
         mCompositeDisposable.add(disposable);
     }
 
@@ -141,7 +146,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void httpUnauthorized() {
-        ARouter.getInstance().build(RouterUrl.HAND_LOGIN).navigation();
+        ARouter.getInstance().build(RouterUrl.TAX_LOGIN).navigation();
     }
 
     @Override
