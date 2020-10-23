@@ -8,6 +8,7 @@
 .externalNativeBuild
 /Tax/seeds.txt
 /Tax/unused.txt
+/Tax/proguardMapping.txt
 /Tax/release
 *.apk
 
