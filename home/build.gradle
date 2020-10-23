@@ -86,4 +86,6 @@ dependencies {
     implementation project(':CommonLibrary')
 
     annotationProcessor "com.alibaba:arouter-compiler:$arouterCompilerVersion"
+
+    implementation 'com.youth.banner:banner:2.1.0'
 }

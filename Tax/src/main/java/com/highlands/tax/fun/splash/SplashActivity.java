@@ -30,8 +30,6 @@ public class SplashActivity extends BaseActivity {
             fragment = SplashFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
-        NetWorkManager.getInstance().setNetChangeObserver(this);
     }
-
 
 }

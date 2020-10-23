@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity {
             fragment = MainFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
-        NetWorkManager.getInstance().setNetChangeObserver(this);
     }
 
     @Override

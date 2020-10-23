@@ -2,21 +2,31 @@ package com.highlands.home.home;
 
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.google.android.material.snackbar.Snackbar;
 import com.highlands.home.view.SlideRecyclerView;
 import com.highlands.home.R;
 import com.highlands.home.databinding.HomeFragmentBinding;
 import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
+import com.youth.banner.Banner;
+import com.youth.banner.adapter.BannerAdapter;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.util.LogUtils;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import timber.log.Timber;
 
 
@@ -50,6 +60,8 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
         binding.rvHome.setLayoutManager(new LinearLayoutManager(mActivity));
         mHomeAdapter = new HomeAdapter();
         binding.rvHome.setAdapter(mHomeAdapter);
+
+        initBanner();
     }
 
     @Override
@@ -78,13 +90,13 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
             }
         });
 
-        binding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mHomeBeans.add(new HomeBean(111));
-                mViewModel.getHomeBeans().setValue(mHomeBeans);
-            }
-        });
+        //        binding.button.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View v) {
+        //                mHomeBeans.add(new HomeBean(111));
+        //                mViewModel.getHomeBeans().setValue(mHomeBeans);
+        //            }
+        //        });
     }
 
     @Override
@@ -111,5 +123,23 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
     public void onResume() {
         super.onResume();
         Timber.tag(TAG).d("onResume");
+    }
+
+    private void initBanner() {
+        binding.banner.addBannerLifecycleObserver(this);
+        //自定义的图片适配器，也可以使用默认的BannerImageAdapter
+        //        ImageAdapter adapter = new ImageAdapter(DataBean.getTestData2());
+
+//        binding.banner.setAdapter()
+//                .addBannerLifecycleObserver(this)//添加生命周期观察者
+//                .setIndicator(new CircleIndicator(mActivity))//设置指示器
+//                .setOnBannerListener((data, position) -> {
+//                })
+//                .isAutoLoop(true)
+//                .setBannerRound2(5)
+//                .setUserInputEnabled(true)
+//                .setOrientation(Banner.HORIZONTAL);
+
+
     }
 }

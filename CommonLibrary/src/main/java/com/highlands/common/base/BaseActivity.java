@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewStub;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.gyf.immersionbar.ImmersionBar;
 import com.highlands.common.base.event.EventBusUtil;
 import com.highlands.common.base.event.EventMessage;
 import com.highlands.common.R;
@@ -16,6 +17,7 @@ import com.highlands.common.databinding.StubToolBarBinding;
 import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.network.NetChangeObserver;
 import com.highlands.common.network.NetType;
+import com.highlands.common.network.NetWorkManager;
 import com.highlands.common.util.DeviceUtils;
 import com.highlands.common.util.FitUtil;
 import com.umeng.analytics.MobclickAgent;
@@ -51,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.base_activity);
-        FitUtil.autoFit(this, true);
+//        FitUtil.autoFit(this, true);
 
         binding.viewStubToolbar.setOnInflateListener(this);
         binding.viewStubInitLoading.setOnInflateListener(this);
@@ -60,6 +62,14 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         if (isRegisteredEventBus()) {
             EventBusUtil.register(this);
         }
+
+        NetWorkManager.getInstance().setNetChangeObserver(this);
+
+        ImmersionBar.with(this)
+                .statusBarDarkFont(true, 0.2f)
+                //                .statusBarColor(R.color.colorPrimaryDark)
+                //                .navigationBarColor(R.color.colorPrimaryDark)
+                .init();
     }
 
     /**
@@ -67,11 +77,9 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
      */
     private void initTooBar() {
         binding.viewStubToolbar.getViewStub().inflate();
-        if (mStubToolBarBinding.toolBar != null) {
-            setSupportActionBar(mStubToolBarBinding.toolBar);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-            mStubToolBarBinding.toolBar.setNavigationOnClickListener(v -> onBackPressed());
-        }
+        setSupportActionBar(mStubToolBarBinding.toolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mStubToolBarBinding.toolBar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     /**

@@ -74,7 +74,6 @@ public class BaseApplication extends Application {
         UMConfigure.setLogEnabled(BuildConfig.LOG_DEBUG);
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
 
-
         NetWorkManager.getInstance().init(this);
     }
 
