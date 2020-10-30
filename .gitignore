@@ -6,10 +6,10 @@
 /build
 /captures
 .externalNativeBuild
-/Tax/seeds.txt
-/Tax/unused.txt
-/Tax/proguardMapping.txt
-/Tax/release
+/tianFuFinance/seeds.txt
+/tianFuFinance/unused.txt
+/tianFuFinance/proguardMapping.txt
+/tianFuFinance/release
 *.apk
 
 /mine/src/test

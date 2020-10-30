@@ -1,9 +1,12 @@
 package com.highlands.login;
 
 import android.view.View;
+import android.widget.MediaController;
 
 import com.highlands.common.base.fragment.BaseFragment;
-import com.highlands.login.R;
+import com.highlands.login.databinding.LoginFragmentBinding;
+
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author xuliangliang
@@ -11,6 +14,9 @@ import com.highlands.login.R;
  * copyright(c) Highlands
  */
 public class LoginFragment extends BaseFragment {
+
+    private LoginFragmentBinding binding;
+
     static LoginFragment newInstance() {
         return new LoginFragment();
     }
@@ -22,7 +28,7 @@ public class LoginFragment extends BaseFragment {
      */
     @Override
     public int setLayout() {
-        return R.layout.activity_login;
+        return R.layout.login_fragment;
     }
 
     /**
@@ -33,7 +39,7 @@ public class LoginFragment extends BaseFragment {
      */
     @Override
     public void initView(View view) {
-
+        binding = DataBindingUtil.bind(view);
     }
 
     /**
@@ -41,7 +47,14 @@ public class LoginFragment extends BaseFragment {
      */
     @Override
     public void initListener() {
+        binding.btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //        binding.videoView.setVideoURI("https://www.baidu.com");
 
+                //        binding.videoView.setMediaController(new MediaController(mActivity));
+            }
+        });
     }
 
     /**

@@ -1,11 +1,11 @@
-package com.highlands.home.home;
+package com.highlands.tianFuFinance.fun.home;
 
 import android.os.Bundle;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.highlands.home.R;
 import com.highlands.common.base.BaseActivity;
 import com.highlands.common.util.ActivityUtil;
+import com.highlands.tianFuFinance.R;
 
 /**
  * @author xuliangliang

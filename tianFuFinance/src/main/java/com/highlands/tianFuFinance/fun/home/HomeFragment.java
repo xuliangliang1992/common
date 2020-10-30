@@ -1,40 +1,28 @@
-package com.highlands.home.home;
+package com.highlands.tianFuFinance.fun.home;
 
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.snackbar.Snackbar;
-import com.gyf.immersionbar.ImmersionBar;
-import com.gyf.immersionbar.components.SimpleImmersionOwner;
-import com.highlands.home.view.SlideRecyclerView;
-import com.highlands.home.R;
-import com.highlands.home.databinding.HomeFragmentBinding;
 import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
+import com.highlands.tianFuFinance.R;
+import com.highlands.tianFuFinance.databinding.HomeFragmentBinding;
 import com.youth.banner.Banner;
-import com.youth.banner.adapter.BannerAdapter;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
-import com.youth.banner.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import timber.log.Timber;
 
 
@@ -43,7 +31,7 @@ import timber.log.Timber;
  * @date 20
  * copyright(c) Highlands
  */
-//@Route(path = RouterUrl.HOME_FRAGMENT_HOME)
+@Route(path = RouterUrl.HOME_FRAGMENT_HOME)
 public class HomeFragment extends BaseLazyFragment<HomePresenter> implements HomeContract.View/*,SimpleImmersionOwner*/ {
     private HomeContract.Presenter mPresenter;
     private HomeFragmentBinding binding;

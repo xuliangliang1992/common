@@ -1,10 +1,9 @@
-package com.highlands.home.home;
+package com.highlands.tianFuFinance.fun.home;
 
 import com.highlands.common.base.adapter.BaseBindingViewHolder;
 import com.highlands.common.base.adapter.BaseMultiBindingAdapter;
-import com.highlands.common.base.adapter.BaseSingleBindingAdapter;
-import com.highlands.home.R;
-import com.highlands.home.databinding.HomeItemBinding;
+import com.highlands.tianFuFinance.R;
+import com.highlands.tianFuFinance.databinding.HomeItemBinding;
 import com.jakewharton.rxbinding3.view.RxView;
 
 import java.util.concurrent.TimeUnit;

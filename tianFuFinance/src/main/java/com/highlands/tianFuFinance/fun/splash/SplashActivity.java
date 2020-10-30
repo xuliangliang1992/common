@@ -1,30 +1,30 @@
-package com.highlands.home.home;
+package com.highlands.tianFuFinance.fun.splash;
 
 import android.os.Bundle;
 
-import com.gyf.immersionbar.ImmersionBar;
-import com.highlands.home.R;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.highlands.common.base.BaseActivity;
+import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.util.ActivityUtil;
+import com.highlands.tianFuFinance.R;
 
 /**
  * @author xuliangliang
  * @date 20
  * copyright(c) Highlands
  */
-public class HomeActivity extends BaseActivity {
+@Route(path = RouterUrl.TAX_SPLASH)
+public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.fl_content);
+        SplashFragment fragment = (SplashFragment) getSupportFragmentManager().findFragmentById(R.id.fl_content);
         if (null == fragment) {
-            fragment = HomeFragment.newInstance();
+            fragment = SplashFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
-
-
-        ImmersionBar.with(this).keyboardEnable(false).statusBarDarkFont(false).navigationBarColor(R.color.colorPrimary).init();
     }
+
 }
