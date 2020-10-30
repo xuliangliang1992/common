@@ -9,4 +9,8 @@
     </integer-array>
 
     <string name="cancel">取消</string>
+
+    <string name="LatoBold">fonts/LatoBold.ttf</string>
+    <string name="LatoRegular">fonts/LatoRegular.ttf</string>
+    <string name="pf_bold">fonts/pf_bold.ttf</string>
 </resources>
