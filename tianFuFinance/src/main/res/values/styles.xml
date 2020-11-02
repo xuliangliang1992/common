@@ -7,23 +7,43 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="home_linear">
+
+    <style name="home_constraint_layout">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">168dp</item>
         <item name="android:orientation">vertical</item>
+        <item name="background">@drawable/shape_home_radius_12</item>
     </style>
+
+    <style name="home_image">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_margin">9dp</item>
+    </style>
+
     <style name="home_title">
         <item name="android:textSize">18dp</item>
         <item name="android:textColor">#FF061436</item>
         <!--        <item name="android:typeface">@string/pf_bold</item>-->
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">14dp</item>
+        <item name="android:layout_marginEnd">14dp</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="singleLine">true</item>
     </style>
+
     <style name="home_sub_title">
         <item name="android:textSize">13dp</item>
         <item name="android:textColor">#FF444444</item>
         <!--        <item name="android:typeface">@{@string/pf_bold}</item>-->
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">14dp</item>
+        <item name="android:layout_marginEnd">14dp</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="singleLine">true</item>
     </style>
 </resources>

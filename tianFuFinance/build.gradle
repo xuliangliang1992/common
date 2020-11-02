@@ -13,6 +13,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "你的 Appkey ", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+
         //指定room.schemaLocation生成的文件路径
         javaCompileOptions {
             annotationProcessorOptions {
@@ -95,4 +101,5 @@ dependencies {
     }
     annotationProcessor "com.alibaba:arouter-compiler:$arouterCompilerVersion"
     implementation 'com.youth.banner:banner:2.1.0'
+
 }

@@ -1,6 +1,7 @@
 package com.highlands.tianFuFinance.fun.home;
 
 
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -9,6 +10,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
+import com.highlands.common.util.SystemUtil;
+import com.highlands.common.util.UIUtil;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.HomeFragmentBinding;
 import com.youth.banner.Banner;
@@ -53,6 +56,8 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
         binding = DataBindingUtil.bind(view);
         Timber.tag(TAG).d("onViewCreated initView");
 
+        GradientDrawable mGroupDrawable = (GradientDrawable) binding.tvNotice.getBackground();
+        mGroupDrawable.setCornerRadius(SystemUtil.dip2px(mActivity,20));
         initBanner();
     }
 

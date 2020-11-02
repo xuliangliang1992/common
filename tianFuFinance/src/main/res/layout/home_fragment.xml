@@ -1,10 +1,497 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="23dp"
+                    android:layout_marginTop="17dp"
+                    android:text="让专业税务知识触手可及"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_video" />
+
+                <View
+                    android:layout_width="26dp"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="#D4D8E0"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_bottom"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_bottom"
+                    app:layout_constraintTop_toTopOf="@+id/tv_bottom" />
+
+                <View
+                    android:layout_width="26dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="14dp"
+                    android:background="#D4D8E0"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_bottom"
+                    app:layout_constraintStart_toEndOf="@+id/tv_bottom"
+                    app:layout_constraintTop_toTopOf="@+id/tv_bottom" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_information"
+                    style="@style/home_constraint_layout"
+                    app:layout_constraintBottom_toTopOf="@+id/cl_train"
+                    app:layout_constraintEnd_toStartOf="@+id/cl_ask"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_information"
+                        style="@style/home_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/cl_information"
+                        app:layout_constraintEnd_toEndOf="@+id/cl_information"
+                        app:layout_constraintStart_toStartOf="@+id/cl_information"
+                        app:layout_constraintTop_toTopOf="@+id/cl_information" />
+
+                    <TextView
+                        style="@style/home_title"
+                        android:text="资讯"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_information"
+                        app:layout_constraintStart_toStartOf="@+id/iv_information"
+                        app:layout_constraintTop_toTopOf="@+id/iv_information" />
+
+                    <TextView
+                        style="@style/home_sub_title"
+                        android:text="每日资讯随心看"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_information"
+                        app:layout_constraintStart_toStartOf="@+id/iv_information"
+                        app:layout_constraintTop_toTopOf="@+id/iv_information" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_ask"
+                    style="@style/home_constraint_layout"
+                    app:layout_constraintBottom_toBottomOf="@+id/cl_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@+id/cl_information"
+                    app:layout_constraintTop_toTopOf="@+id/cl_information">
+
+                    <ImageView
+                        android:id="@+id/iv_ask"
+                        style="@style/home_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/cl_ask"
+                        app:layout_constraintEnd_toEndOf="@+id/cl_ask"
+                        app:layout_constraintStart_toStartOf="@+id/cl_ask"
+                        app:layout_constraintTop_toTopOf="@+id/cl_ask" />
+
+                    <TextView
+                        style="@style/home_title"
+                        android:text="咨询"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_ask"
+                        app:layout_constraintStart_toStartOf="@+id/iv_ask"
+                        app:layout_constraintTop_toTopOf="@+id/iv_ask" />
+
+                    <TextView
+                        style="@style/home_sub_title"
+                        android:text="24小时客服不停歇"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_ask"
+                        app:layout_constraintStart_toStartOf="@+id/iv_ask"
+                        app:layout_constraintTop_toTopOf="@+id/iv_ask" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_train"
+                    style="@style/home_constraint_layout"
+                    app:layout_constraintBottom_toTopOf="@+id/cl_policy"
+                    app:layout_constraintEnd_toEndOf="@+id/cl_information"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="@+id/cl_information"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_information">
+
+                    <ImageView
+                        android:id="@+id/iv_train"
+                        style="@style/home_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/cl_train"
+                        app:layout_constraintEnd_toEndOf="@+id/cl_train"
+                        app:layout_constraintStart_toStartOf="@+id/cl_train"
+                        app:layout_constraintTop_toTopOf="@+id/cl_train" />
+
+                    <TextView
+                        style="@style/home_title"
+                        android:text="培训"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_train"
+                        app:layout_constraintStart_toStartOf="@+id/iv_train"
+                        app:layout_constraintTop_toTopOf="@+id/iv_train" />
+
+                    <TextView
+                        style="@style/home_sub_title"
+                        android:text="重量级讲师每日更"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_train"
+                        app:layout_constraintStart_toStartOf="@+id/iv_train"
+                        app:layout_constraintTop_toTopOf="@+id/iv_train" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_share"
+                    style="@style/home_constraint_layout"
+                    app:layout_constraintBottom_toBottomOf="@+id/cl_train"
+                    app:layout_constraintEnd_toEndOf="@+id/cl_ask"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="@+id/cl_ask"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_information">
+
+                    <ImageView
+                        android:id="@+id/iv_share"
+                        style="@style/home_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/cl_share"
+                        app:layout_constraintEnd_toEndOf="@+id/cl_share"
+                        app:layout_constraintStart_toStartOf="@+id/cl_share"
+                        app:layout_constraintTop_toTopOf="@+id/cl_share" />
+
+                    <TextView
+                        style="@style/home_title"
+                        android:text="共享"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_share"
+                        app:layout_constraintStart_toStartOf="@+id/iv_share"
+                        app:layout_constraintTop_toTopOf="@+id/iv_share" />
+
+                    <TextView
+                        style="@style/home_sub_title"
+                        android:text="会员福利等你解锁"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_share"
+                        app:layout_constraintStart_toStartOf="@+id/iv_share"
+                        app:layout_constraintTop_toTopOf="@+id/iv_share" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_home_radius_10"
+                    android:paddingEnd="13dp"
+                    android:paddingStart="14dp"
+                    app:layout_constraintBottom_toTopOf="@+id/cl_live"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_train">
+
+                    <ImageView
+                        android:id="@+id/iv_policy"
+                        android:layout_width="87dp"
+                        android:layout_height="66dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="11dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_policy_content"
+                        app:layout_constraintTop_toBottomOf="@id/tv_policy_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginStart="54dp"
+                        android:text="政策解读"
+                        android:textColor="@color/black_212222"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:typeface="serif"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_policy_title"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_policy_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="54dp"
+                        android:lineHeight="27dp"
+                        android:maxLines="2"
+                        android:textColor="@color/black_212222"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_policy_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="国家税务总局关于大屯煤电(集团有)限责任公司债转股及减资企业所得税处理问题的批复" />
+
+                    <TextView
+                        android:id="@+id/tv_policy_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:text="傅瑾"
+                        android:textColor="@color/gray_646968"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toTopOf="@id/iv_policy"
+                        app:layout_constraintStart_toEndOf="@+id/iv_policy_head"
+                        app:layout_constraintTop_toBottomOf="@id/tv_policy_title" />
+
+                    <TextView
+                        android:id="@+id/tv_policy_certificate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="中国注册会计师证、中国注册税务师证"
+                        android:textColor="@color/gray_646968"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_policy_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_policy_name"
+                        app:layout_constraintTop_toTopOf="@+id/tv_policy_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/shape_tv_yellow_radius_9"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="5dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:text="最新"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_policy_title"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_policy_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="9dp"
+                        android:lineHeight="22dp"
+                        android:maxLines="3"
+                        android:text="老师解读内容，老师解读内容老师解读内容老师解读内容。老师内容解读解读老师，内容解读解读老师内容。"
+                        android:textColor="#2D2F2F"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_policy"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_policy"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_policy" />
+
+                    <com.highlands.common.view.CircleImageView
+                        android:id="@+id/iv_policy_head"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_policy_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_policy_name" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_live"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    android:background="@drawable/shape_home_radius_10"
+                    app:layout_constraintBottom_toTopOf="@id/cl_video"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_policy">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginStart="54dp"
+                        android:text="直播预告"
+                        android:textColor="@color/black_212222"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:typeface="serif"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_live_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="54dp"
+                        android:lineHeight="27dp"
+                        android:maxLines="2"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_live_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="变幻的趋势：踩准节奏，指导投资的5大方法论解析" />
+
+                    <TextView
+                        android:id="@+id/tv_live_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="13dp"
+                        android:text="傅瑾"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toTopOf="@id/tv_notice"
+                        app:layout_constraintStart_toEndOf="@+id/iv_live_head"
+                        app:layout_constraintTop_toBottomOf="@id/tv_live_title" />
+
+                    <TextView
+                        android:id="@+id/tv_live_certificate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="中国注册会计师证、中国注册税务师证"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_live_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_live_name"
+                        app:layout_constraintTop_toTopOf="@+id/tv_live_name" />
+
+                    <TextView
+                        android:id="@+id/tv_notice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginTop="38dp"
+                        android:background="@drawable/shape_tv_yellow_radius_9"
+                        android:paddingBottom="8dp"
+                        android:paddingEnd="14dp"
+                        android:paddingStart="39dp"
+                        android:paddingTop="8dp"
+                        android:text="提醒我"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_live_name" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="直播时间"
+                        android:textColor="@color/black_061436"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_notice"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_notice" />
+
+                    <TextView
+                        android:id="@+id/tv_live_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_061436"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_notice"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_notice"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="2020年10月12日 18:00-20:00" />
+
+                    <com.highlands.common.view.CircleImageView
+                        android:id="@+id/iv_live_head"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_live_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_live_name" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_home_radius_10"
+                    android:paddingEnd="14dp"
+                    android:paddingStart="14dp"
+                    app:layout_constraintBottom_toTopOf="@id/tv_bottom"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_live">
+
+                    <ImageView
+                        android:id="@+id/iv_video"
+                        android:layout_width="0dp"
+                        android:layout_height="178dp"
+                        android:layout_marginTop="53dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="9dp"
+                        android:layout_marginStart="4dp"
+                        android:text="最新视频"
+                        android:textColor="@color/black_212222"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:typeface="serif"
+                        app:layout_constraintBottom_toTopOf="@+id/iv_video"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:id="@+id/"/>-->
+                    <TextView
+                        android:id="@+id/tv_video_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:lineHeight="27dp"
+                        android:maxLines="2"
+                        android:textColor="@color/black_212222"
+                        android:textSize="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_video"
+                        tools:text="国家税务总局关于大屯煤电(集团有)限责任公司债转股及减资企业所得税处理问题的批复" />
+
+                    <TextView
+                        android:id="@+id/tv_video_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:text="傅瑾"
+                        android:textColor="@color/gray_646968"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_video_head"
+                        app:layout_constraintTop_toBottomOf="@id/tv_video_title" />
+
+                    <TextView
+                        android:id="@+id/tv_video_certificate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="中国注册会计师证、中国注册税务师证"
+                        android:textColor="@color/gray_646968"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_video_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_video_name"
+                        app:layout_constraintTop_toTopOf="@+id/tv_video_name" />
+
+                    <com.highlands.common.view.CircleImageView
+                        android:id="@+id/iv_video_head"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_video_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_video_name" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -19,13 +506,13 @@
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <com.youth.banner.Banner
+                 <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-                </com.youth.banner.Banner>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/tool_bar"
                     android:layout_width="match_parent"
@@ -38,109 +525,6 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
-                
-                <LinearLayout
-                    android:id="@+id/ll_information"
-                    style="@style/home_linear"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ll_ask"
-                    app:layout_constraintBottom_toTopOf="@+id/ll_train"
-                    app:layout_constraintHorizontal_weight="1"
-              >
-
-                    <TextView
-                        style="@style/home_title"
-                        android:text="资讯"/>
-                    <TextView
-                        android:text="每日资讯随心看"
-                        style="@style/home_sub_title"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_ask"
-                    style="@style/home_linear"
-                    app:layout_constraintTop_toTopOf="@+id/ll_information"
-                    app:layout_constraintBottom_toBottomOf="@+id/ll_information"
-                    app:layout_constraintStart_toEndOf="@+id/ll_information"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    >
-
-                    <TextView
-                        style="@style/home_title"
-                        android:text="咨询"/>
-                    <TextView
-                        android:text="24小时客服不停歇"
-                        style="@style/home_sub_title"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_train"
-                    style="@style/home_linear"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_information"
-                    app:layout_constraintStart_toStartOf="@+id/ll_information"
-                    app:layout_constraintEnd_toEndOf="@+id/ll_information"
-app:layout_constraintBottom_toTopOf="@+id/cl_policy"
-                    >
-
-                    <TextView
-                        style="@style/home_title"
-                        android:text="培训"/>
-                    <TextView
-                        android:text="重量级讲师每日更"
-                        style="@style/home_sub_title"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_share"
-                    style="@style/home_linear"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_information"
-                    app:layout_constraintStart_toStartOf="@+id/ll_ask"
-                    app:layout_constraintEnd_toEndOf="@+id/ll_ask"
-                    app:layout_constraintBottom_toBottomOf="@+id/ll_train"
-                    >
-
-                    <TextView
-                        style="@style/home_title"
-                        android:text="共享"/>
-                    <TextView
-                        android:text="会员福利等你解锁"
-                        style="@style/home_sub_title"/>
-                </LinearLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_policy"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_train"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_live"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_policy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_video"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_live"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <data></data>

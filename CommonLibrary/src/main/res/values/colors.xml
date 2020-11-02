@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="progresshud_default_color">#b1000000</color>
+    <color name="progresshud_default_color">#B1000000</color>
     <color name="progresshud_grey_color">#449E9E9E</color>
 
-    <color name="material_red">#ffF44336</color>
-    <color name="material_green">#ff4CAF50</color>
-    <color name="material_blue">#ff03A9F4</color>
-    <color name="material_yellow">#ffFFEB3B</color>
+    <color name="material_red">#FFF44336</color>
+    <color name="material_green">#FF4CAF50</color>
+    <color name="material_blue">#FF03A9F4</color>
+    <color name="material_yellow">#FFFFEB3B</color>
 
-    <color name="base_bg_e6">#e6e6e6</color>
+    <color name="base_bg_e6">#E6E6E6</color>
+    <color name="white">#FFFFFF</color>
 </resources>

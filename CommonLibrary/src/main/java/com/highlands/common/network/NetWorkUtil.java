@@ -20,7 +20,7 @@ public class NetWorkUtil {
      * @return 网络是否可用
      */
     @SuppressLint("MissingPermission")
-    static boolean isNetworkAvailable() {
+    public static boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) NetWorkManager.getInstance().getApplication()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager == null) {
