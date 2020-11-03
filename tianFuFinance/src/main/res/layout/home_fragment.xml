@@ -180,7 +180,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_home_radius_10"
+                    android:background="@drawable/base_shape"
                     android:paddingEnd="13dp"
                     android:paddingStart="14dp"
                     app:layout_constraintBottom_toTopOf="@+id/cl_live"
@@ -297,7 +297,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="23dp"
-                    android:background="@drawable/shape_home_radius_10"
+                    android:background="@drawable/base_shape"
                     app:layout_constraintBottom_toTopOf="@id/cl_video"
                     app:layout_constraintTop_toBottomOf="@+id/cl_policy">
 
@@ -407,7 +407,7 @@
                     android:id="@+id/cl_video"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_home_radius_10"
+                    android:background="@drawable/base_shape"
                     android:paddingEnd="14dp"
                     android:paddingStart="14dp"
                     app:layout_constraintBottom_toTopOf="@id/tv_bottom"

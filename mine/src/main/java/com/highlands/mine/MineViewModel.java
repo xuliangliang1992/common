@@ -1,0 +1,23 @@
+package com.highlands.mine;
+
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+public class MineViewModel extends ViewModel {
+    // TODO: Implement the ViewModel
+    private MutableLiveData<String> currentName;
+    private MutableLiveData<Boolean> loggedIn;
+
+    public MutableLiveData<String> getCurrentName() {
+        if (currentName == null) {
+            currentName = new MutableLiveData<String>();
+        }
+        return currentName;
+    }
+    public MutableLiveData<Boolean> isLoggedIn() {
+        if (loggedIn == null) {
+            loggedIn = new MutableLiveData<Boolean>();
+        }
+        return loggedIn;
+    }
+}

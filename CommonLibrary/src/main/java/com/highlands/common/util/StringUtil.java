@@ -1,5 +1,8 @@
 package com.highlands.common.util;
 
+import com.highlands.common.R;
+import com.highlands.common.base.BaseApplication;
+
 import java.text.DecimalFormat;
 
 /**
@@ -166,4 +169,30 @@ public class StringUtil {
         return "";
     }
 
+    public static boolean checkPhone(String phone) {
+        if (StringUtil.isStringNull(phone)) {
+            ToastUtil.showToast(BaseApplication.getInstance(), BaseApplication.getInstance().getString(R.string.please_input_phone));
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkCode(String code) {
+        if (StringUtil.isStringNull(code)) {
+            ToastUtil.showToast(BaseApplication.getInstance(), BaseApplication.getInstance().getString(R.string.please_input_code));
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkPassword(String password) {
+        if (StringUtil.isStringNull(password)) {
+            ToastUtil.showToast(BaseApplication.getInstance(), BaseApplication.getInstance().getString(R.string.please_input_password));
+            return false;
+        }
+
+        return true;
+    }
 }

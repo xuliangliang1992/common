@@ -3,10 +3,11 @@ package com.highlands.tianFuFinance.fun.main;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.highlands.common.base.fragment.BaseFragment;
+import com.highlands.common.base.fragment.BaseMvpFragment;
+import com.highlands.common.constant.RouterUrl;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.MainFragmentBinding;
-import com.highlands.common.base.fragment.BaseFragment;
-import com.highlands.common.constant.RouterUrl;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,8 +24,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
  * @date 20
  * copyright(c) Highlands
  */
-public class MainFragment extends BaseFragment implements MainContract.View {
-    private MainContract.Presenter mPresenter;
+public class MainFragment extends BaseMvpFragment<MainPresenter> implements MainContract.View {
     private MainFragmentBinding binding;
     private String[] titles;
     private BaseFragment mHomeFragment, mColumnFragment, mDiscoverFragment, mCartFragment, mMineFragment;

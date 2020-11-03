@@ -4,6 +4,8 @@ package com.highlands.common.view;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.highlands.common.R;
+
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -13,8 +15,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
+import timber.log.Timber;
 
 /**
  * 倒计时控件
@@ -37,6 +38,15 @@ public class CountDownTextView extends AppCompatTextView {
     /**
      * 初始化控件
      *
+     * @param count 倒计时
+     */
+    public void init(int count) {
+        init(count, R.color.white, R.color.white);
+    }
+
+    /**
+     * 初始化控件
+     *
      * @param count        倒计时
      * @param enableColor  可点击时字体颜色
      * @param disableColor 不可点击时字体颜色
@@ -54,19 +64,11 @@ public class CountDownTextView extends AppCompatTextView {
     public void onClick() {
         Observable.interval(0, 1, TimeUnit.SECONDS)
                 .take(count + 1)
-                .map(new Function<Long, Long>() {
-                    @Override
-                    public Long apply(Long aLong) throws Exception {
-                        return count - aLong;
-                    }
-                })
+                .map(aLong -> count - aLong)
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        CountDownTextView.this.setEnabled(false);
-                        CountDownTextView.this.setTextColor(ContextCompat.getColor(getContext(), disableColor));
-                    }
+                .doOnSubscribe(disposable -> {
+                    CountDownTextView.this.setEnabled(false);
+                    CountDownTextView.this.setTextColor(ContextCompat.getColor(getContext(), disableColor));
                 })
                 .subscribe(new Observer<Long>() {
                     @Override
@@ -76,12 +78,12 @@ public class CountDownTextView extends AppCompatTextView {
 
                     @Override
                     public void onNext(Long aLong) {
-                        CountDownTextView.this.setText("(" + aLong + ")秒");
+                        CountDownTextView.this.setText(aLong + "秒");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Timber.tag("CountDownTextView").e(e);
                     }
 
                     @Override

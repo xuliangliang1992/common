@@ -1,16 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="MineFragment" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:paddingEnd="14dp"
+            android:paddingStart="16dp">
 
-    <data></data>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_mine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/base_shape"
+                android:paddingBottom="14dp"
+                android:paddingEnd="12dp"
+                android:paddingStart="12dp"
+                android:paddingTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_head"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/civ_head" />
+
+                <TextView
+                    android:id="@+id/tv_login"
+                    style="@style/mine_login_text"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="14dp"
+                    android:text="@string/login"
+                    android:visibility="@{viewModel.isLoggedIn()?View.GONE:View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_head"
+                    app:layout_constraintStart_toEndOf="@+id/civ_head"
+                    app:layout_constraintTop_toTopOf="@+id/civ_head" />
+
+                <TextView
+                    style="@style/mine_login_text"
+                    android:text="/"
+                    android:visibility="@{viewModel.isLoggedIn()?View.GONE:View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_head"
+                    app:layout_constraintStart_toEndOf="@+id/tv_login"
+                    app:layout_constraintTop_toTopOf="@+id/civ_head" />
+
+                <TextView
+                    android:id="@+id/tv_register"
+                    style="@style/mine_login_text"
+                    android:layout_marginStart="5dp"
+                    android:paddingEnd="14dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/register"
+                    android:visibility="@{viewModel.isLoggedIn()?View.GONE:View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_head"
+                    app:layout_constraintStart_toEndOf="@+id/tv_login"
+                    app:layout_constraintTop_toTopOf="@+id/civ_head" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="11dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black_212222"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:visibility="@{viewModel.isLoggedIn()?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_company"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_head"
+                    app:layout_constraintTop_toTopOf="@+id/civ_head"
+                    tools:text="15021676796" />
+
+                <TextView
+                    android:id="@+id/tv_company"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="11dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black_212222"
+                    android:textSize="14dp"
+                    android:visibility="@{viewModel.isLoggedIn()?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/civ_head"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/civ_head"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_phone"
+                    tools:text="所属公司" />
+
+                <com.highlands.common.view.CircleImageView
+                    android:id="@+id/civ_head"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/base_shape"
+                android:paddingBottom="13dp"
+                android:paddingEnd="12dp"
+                android:paddingStart="10dp"
+                android:paddingTop="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_mine">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_collect"
+                    style="@style/mine_collect_constraint"
+                    android:layout_marginStart="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/cl_focus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_weight="1">
+
+                    <LinearLayout
+                        style="@style/mine_collect_linear"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            style="@style/mine_collect_image"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            style="@style/mine_collect_text"
+                            android:text="我的收藏" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_focus"
+                    style="@style/mine_collect_constraint"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/cl_comment"
+                    app:layout_constraintStart_toEndOf="@+id/cl_collect"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        style="@style/mine_collect_linear"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            style="@style/mine_collect_image"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            style="@style/mine_collect_text"
+                            android:text="我的收藏" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_comment"
+                    style="@style/mine_collect_constraint"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/cl_support"
+                    app:layout_constraintStart_toEndOf="@+id/cl_focus"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        style="@style/mine_collect_linear"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            style="@style/mine_collect_image"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            style="@style/mine_collect_text"
+                            android:text="我的收藏" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_support"
+                    style="@style/mine_collect_constraint"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cl_comment"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        style="@style/mine_collect_linear"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            style="@style/mine_collect_image"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            style="@style/mine_collect_text"
+                            android:text="我的收藏" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <data>
+
+        <import type="com.highlands.mine.MineViewModel" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="MineViewModel" />
+    </data>
 </layout>

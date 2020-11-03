@@ -24,7 +24,8 @@ public class RouterUrl {
 
     public static final String TAX_MAIN = TAX + ACTIVITY + "main";
     public static final String TAX_SPLASH = TAX + ACTIVITY + "splash";
-    public static final String TAX_LOGIN = LOGIN + ACTIVITY + "login";
+    public static final String TAX_LOGIN = TAX + ACTIVITY + "login";
+    public static final String TAX_REGISTER = TAX + ACTIVITY + "register";
 
     public static final String HOME_FRAGMENT_HOME = HOME + FRAGMENT + "home";
 

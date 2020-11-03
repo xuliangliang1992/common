@@ -1,13 +1,12 @@
 package com.highlands.tianFuFinance.http.request;
 
+import com.highlands.common.util.RxJavaUtil;
 import com.highlands.tianFuFinance.base.MainApplication;
 import com.highlands.tianFuFinance.constant.Constant;
 import com.highlands.tianFuFinance.http.CacheProvider;
 import com.highlands.tianFuFinance.http.HttpUrl;
 import com.highlands.tianFuFinance.http.RetrofitUtil;
 import com.highlands.tianFuFinance.http.response.LoginBean;
-import com.highlands.common.http.HttpFilterFunc;
-import com.highlands.common.http.HttpMapToBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,8 +48,8 @@ public class RemoteLoanDataSource implements LoanDataSource {
         params.put("shopId", shopId);
         params.put("userId", userId);
         return mRetrofitUtil.getFaceIDService(false).getAccessToken(HttpUrl.ACCESS_TOKEN_URL, params)
-                .filter(new HttpFilterFunc<>())
-                .map(new HttpMapToBean<>());
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
     }
 
     /**

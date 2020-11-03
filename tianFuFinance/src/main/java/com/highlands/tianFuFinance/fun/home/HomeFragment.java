@@ -1,6 +1,5 @@
 package com.highlands.tianFuFinance.fun.home;
 
-
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 
@@ -11,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.util.SystemUtil;
-import com.highlands.common.util.UIUtil;
+import com.highlands.common.util.ToastUtil;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.HomeFragmentBinding;
 import com.youth.banner.Banner;
@@ -28,7 +27,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import timber.log.Timber;
 
-
 /**
  * @author xll
  * @date 20
@@ -36,7 +34,6 @@ import timber.log.Timber;
  */
 @Route(path = RouterUrl.HOME_FRAGMENT_HOME)
 public class HomeFragment extends BaseLazyFragment<HomePresenter> implements HomeContract.View/*,SimpleImmersionOwner*/ {
-    private HomeContract.Presenter mPresenter;
     private HomeFragmentBinding binding;
     private static String TAG = "HomeFragment";
     private ObservableArrayList<HomeBean> mHomeBeans;
@@ -57,7 +54,7 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
         Timber.tag(TAG).d("onViewCreated initView");
 
         GradientDrawable mGroupDrawable = (GradientDrawable) binding.tvNotice.getBackground();
-        mGroupDrawable.setCornerRadius(SystemUtil.dip2px(mActivity,20));
+        mGroupDrawable.setCornerRadius(SystemUtil.dip2px(mActivity, 20));
         initBanner();
     }
 
@@ -115,12 +112,7 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
         Timber.tag(TAG).d("onLazyLoad");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Timber.tag(TAG).d("onResume");
-    }
-
+    @SuppressWarnings("unchecked")
     private void initBanner() {
         List<String> mImages = new ArrayList<>();
         mImages.add("http://172.31.225.218/zentao/file-read-34542.png");
@@ -139,6 +131,7 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
                 .addBannerLifecycleObserver(this)//添加生命周期观察者
                 .setIndicator(new CircleIndicator(mActivity))//设置指示器
                 .setOnBannerListener((data, position) -> {
+                    ToastUtil.showToast(mActivity, "点击了banner" + position);
                 })
                 .isAutoLoop(true)
                 .setBannerRound2(5)
@@ -149,14 +142,13 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
 
     }
 
-//    @Override
-//    public void initImmersionBar() {
-//        ImmersionBar.with(this).statusBarColorTransformEnable(false)
-//                .keyboardEnable(false)
-//                .navigationBarColor(R.color.colorPrimary)
-//                .init();
-//    }
-
+    //    @Override
+    //    public void initImmersionBar() {
+    //        ImmersionBar.with(this).statusBarColorTransformEnable(false)
+    //                .keyboardEnable(false)
+    //                .navigationBarColor(R.color.colorPrimary)
+    //                .init();
+    //    }
 
 
 }

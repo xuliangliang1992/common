@@ -2,9 +2,9 @@ package com.highlands.tianFuFinance.fun.splash;
 
 import android.view.View;
 
-import com.highlands.common.base.fragment.BaseFragment;
-import com.highlands.tianFuFinance.databinding.SplashFragmentBinding;
+import com.highlands.common.base.fragment.BaseMvpFragment;
 import com.highlands.tianFuFinance.R;
+import com.highlands.tianFuFinance.databinding.SplashFragmentBinding;
 import com.jakewharton.rxbinding3.view.RxView;
 
 import org.jetbrains.annotations.NotNull;
@@ -18,12 +18,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 /**
+ * 闪屏
+ *
  * @author xll
  * @date 20
  * copyright(c) Highlands
  */
-public class SplashFragment extends BaseFragment implements SplashContract.View {
-    private SplashContract.Presenter mPresenter;
+public class SplashFragment extends BaseMvpFragment<SplashPresenter> implements SplashContract.View {
     private SplashFragmentBinding binding;
     private int count;
 

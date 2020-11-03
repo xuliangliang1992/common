@@ -353,6 +353,15 @@
 # -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
 ##---------------End: proguard configuration for Arouter  ----------
 
+##---------------JPush
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
+
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+
+##---------------JPush
 
 #---------- Umeng ---------------
 -keep class com.umeng.** {*;}

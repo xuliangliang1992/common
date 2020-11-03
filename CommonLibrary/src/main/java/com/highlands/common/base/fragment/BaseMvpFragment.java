@@ -10,6 +10,7 @@ import com.highlands.common.base.BaseView;
  * @date 2019-09-11
  * copyright(c) Highlands
  */
+@SuppressWarnings("ALL")
 public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragment implements BaseView {
     protected P mPresenter;
 

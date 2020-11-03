@@ -19,6 +19,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        if (mineRunAlone.toBoolean()) {
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: "com.highlands.tianFuFinance",
+                    JPUSH_APPKEY : "2807994bef3b82a1686ac792", //JPush 上注册的包名对应的 Appkey.
+                    JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+            ]
+        }
         //指定room.schemaLocation生成的文件路径
         javaCompileOptions {
             annotationProcessorOptions {
