@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -41,5 +41,21 @@
         <item name="android:background">@drawable/base_shape</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="mine_bottom_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black_212222</item>
+    </style>
+
+    <style name="mine_view_line" >
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@color/base_bg_e6</item>
     </style>
 </resources>
