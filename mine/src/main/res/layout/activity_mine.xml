@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.highlands.mine.MineActivity">
+    tools:context="com.highlands.mine.fun.mine.MineActivity">
 
     <TextView
         android:layout_width="wrap_content"

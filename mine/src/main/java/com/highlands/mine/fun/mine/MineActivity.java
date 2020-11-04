@@ -1,4 +1,4 @@
-package com.highlands.mine;
+package com.highlands.mine.fun.mine;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import com.highlands.mine.R;
 
 /**
  * @author xuliangliang
- * @date 20
+ * @date 2020-11-03
  * copyright(c) Highlands
  */
 public class MineActivity extends BaseActivity {

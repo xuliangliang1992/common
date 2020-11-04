@@ -58,8 +58,8 @@ public abstract class BaseSingleBindingAdapter<M, B extends ViewDataBinding> ext
     /**
      * 填充数据
      *
-     * @param binding
-     * @param position
+     * @param binding binding
+     * @param position position
      */
     protected abstract void onBindItem(B binding, int position);
 

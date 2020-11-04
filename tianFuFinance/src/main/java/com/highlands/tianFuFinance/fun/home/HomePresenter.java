@@ -4,7 +4,7 @@ import com.highlands.common.base.BasePresenter;
 
 /**
  * @author xll
- * @date 20
+ * @date 2020-11-01
  * copyright(c) Highlands
  */
 class HomePresenter extends BasePresenter<HomeContract.View> implements HomeContract.Presenter {

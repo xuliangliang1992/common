@@ -70,7 +70,7 @@
                     android:layout_marginBottom="19dp"
                     android:layout_marginTop="30dp"
                     android:text="我的"
-                    android:textColor="#061436"
+                    android:textColor="@color/black_061436"
                     android:textSize="22dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -446,12 +446,12 @@
 
     <data>
 
-        <import type="com.highlands.mine.MineViewModel" />
+        <import type="com.highlands.mine.fun.mine.MineViewModel" />
 
         <import type="android.view.View" />
 
         <variable
             name="viewModel"
-            type="MineViewModel" />
+            type="com.highlands.mine.fun.mine.MineViewModel" />
     </data>
 </layout>

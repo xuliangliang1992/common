@@ -1,4 +1,4 @@
-package com.highlands.mine;
+package com.highlands.mine.fun.mine;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

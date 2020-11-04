@@ -29,7 +29,7 @@ import timber.log.Timber;
 
 /**
  * @author xll
- * @date 20
+ * @date 2020-11-01
  * copyright(c) Highlands
  */
 @Route(path = RouterUrl.HOME_FRAGMENT_HOME)

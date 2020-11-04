@@ -4,6 +4,11 @@ import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+/**
+ * @author xll
+ * @date 2020-11-01
+ * copyright(c) Highlands
+ */
 public class HomeViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     private MutableLiveData<ObservableArrayList<HomeBean>> mHomeBeans;

@@ -19,7 +19,6 @@ public class RouterUrl {
     public static final String INFORMATION = "/information";
     public static final String TRAIN = "/train";
     public static final String MINE = "/mine";
-    public static final String LOGIN = "/login";
 
 
     public static final String TAX_MAIN = TAX + ACTIVITY + "main";
@@ -34,7 +33,13 @@ public class RouterUrl {
 
     public static final String TRAIN_FRAGMENT_CART = TRAIN + FRAGMENT + "cart";
 
+
+    public static final String HISTORY = "history/";
     public static final String MINE_FRAGMENT_MINE = MINE + FRAGMENT + "mine";
+    public static final String MINE_ACTIVITY_HISTORY = MINE + ACTIVITY + "history";
+    public static final String MINE_FRAGMENT_HISTORY_POLICY = MINE + FRAGMENT +HISTORY+ "policy";
+    public static final String MINE_FRAGMENT_HISTORY_VIDEO = MINE + FRAGMENT +HISTORY+ "video";
+    public static final String MINE_FRAGMENT_HISTORY_LIVE = MINE + FRAGMENT +HISTORY+ "live";
 
 
 }

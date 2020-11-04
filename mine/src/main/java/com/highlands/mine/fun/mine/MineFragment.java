@@ -1,4 +1,4 @@
-package com.highlands.mine;
+package com.highlands.mine.fun.mine;
 
 
 import android.view.View;
@@ -9,6 +9,7 @@ import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.util.ShapeUtil;
 import com.highlands.common.util.SystemUtil;
+import com.highlands.mine.R;
 import com.highlands.mine.databinding.MineFragmentBinding;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -110,7 +111,7 @@ public class MineFragment extends BaseLazyFragment<MinePresenter> implements Min
         } else if (v.getId() == R.id.tv_logout) {
 
         } else if (v.getId() == R.id.tv_history) {
-
+ARouter.getInstance().build(RouterUrl.MINE_ACTIVITY_HISTORY).navigation();
         } else if (v.getId() == R.id.cl_collect) {
 
         } else if (v.getId() == R.id.cl_focus) {

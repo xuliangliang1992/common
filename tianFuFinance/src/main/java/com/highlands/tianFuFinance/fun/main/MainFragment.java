@@ -3,28 +3,23 @@ package com.highlands.tianFuFinance.fun.main;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.highlands.common.base.adapter.MainPageAdapter;
 import com.highlands.common.base.fragment.BaseFragment;
-import com.highlands.common.base.fragment.BaseMvpFragment;
 import com.highlands.common.constant.RouterUrl;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.MainFragmentBinding;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
  * @author xll
- * @date 20
+ * @date 2020-11-01
  * copyright(c) Highlands
  */
-public class MainFragment extends BaseMvpFragment<MainPresenter> implements MainContract.View {
+public class MainFragment extends BaseFragment {
     private MainFragmentBinding binding;
     private String[] titles;
     private BaseFragment mHomeFragment, mColumnFragment, mDiscoverFragment, mCartFragment, mMineFragment;
@@ -77,30 +72,7 @@ public class MainFragment extends BaseMvpFragment<MainPresenter> implements Main
 
     @Override
     public void setPresenter() {
-        mPresenter = new MainPresenter(this);
     }
 
-    public class MainPageAdapter extends FragmentStatePagerAdapter {
 
-        private List<BaseFragment> mFragmentList;
-
-        private MainPageAdapter(FragmentManager fm, List<BaseFragment> fragments) {
-            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-            this.mFragmentList = fragments;
-        }
-
-        @NotNull
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            if (mFragmentList != null) {
-                return mFragmentList.size();
-            }
-            return -1;
-        }
-    }
 }

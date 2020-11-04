@@ -1,15 +1,15 @@
-package com.highlands.tianFuFinance.fun.main;
+package com.highlands.mine.fun.mine;
 
 import com.highlands.common.base.BaseView;
 
 /**
- * Main控制器
+ * Mine控制器
  *
  * @author xll
  * @date 20
  * copyright(c) Highlands
  */
-class MainContract {
+class MineContract {
 
     interface View extends BaseView {
 

@@ -21,7 +21,7 @@ import io.reactivex.disposables.Disposable;
  * 闪屏
  *
  * @author xll
- * @date 20
+ * @date 2020-11-01
  * copyright(c) Highlands
  */
 public class SplashFragment extends BaseMvpFragment<SplashPresenter> implements SplashContract.View {

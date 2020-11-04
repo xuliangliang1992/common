@@ -14,8 +14,9 @@ public interface BaseRefreshContract {
 
         /**
          * 加载更多
+         * @param page 页码
          */
-        void loadMoreData();
+        void loadMoreData(int page);
     }
 
     interface View extends BaseView {
