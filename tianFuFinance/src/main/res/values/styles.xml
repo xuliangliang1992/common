@@ -11,8 +11,7 @@
     <style name="home_constraint_layout">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">168dp</item>
-        <item name="android:orientation">vertical</item>
-        <item name="background">@drawable/shape_home_radius_12</item>
+        <item name="android:background">@drawable/base_shape</item>
     </style>
 
     <style name="home_image">

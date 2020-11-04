@@ -31,7 +31,7 @@ class TestPresenter extends BasePresenter<TestContract.View> implements TestCont
      * 加载更多
      */
     @Override
-    public void loadMoreData() {
+    public void loadMoreData(int page) {
         mView.loadMoreData(new ObservableArrayList<>());
     }
 

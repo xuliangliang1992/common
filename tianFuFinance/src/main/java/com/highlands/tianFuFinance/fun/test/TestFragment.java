@@ -184,7 +184,7 @@ class TestFragment extends BaseRefreshFragment<User, TestPresenter> implements T
      */
     @Override
     public void onLoadMoreEvent() {
-        mPresenter.loadMoreData();
+        mPresenter.loadMoreData(page);
     }
 
     @Override

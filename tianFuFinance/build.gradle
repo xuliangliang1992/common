@@ -15,7 +15,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : "com.highlands.tianFuFinance",
-                JPUSH_APPKEY : "2807994bef3b82a1686ac792", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_APPKEY : jpush_appkey, //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
 

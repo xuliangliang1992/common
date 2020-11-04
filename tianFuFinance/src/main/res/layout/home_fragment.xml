@@ -15,15 +15,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp">
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp">
 
-                <TextView
+                <ImageView
                     android:id="@+id/tv_bottom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="208dp"
+                    android:layout_height="24dp"
                     android:layout_marginBottom="23dp"
                     android:layout_marginTop="17dp"
-                    android:text="让专业税务知识触手可及"
+                    android:src="@drawable/home_bottom"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_information"
                     style="@style/home_constraint_layout"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintBottom_toTopOf="@+id/cl_train"
                     app:layout_constraintEnd_toStartOf="@+id/cl_ask"
                     app:layout_constraintHorizontal_weight="1"
@@ -59,6 +61,7 @@
                     <ImageView
                         android:id="@+id/iv_information"
                         style="@style/home_image"
+                        android:src="@drawable/information"
                         app:layout_constraintBottom_toBottomOf="@+id/cl_information"
                         app:layout_constraintEnd_toEndOf="@+id/cl_information"
                         app:layout_constraintStart_toStartOf="@+id/cl_information"
@@ -82,6 +85,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_ask"
                     style="@style/home_constraint_layout"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="9dp"
                     app:layout_constraintBottom_toBottomOf="@+id/cl_information"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
@@ -91,6 +96,7 @@
                     <ImageView
                         android:id="@+id/iv_ask"
                         style="@style/home_image"
+                        android:src="@drawable/ask"
                         app:layout_constraintBottom_toBottomOf="@+id/cl_ask"
                         app:layout_constraintEnd_toEndOf="@+id/cl_ask"
                         app:layout_constraintStart_toStartOf="@+id/cl_ask"
@@ -114,6 +120,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_train"
                     style="@style/home_constraint_layout"
+                    android:layout_marginTop="9dp"
                     app:layout_constraintBottom_toTopOf="@+id/cl_policy"
                     app:layout_constraintEnd_toEndOf="@+id/cl_information"
                     app:layout_constraintHorizontal_weight="1"
@@ -123,6 +130,7 @@
                     <ImageView
                         android:id="@+id/iv_train"
                         style="@style/home_image"
+                        android:src="@drawable/train"
                         app:layout_constraintBottom_toBottomOf="@+id/cl_train"
                         app:layout_constraintEnd_toEndOf="@+id/cl_train"
                         app:layout_constraintStart_toStartOf="@+id/cl_train"
@@ -150,11 +158,12 @@
                     app:layout_constraintEnd_toEndOf="@+id/cl_ask"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="@+id/cl_ask"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_information">
+                    app:layout_constraintTop_toTopOf="@+id/cl_train">
 
                     <ImageView
                         android:id="@+id/iv_share"
                         style="@style/home_image"
+                        android:src="@drawable/share"
                         app:layout_constraintBottom_toBottomOf="@+id/cl_share"
                         app:layout_constraintEnd_toEndOf="@+id/cl_share"
                         app:layout_constraintStart_toStartOf="@+id/cl_share"
@@ -179,6 +188,8 @@
                     android:id="@+id/cl_policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/base_shape"
                     android:paddingEnd="13dp"
@@ -193,21 +204,17 @@
                         android:layout_marginBottom="16dp"
                         android:layout_marginTop="11dp"
                         android:scaleType="fitXY"
+                        android:src="@drawable/policy_cover"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/tv_policy_content"
                         app:layout_constraintTop_toBottomOf="@id/tv_policy_name" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="26dp"
                         android:layout_marginBottom="12dp"
-                        android:layout_marginStart="54dp"
-                        android:text="政策解读"
-                        android:textColor="@color/black_212222"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:typeface="serif"
+                        android:src="@drawable/label_new"
                         app:layout_constraintBottom_toTopOf="@+id/tv_policy_title"
                         app:layout_constraintStart_toStartOf="parent" />
 
@@ -232,38 +239,36 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="8dp"
-                        android:text="傅瑾"
                         android:textColor="@color/gray_646968"
                         android:textSize="12dp"
                         app:layout_constraintBottom_toTopOf="@id/iv_policy"
                         app:layout_constraintStart_toEndOf="@+id/iv_policy_head"
-                        app:layout_constraintTop_toBottomOf="@id/tv_policy_title" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_policy_title"
+                        tools:text="傅瑾" />
 
                     <TextView
                         android:id="@+id/tv_policy_certificate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="中国注册会计师证、中国注册税务师证"
                         android:textColor="@color/gray_646968"
                         android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_policy_name"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/tv_policy_name"
-                        app:layout_constraintTop_toTopOf="@+id/tv_policy_name" />
+                        app:layout_constraintTop_toTopOf="@+id/tv_policy_name"
+                        tools:text="中国注册会计师证、中国注册税务师证" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/shape_tv_yellow_radius_9"
-                        android:paddingBottom="3dp"
-                        android:paddingEnd="5dp"
-                        android:paddingStart="5dp"
-                        android:paddingTop="3dp"
-                        android:text="最新"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginStart="54dp"
+                        android:text="政策解读"
+                        android:textColor="@color/black_212222"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:typeface="serif"
                         app:layout_constraintBottom_toTopOf="@+id/tv_policy_title"
                         app:layout_constraintStart_toStartOf="parent" />
 
@@ -274,13 +279,13 @@
                         android:layout_marginEnd="9dp"
                         android:lineHeight="22dp"
                         android:maxLines="3"
-                        android:text="老师解读内容，老师解读内容老师解读内容老师解读内容。老师内容解读解读老师，内容解读解读老师内容。"
                         android:textColor="#2D2F2F"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@+id/iv_policy"
                         app:layout_constraintEnd_toStartOf="@+id/iv_policy"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/iv_policy" />
+                        app:layout_constraintTop_toTopOf="@+id/iv_policy"
+                        tools:text="老师解读内容，老师解读内容老师解读内容老师解读内容。老师内容解读解读老师，内容解读解读老师内容。" />
 
                     <com.highlands.common.view.CircleImageView
                         android:id="@+id/iv_policy_head"
@@ -296,27 +301,27 @@
                     android:id="@+id/cl_live"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="23dp"
                     android:background="@drawable/base_shape"
                     app:layout_constraintBottom_toTopOf="@id/cl_video"
                     app:layout_constraintTop_toBottomOf="@+id/cl_policy">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginStart="54dp"
-                        android:text="直播预告"
-                        android:textColor="@color/black_212222"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:typeface="serif"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="163dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/live_cover"
+                        app:layout_constraintTop_toTopOf="parent" />
+
 
                     <TextView
                         android:id="@+id/tv_live_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginStart="12dp"
                         android:layout_marginTop="54dp"
                         android:lineHeight="27dp"
                         android:maxLines="2"
@@ -334,25 +339,31 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="13dp"
-                        android:text="傅瑾"
                         android:textColor="@color/white"
                         android:textSize="12dp"
                         app:layout_constraintBottom_toTopOf="@id/tv_notice"
                         app:layout_constraintStart_toEndOf="@+id/iv_live_head"
-                        app:layout_constraintTop_toBottomOf="@id/tv_live_title" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_live_title"
+                        tools:text="傅瑾" />
 
                     <TextView
                         android:id="@+id/tv_live_certificate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="中国注册会计师证、中国注册税务师证"
                         android:textColor="@color/white"
                         android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_live_name"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_live_title"
                         app:layout_constraintStart_toEndOf="@+id/tv_live_name"
-                        app:layout_constraintTop_toTopOf="@+id/tv_live_name" />
+                        app:layout_constraintTop_toTopOf="@+id/tv_live_name"
+                        tools:text="中国注册会计师证、中国注册税务师证" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="78dp"
+                        android:background="@drawable/base_shape"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_notice"
@@ -361,14 +372,16 @@
                         android:layout_marginBottom="20dp"
                         android:layout_marginEnd="14dp"
                         android:layout_marginTop="38dp"
-                        android:background="@drawable/shape_tv_yellow_radius_9"
+                        android:background="@drawable/base_shape"
+                        android:drawablePadding="5dp"
                         android:paddingBottom="8dp"
                         android:paddingEnd="14dp"
-                        android:paddingStart="39dp"
+                        android:paddingStart="15dp"
                         android:paddingTop="8dp"
                         android:text="提醒我"
                         android:textColor="@color/white"
                         android:textSize="14dp"
+                        app:drawableStartCompat="@drawable/live_time"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_live_name" />
@@ -380,18 +393,19 @@
                         android:textColor="@color/black_061436"
                         android:textSize="14dp"
                         app:layout_constraintEnd_toStartOf="@+id/tv_notice"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_live_title"
                         app:layout_constraintTop_toTopOf="@+id/tv_notice" />
 
                     <TextView
                         android:id="@+id/tv_live_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:textColor="@color/black_061436"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_notice"
                         app:layout_constraintEnd_toStartOf="@+id/tv_notice"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_live_title"
                         tools:text="2020年10月12日 18:00-20:00" />
 
                     <com.highlands.common.view.CircleImageView
@@ -399,7 +413,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_live_name"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_live_title"
                         app:layout_constraintTop_toTopOf="@+id/tv_live_name" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -407,6 +421,9 @@
                     android:id="@+id/cl_video"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/base_shape"
                     android:paddingEnd="14dp"
                     android:paddingStart="14dp"
@@ -418,9 +435,20 @@
                         android:layout_width="0dp"
                         android:layout_height="178dp"
                         android:layout_marginTop="53dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/video_cover"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/home_play"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_video"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_video"
+                        app:layout_constraintStart_toStartOf="@+id/iv_video"
+                        app:layout_constraintTop_toTopOf="@+id/iv_video" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -460,25 +488,25 @@
                         android:layout_marginBottom="25dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="8dp"
-                        android:text="傅瑾"
                         android:textColor="@color/gray_646968"
                         android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/iv_video_head"
-                        app:layout_constraintTop_toBottomOf="@id/tv_video_title" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_video_title"
+                        tools:text="傅瑾" />
 
                     <TextView
                         android:id="@+id/tv_video_certificate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="中国注册会计师证、中国注册税务师证"
                         android:textColor="@color/gray_646968"
                         android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_video_name"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/tv_video_name"
-                        app:layout_constraintTop_toTopOf="@+id/tv_video_name" />
+                        app:layout_constraintTop_toTopOf="@+id/tv_video_name"
+                        tools:text="中国注册会计师证、中国注册税务师证" />
 
                     <com.highlands.common.view.CircleImageView
                         android:id="@+id/iv_video_head"
@@ -489,6 +517,23 @@
                         app:layout_constraintTop_toTopOf="@+id/tv_video_name" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/live_label"
+                    android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:text="直播预告"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:typeface="serif"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/cl_live" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
@@ -496,17 +541,17 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
+            android:fitsSystemWindows="true"
             android:layout_height="250dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:contentScrim="?attr/colorPrimary"
+                app:statusBarScrim="@android:color/transparent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                 <com.youth.banner.Banner
+                <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
@@ -516,11 +561,41 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/tool_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:fitsSystemWindows="true"
+                    android:layout_height="60dp"
                     app:layout_collapseMode="pin">
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        
+                        <TextView
+                            android:id="@+id/tv_search"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:text="搜索政策讲解标题"
+                            android:gravity="center_vertical"
+                            android:paddingStart="15dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/base_shape"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_cus_service"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <ImageView
+                            android:id="@+id/iv_cus_service"
+                            android:layout_width="56dp"
+                            android:scaleType="centerInside"
+                            app:layout_constraintStart_toEndOf="@+id/tv_search"
+                            app:layout_constraintTop_toTopOf="@+id/tv_search"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_search"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:src="@drawable/home_cus_service"
+                            android:layout_height="56dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.appcompat.widget.Toolbar>
+
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

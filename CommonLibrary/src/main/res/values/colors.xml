@@ -3,8 +3,8 @@
     <color name="progresshud_default_color">#B1000000</color>
     <color name="progresshud_grey_color">#449E9E9E</color>
 
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#FF0000</color>
+    <color name="colorPrimaryDark">#00FFFFFF</color>
     <color name="colorAccent">#D81B60</color>
 
     <color name="material_red">#FFF44336</color>
@@ -14,12 +14,14 @@
 
     <color name="base_bg_e6">#F6F6F6</color>
     <color name="black_212222">#212222</color>
+    <color name="black_A4AAA8">#A4AAA8</color>
     <color name="white">#FFFFFF</color>
     <color name="white_EFF4FF">#EFF4FF</color>
     <color name="yellow_FFF9F0">#FFF9F0</color>
     <color name="green_F2FDFF">#F2FDFF</color>
     <color name="yellow_FFF7F4">#FFF7F4</color>
     <color name="yellow_FFDB9F">#FFDB9F</color>
+    <color name="yellow_FFBC1F">#FFBC1F</color>
     <color name="gray_646968">#646968</color>
     <color name="black_061436">#061436</color>
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 
+import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
 
 /**
@@ -22,17 +23,23 @@ public class ShapeUtil {
      */
     public static void setShapeRadius(View view, Context context, int cornerRadius) {
         GradientDrawable mGroupDrawable = (GradientDrawable) view.getBackground();
-        mGroupDrawable.setCornerRadius(SystemUtil.dip2px(context, cornerRadius));
+        if (mGroupDrawable != null) {
+            mGroupDrawable.mutate();
+            mGroupDrawable.setCornerRadius(SystemUtil.dip2px(context, cornerRadius));
+        }
     }
 
     /**
-     * @param view         view
-     * @param context      context
-     * @param colorResId   颜色
+     * @param view       view
+     * @param context    context
+     * @param colorResId 颜色
      */
     public static void setShapeColor(View view, Context context, int colorResId) {
         GradientDrawable mGroupDrawable = (GradientDrawable) view.getBackground();
-        mGroupDrawable.setColor(ContextCompat.getColor(context, colorResId));
+        if (mGroupDrawable != null) {
+            mGroupDrawable.mutate();
+            mGroupDrawable.setColor(ContextCompat.getColor(context, colorResId));
+        }
     }
 
     /**
@@ -41,10 +48,13 @@ public class ShapeUtil {
      * @param cornerRadius 圆角 dp
      * @param colorResId   颜色
      */
-    public static void setShape(View view, Context context, int cornerRadius, int colorResId) {
+    public static void setShape(View view, Context context, int cornerRadius,@ColorRes int colorResId) {
         GradientDrawable mGroupDrawable = (GradientDrawable) view.getBackground();
-        mGroupDrawable.setCornerRadius(SystemUtil.dip2px(context, cornerRadius));
-        mGroupDrawable.setColor(ContextCompat.getColor(context, colorResId));
+        if (mGroupDrawable != null) {
+            mGroupDrawable.mutate();
+            mGroupDrawable.setCornerRadius(SystemUtil.dip2px(context, cornerRadius));
+            mGroupDrawable.setColor(ContextCompat.getColor(context, colorResId));
+        }
     }
 
 }

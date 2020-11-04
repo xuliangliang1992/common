@@ -8,6 +8,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.highlands.common.util.StringUtil;
+import com.highlands.common.util.SystemUtil;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.RawRes;
 
 /**
  * glide加载图片
@@ -35,20 +40,36 @@ public class GlideUtil {
         return true;
     }
 
-    public static void loadImage(Context mContext, String url, ImageView imageView) {
+    public static void loadImage(Context context, String url, ImageView imageView) {
+        if (StringUtil.isStringNull(url)) {
+            return;
+        }
+        GlideApp.with(context).load(new MyGlideUrl(url)).into(imageView);
+    }
+
+    public static void loadImage(Context context, String url, ImageView imageView, int roundingRadius) {
         if (StringUtil.isStringNull(url)) {
             return;
         }
         //设置图片圆角角度
-        RoundedCorners roundedCorners = new RoundedCorners(5);
+        RoundedCorners roundedCorners = new RoundedCorners(SystemUtil.dip2px(context,roundingRadius));
         //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
         RequestOptions options = RequestOptions.bitmapTransform(roundedCorners)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);//不做磁盘缓存
-        GlideApp.with(mContext).load(new MyGlideUrl(url)).apply(options).into(imageView);
+        GlideApp.with(context).load(new MyGlideUrl(url)).apply(options).into(imageView);
     }
 
-    public static void preLoad(Context mContext, String url) {
-        GlideApp.with(mContext)
+    public static void loadImage(Context context, @RawRes @DrawableRes @Nullable Integer id, ImageView imageView, int roundingRadius) {
+        //设置图片圆角角度
+        RoundedCorners roundedCorners = new RoundedCorners(SystemUtil.dip2px(context,roundingRadius));
+        //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
+        RequestOptions options = RequestOptions.bitmapTransform(roundedCorners)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);//不做磁盘缓存
+        GlideApp.with(context).load(id).apply(options).into(imageView);
+    }
+
+    public static void preLoad(Context context, String url) {
+        GlideApp.with(context)
                 .load(url)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .preload();

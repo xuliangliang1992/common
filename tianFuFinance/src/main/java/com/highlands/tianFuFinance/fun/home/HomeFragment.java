@@ -1,15 +1,12 @@
 package com.highlands.tianFuFinance.fun.home;
 
-import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
-import com.highlands.common.util.SystemUtil;
+import com.highlands.common.util.ShapeUtil;
 import com.highlands.common.util.ToastUtil;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.HomeFragmentBinding;
@@ -51,10 +48,14 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
     @Override
     public void initView(View view) {
         binding = DataBindingUtil.bind(view);
-        Timber.tag(TAG).d("onViewCreated initView");
 
-        GradientDrawable mGroupDrawable = (GradientDrawable) binding.tvNotice.getBackground();
-        mGroupDrawable.setCornerRadius(SystemUtil.dip2px(mActivity, 20));
+        ShapeUtil.setShapeRadius(binding.clInformation, mActivity, 12);
+        ShapeUtil.setShapeRadius(binding.clAsk, mActivity, 12);
+        ShapeUtil.setShapeRadius(binding.clTrain, mActivity, 12);
+        ShapeUtil.setShapeRadius(binding.clShare, mActivity, 12);
+        ShapeUtil.setShape(binding.tvNotice, mActivity, 20,R.color.yellow_FFBC1F);
+        ShapeUtil.setShape(binding.tvSearch, mActivity, 20,R.color.gray_646968);
+
         initBanner();
     }
 
@@ -124,7 +125,6 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
                 //图片加载自己实现
                 Glide.with(holder.itemView)
                         .load(url)
-                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
                         .into(holder.imageView);
             }
         })
