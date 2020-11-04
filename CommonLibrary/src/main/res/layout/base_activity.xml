@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
-        android:background="#F4F7FF"
+        android:background="@color/white_F4F7FF"
         tools:ignore="SpUsage,ContentDescription,UseCompoundDrawables">
 
         <ViewStub

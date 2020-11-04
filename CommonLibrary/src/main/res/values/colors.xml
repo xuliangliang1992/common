@@ -3,7 +3,7 @@
     <color name="progresshud_default_color">#B1000000</color>
     <color name="progresshud_grey_color">#449E9E9E</color>
 
-    <color name="colorPrimary">#FF0000</color>
+    <color name="colorPrimary">#F4F7FF</color>
     <color name="colorPrimaryDark">#00FFFFFF</color>
     <color name="colorAccent">#D81B60</color>
 
@@ -30,4 +30,5 @@
     <color name="gray_788196">#788196</color>
     <color name="black_000012">#000012</color>
     <color name="black_1B1E24">#1B1E24</color>
+    <color name="white_F4F7FF">#F4F7FF</color>
 </resources>

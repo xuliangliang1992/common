@@ -3,10 +3,11 @@ package com.highlands.tianFuFinance.fun.main;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.highlands.common.constant.RouterUrl;
-import com.highlands.tianFuFinance.R;
+import com.gyf.immersionbar.ImmersionBar;
 import com.highlands.common.base.BaseActivity;
+import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.util.ActivityUtil;
+import com.highlands.tianFuFinance.R;
 
 /**
  * @author xll
@@ -25,6 +26,7 @@ public class MainActivity extends BaseActivity {
             fragment = MainFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fl_content);
         }
+
     }
 
     @Override

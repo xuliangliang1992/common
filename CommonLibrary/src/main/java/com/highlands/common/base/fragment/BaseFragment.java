@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.gyf.immersionbar.components.SimpleImmersionFragment;
 import com.highlands.common.base.BaseActivity;
 import com.highlands.common.base.BaseView;
 import com.highlands.common.base.event.EventBusUtil;
@@ -20,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -31,7 +31,7 @@ import io.reactivex.disposables.Disposable;
  * @date 2019/9/4
  * copyright(c) Highlands
  */
-public abstract class BaseFragment extends Fragment implements BaseView {
+public abstract class BaseFragment extends SimpleImmersionFragment implements BaseView {
 
     protected String TAG = this.getClass().getSimpleName();
     /**
@@ -164,4 +164,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         ToastUtil.showToast(mActivity, "网络请求失败");
     }
 
+    @Override
+    public void initImmersionBar() {
+
+    }
 }

@@ -6,20 +6,19 @@ import android.view.ViewStub;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.gyf.immersionbar.ImmersionBar;
+import com.highlands.common.R;
 import com.highlands.common.base.event.EventBusUtil;
 import com.highlands.common.base.event.EventMessage;
-import com.highlands.common.R;
+import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.databinding.BaseActivityBinding;
 import com.highlands.common.databinding.StubInitLoadingBinding;
 import com.highlands.common.databinding.StubNetErrorBinding;
 import com.highlands.common.databinding.StubNoDataBinding;
 import com.highlands.common.databinding.StubToolBarBinding;
-import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.network.NetChangeObserver;
 import com.highlands.common.network.NetType;
 import com.highlands.common.network.NetWorkManager;
 import com.highlands.common.util.DeviceUtils;
-import com.highlands.common.util.FitUtil;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -64,12 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         }
 
         NetWorkManager.getInstance().setNetChangeObserver(this);
-
-        ImmersionBar.with(this)
-                .statusBarDarkFont(true, 0.2f)
-                //                .statusBarColor(R.color.colorPrimaryDark)
-                //                .navigationBarColor(R.color.colorPrimaryDark)
-                .init();
+        ImmersionBar.with(this).navigationBarColor(R.color.colorPrimary).init();
     }
 
     /**

@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
+import com.gyf.immersionbar.ImmersionBar;
+import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.util.ShapeUtil;
@@ -30,7 +32,7 @@ import timber.log.Timber;
  * copyright(c) Highlands
  */
 @Route(path = RouterUrl.HOME_FRAGMENT_HOME)
-public class HomeFragment extends BaseLazyFragment<HomePresenter> implements HomeContract.View/*,SimpleImmersionOwner*/ {
+public class HomeFragment extends BaseLazyFragment<HomePresenter> implements HomeContract.View, SimpleImmersionOwner {
     private HomeFragmentBinding binding;
     private static String TAG = "HomeFragment";
     private ObservableArrayList<HomeBean> mHomeBeans;
@@ -53,8 +55,8 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
         ShapeUtil.setShapeRadius(binding.clAsk, mActivity, 12);
         ShapeUtil.setShapeRadius(binding.clTrain, mActivity, 12);
         ShapeUtil.setShapeRadius(binding.clShare, mActivity, 12);
-        ShapeUtil.setShape(binding.tvNotice, mActivity, 20,R.color.yellow_FFBC1F);
-        ShapeUtil.setShape(binding.tvSearch, mActivity, 20,R.color.gray_646968);
+        ShapeUtil.setShape(binding.tvNotice, mActivity, 20, R.color.yellow_FFBC1F);
+        ShapeUtil.setShape(binding.tvSearch, mActivity, 20, R.color.gray_646968);
 
         initBanner();
     }
@@ -142,13 +144,19 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
 
     }
 
-    //    @Override
-    //    public void initImmersionBar() {
-    //        ImmersionBar.with(this).statusBarColorTransformEnable(false)
-    //                .keyboardEnable(false)
-    //                .navigationBarColor(R.color.colorPrimary)
-    //                .init();
-    //    }
+
+    @Override
+    public boolean immersionBarEnabled() {
+        return true;
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this)
+                .navigationBarColor(R.color.colorPrimary)
+                .keyboardEnable(false)
+                .init();
+    }
 
 
 }

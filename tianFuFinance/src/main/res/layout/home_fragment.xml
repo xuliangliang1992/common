@@ -541,14 +541,13 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:fitsSystemWindows="true"
             android:layout_height="250dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
-                app:statusBarScrim="@android:color/transparent"
+                app:toolbarId="@+id/tool_bar"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <com.youth.banner.Banner
@@ -561,7 +560,7 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/tool_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="?actionBarSize"
                     app:layout_collapseMode="pin">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
