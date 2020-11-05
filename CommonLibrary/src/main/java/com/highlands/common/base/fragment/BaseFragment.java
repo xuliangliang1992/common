@@ -13,6 +13,7 @@ import com.highlands.common.base.BaseView;
 import com.highlands.common.base.event.EventBusUtil;
 import com.highlands.common.base.event.EventMessage;
 import com.highlands.common.constant.RouterUrl;
+import com.highlands.common.dialog.DialogManager;
 import com.highlands.common.util.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -95,9 +96,21 @@ public abstract class BaseFragment extends SimpleImmersionFragment implements Ba
         }
     }
 
-    protected void toHome() {
+    /**
+     * 跳转首页
+     */
+    protected void toMain() {
         ARouter.getInstance()
                 .build(RouterUrl.TAX_MAIN)
+                .navigation();
+    }
+
+    /**
+     * 跳转登录页
+     */
+    protected void toLogin() {
+        ARouter.getInstance()
+                .build(RouterUrl.TAX_LOGIN)
                 .navigation();
     }
 
@@ -146,7 +159,7 @@ public abstract class BaseFragment extends SimpleImmersionFragment implements Ba
 
     @Override
     public void httpUnauthorized() {
-        ARouter.getInstance().build(RouterUrl.TAX_LOGIN).navigation();
+       toLogin();
     }
 
     @Override
@@ -167,5 +180,19 @@ public abstract class BaseFragment extends SimpleImmersionFragment implements Ba
     @Override
     public void initImmersionBar() {
 
+    }
+
+    /**
+     * 显示小菊花
+     */
+    protected void showLoading() {
+        DialogManager.getInstance().showProgressDialog(mActivity);
+    }
+
+    /**
+     * 隐藏小菊花
+     */
+    protected void hideLoading() {
+        DialogManager.getInstance().dismissProgressDialog();
     }
 }

@@ -2,13 +2,12 @@ package com.highlands.tianFuFinance.fun.register;
 
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.highlands.common.base.fragment.BaseMvpFragment;
-import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.util.ShapeUtil;
 import com.highlands.common.util.StringUtil;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.RegisterFragmentBinding;
+import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -73,8 +72,8 @@ public class RegisterFragment extends BaseMvpFragment<RegisterPresenter> impleme
 
 
     @Override
-    protected void toHome() {
-        super.toHome();
+    protected void toMain() {
+        super.toMain();
         mActivity.finish();
     }
 
@@ -90,11 +89,13 @@ public class RegisterFragment extends BaseMvpFragment<RegisterPresenter> impleme
         if (v.getId() == R.id.tv_code) {
             phone = binding.lvAccount.getText();
             if (StringUtil.checkPhone(phone)) {
-                binding.tvCode.onClick();
+                showLoading();
+                mPresenter.sendSms(phone);
             }
         } else if (v.getId() == R.id.tv_login) {
-            ARouter.getInstance().build(RouterUrl.TAX_LOGIN).navigation();
+            toLogin();
         } else if (v.getId() == R.id.tv_register) {
+            phone = binding.lvAccount.getText();
             String code = binding.lvCode.getText();
             String password = binding.lvPassword.getText();
             String passwordAgain = binding.lvPasswordAgain.getText();
@@ -103,9 +104,24 @@ public class RegisterFragment extends BaseMvpFragment<RegisterPresenter> impleme
                     showToast("两次密码不一致");
                     return;
                 }
+                showLoading();
                 mPresenter.register(phone, code, password);
             }
         }
 
+    }
+
+    @Override
+    public void sendSmsSuccess(SmsSendBean smsSendBean) {
+        showToast("验证码已发送");
+        hideLoading();
+        binding.tvCode.onClick();
+    }
+
+    @Override
+    public void register() {
+        hideLoading();
+        showToast("注册成功");
+        toLogin();
     }
 }

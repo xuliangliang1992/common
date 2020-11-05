@@ -27,7 +27,7 @@ public class HttpFilterFunc<T> implements Predicate<BaseResponse<T>> {
             return false;
         }
         if (!map.isSuccess()) {
-            msg = map.getMessage();
+            msg = map.getMsg();
             if (StringUtil.isStringNull(msg)) {
                 msg = map.getHttpmsg();
             }

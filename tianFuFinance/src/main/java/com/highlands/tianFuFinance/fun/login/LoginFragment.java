@@ -9,9 +9,10 @@ import com.highlands.common.util.ShapeUtil;
 import com.highlands.common.util.StringUtil;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.LoginFragmentBinding;
+import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 /**
@@ -47,14 +48,6 @@ public class LoginFragment extends BaseMvpFragment<LoginPresenter> implements Lo
 
     @Override
     public void initListener() {
-        // Create the observer which updates the UI.
-        final Observer<String> nameObserver = newName -> {
-            // Update the UI, in this case, a TextView.
-            //            mTextView.setText(newName);
-        };
-
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        mViewModel.getCurrentName().observe(this, nameObserver);
 
         binding.tvCodeLogin.setOnClickListener(this);
         binding.tvAccountLogin.setOnClickListener(this);
@@ -75,8 +68,8 @@ public class LoginFragment extends BaseMvpFragment<LoginPresenter> implements Lo
 
 
     @Override
-    protected void toHome() {
-        super.toHome();
+    protected void toMain() {
+        super.toMain();
         mActivity.finish();
     }
 
@@ -96,19 +89,23 @@ public class LoginFragment extends BaseMvpFragment<LoginPresenter> implements Lo
         } else if (v.getId() == R.id.tv_code) {
             phone = binding.lvAccount.getText();
             if (StringUtil.checkPhone(phone)) {
-                binding.tvCode.onClick();
+                showLoading();
+                mPresenter.sendSms(phone);
             }
 
         } else if (v.getId() == R.id.tv_login) {
+            phone = binding.lvAccount.getText();
             if (StringUtil.checkPhone(phone)) {
                 if (mViewModel.isCodeLogin().getValue()) {
                     String code = binding.lvCode.getText();
                     if (StringUtil.checkCode(code)) {
-                        mPresenter.codeLogin(phone, code);
+                        showLoading();
+                        mPresenter.mobileLogin(phone, code);
                     }
                 } else {
                     String password = binding.lvPassword.getText();
                     if (StringUtil.checkPassword(password)) {
+                        showLoading();
                         mPresenter.accountLogin(phone, password);
                     }
                 }
@@ -119,4 +116,17 @@ public class LoginFragment extends BaseMvpFragment<LoginPresenter> implements Lo
 
     }
 
+    @Override
+    public void sendSmsSuccess(SmsSendBean smsSendBean) {
+        showToast("验证码已发送");
+        hideLoading();
+        binding.tvCode.onClick();
+    }
+
+    @Override
+    public void loginSuccess(LoginBean loginBean) {
+        showToast("登录成功");
+        hideLoading();
+        toMain();
+    }
 }

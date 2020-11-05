@@ -3,6 +3,8 @@ package com.highlands.tianFuFinance.fun.login;
 import com.highlands.common.base.BasePresenter;
 import com.highlands.common.http.BaseXllObserver;
 import com.highlands.tianFuFinance.http.request.RemoteLoanDataSource;
+import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -19,28 +21,50 @@ class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginC
     }
 
     @Override
-    public void accountLogin(String phone, String password) {
-        RemoteLoanDataSource.getInstance().getAccessToken(1, 2, "3")
-                .subscribe(new BaseXllObserver<String>(mView) {
+    public void accountLogin(String account, String password) {
+        RemoteLoanDataSource.getInstance().accountLogin(account, password)
+                .subscribe(new BaseXllObserver<LoginBean>(mView) {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
+                        mCompositeDisposable.add(d);
                     }
 
                     @Override
-                    public void onNext(@NonNull String s) {
-
+                    public void onNext(@NonNull LoginBean loginBean) {
+                        mView.loginSuccess(loginBean);
                     }
                 });
     }
 
     @Override
-    public void codeLogin(String phone, String code) {
+    public void mobileLogin(String phone, String code) {
+        RemoteLoanDataSource.getInstance().mobileLogin(phone, code)
+                .subscribe(new BaseXllObserver<LoginBean>(mView) {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mCompositeDisposable.add(d);
+                    }
 
+                    @Override
+                    public void onNext(@NonNull LoginBean loginBean) {
+                        mView.loginSuccess(loginBean);
+                    }
+                });
     }
 
     @Override
-    public void getCode(String phone) {
+    public void sendSms(String phone) {
+        RemoteLoanDataSource.getInstance().sendSms(phone, 2)
+                .subscribe(new BaseXllObserver<SmsSendBean>(mView) {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mCompositeDisposable.add(d);
+                    }
 
+                    @Override
+                    public void onNext(@NonNull SmsSendBean smsSendBean) {
+                        mView.sendSmsSuccess(smsSendBean);
+                    }
+                });
     }
 }

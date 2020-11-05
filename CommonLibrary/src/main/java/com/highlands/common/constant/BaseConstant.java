@@ -12,7 +12,7 @@ public class BaseConstant {
     public static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
     public static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0x04;
 
-    public static final String BASE_URL = "";
+    public static final String BASE_URL = "http://api.finance.baiku.co/";
 
     public static final String SHARED_PREFERENCE_FILE_NAME = "";
 

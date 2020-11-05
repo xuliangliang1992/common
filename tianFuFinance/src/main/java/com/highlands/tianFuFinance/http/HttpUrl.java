@@ -13,8 +13,22 @@ public class HttpUrl {
      */
     public static final String ACCESS_TOKEN_URL = "auth/getAccessToken";
     /**
-     * 管理员登录
+     * 短信验证码发送
      */
-    public static final String LOGIN_URL = "web/account_login";
+    public static final String SMS_SEND_URL = "common/sms/send";
+    /**
+     * 注册
+     */
+    public static final String REGISTER_URL = "api/user/register";
+    /**
+     * 账号密码登录
+     */
+    public static final String ACCOUNT_LOGIN_URL = "api/user/pwd/login";
+
+    /**
+     * 验证码码登录
+     */
+    public static final String MOBILE_LOGIN_URL = "api/user/mobile/login";
+
 
 }

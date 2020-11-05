@@ -14,7 +14,7 @@ public abstract class BasePresenter<V extends BaseView> implements IBasePresente
     protected CompositeDisposable mCompositeDisposable;
     protected BaseSchedulerProvider mSchedulerProvider;
     protected V mView;
-
+protected String TAG = this.getClass().getSimpleName();
     public BasePresenter(V view) {
         mView = view;
     }

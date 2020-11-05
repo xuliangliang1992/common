@@ -153,6 +153,7 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
     @Override
     public void initImmersionBar() {
         ImmersionBar.with(this)
+                .statusBarView(binding.statusBarView)
                 .navigationBarColor(R.color.colorPrimary)
                 .keyboardEnable(false)
                 .init();

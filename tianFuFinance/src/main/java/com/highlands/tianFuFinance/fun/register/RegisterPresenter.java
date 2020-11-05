@@ -3,6 +3,8 @@ package com.highlands.tianFuFinance.fun.register;
 import com.highlands.common.base.BasePresenter;
 import com.highlands.common.http.BaseXllObserver;
 import com.highlands.tianFuFinance.http.request.RemoteLoanDataSource;
+import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -19,24 +21,37 @@ class RegisterPresenter extends BasePresenter<RegisterContract.View> implements 
     }
 
     @Override
-    public void register(String phone, String code, String password) {
-        RemoteLoanDataSource.getInstance().getAccessToken(1, 2, "3")
-                .subscribe(new BaseXllObserver<String>(mView) {
+    public void register(String mobile, String code, String password) {
+        RemoteLoanDataSource.getInstance().register(mobile, code, password)
+                .subscribe(new BaseXllObserver<LoginBean>(mView) {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
+                        mCompositeDisposable.add(d);
                     }
 
                     @Override
-                    public void onNext(@NonNull String s) {
+                    public void onNext(@NonNull LoginBean loginBean) {
 
+                        mView.register();
                     }
                 });
     }
 
 
     @Override
-    public void getCode(String phone) {
+    public void sendSms(String phone) {
+        RemoteLoanDataSource.getInstance().sendSms(phone, 2)
+                .subscribe(new BaseXllObserver<SmsSendBean>(mView) {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mCompositeDisposable.add(d);
+                    }
 
+                    @Override
+                    public void onNext(@NonNull SmsSendBean smsSendBean) {
+                        mView.sendSmsSuccess(smsSendBean);
+                    }
+
+                });
     }
 }

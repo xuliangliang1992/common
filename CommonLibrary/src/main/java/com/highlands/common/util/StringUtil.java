@@ -174,7 +174,10 @@ public class StringUtil {
             ToastUtil.showToast(BaseApplication.getInstance(), BaseApplication.getInstance().getString(R.string.please_input_phone));
             return false;
         }
-
+        if (phone.length() != 11) {
+            ToastUtil.showToast(BaseApplication.getInstance(), BaseApplication.getInstance().getString(R.string.error_phone));
+            return false;
+        }
         return true;
     }
 

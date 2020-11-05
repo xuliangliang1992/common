@@ -29,11 +29,11 @@ public abstract class BaseObserver<T> implements Observer<T> {
     private HttpObserver mHttpObserver;
     private SubscriberOnErrorListener onErrorListener;
 
-    BaseObserver(HttpObserver httpObserver) {
+    public BaseObserver(HttpObserver httpObserver) {
         mHttpObserver = httpObserver;
     }
 
-    BaseObserver(HttpObserver httpObserver, SubscriberOnErrorListener onErrorListener) {
+    public BaseObserver(HttpObserver httpObserver, SubscriberOnErrorListener onErrorListener) {
         this.mHttpObserver = httpObserver;
         this.onErrorListener = onErrorListener;
     }

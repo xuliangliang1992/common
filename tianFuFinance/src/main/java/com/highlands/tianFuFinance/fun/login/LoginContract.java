@@ -1,6 +1,8 @@
 package com.highlands.tianFuFinance.fun.login;
 
 import com.highlands.common.base.BaseView;
+import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 /**
  * Main控制器
@@ -13,7 +15,9 @@ class LoginContract {
 
     interface View extends BaseView {
 
+        void sendSmsSuccess(SmsSendBean smsSendBean);
 
+        void loginSuccess(LoginBean loginBean);
     }
 
     interface Presenter {
@@ -21,24 +25,24 @@ class LoginContract {
         /**
          * 账号密码登录
          *
-         * @param phone    手机号
+         * @param account  账号
          * @param password 密码
          */
-        void accountLogin(String phone, String password);
+        void accountLogin(String account, String password);
 
         /**
          * 验证码登录
          *
-         * @param phone 手机号
-         * @param code  验证码
+         * @param mobile 手机号
+         * @param code   验证码
          */
-        void codeLogin(String phone, String code);
+        void mobileLogin(String mobile, String code);
 
         /**
          * 获取验证码
          *
          * @param phone 手机号
          */
-        void getCode(String phone);
+        void sendSms(String phone);
     }
 }

@@ -89,4 +89,10 @@ public abstract class BaseRefreshFragment<T, P extends BasePresenter> extends Ba
         mRefreshLayout.autoRefresh();
     }
 
+    @Override
+    protected void hideLoading() {
+        super.hideLoading();
+        stopLoadMore();
+        stopRefresh();
+    }
 }

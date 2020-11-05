@@ -47,7 +47,7 @@ public class SplashFragment extends BaseMvpFragment<SplashPresenter> implements 
     public void initListener() {
         addDisposable(RxView.clicks(binding.tvCount).throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(unit -> {
-                    toHome();
+                    toMain();
                 }));
     }
 
@@ -86,14 +86,14 @@ public class SplashFragment extends BaseMvpFragment<SplashPresenter> implements 
 
                     @Override
                     public void onComplete() {
-                        toHome();
+                        toMain();
                     }
                 });
     }
 
     @Override
-    protected void toHome() {
-        super.toHome();
+    protected void toMain() {
+        super.toMain();
         mActivity.finish();
     }
 

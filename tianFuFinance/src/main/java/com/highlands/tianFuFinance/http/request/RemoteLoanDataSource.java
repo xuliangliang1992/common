@@ -7,15 +7,16 @@ import com.highlands.tianFuFinance.http.CacheProvider;
 import com.highlands.tianFuFinance.http.HttpUrl;
 import com.highlands.tianFuFinance.http.RetrofitUtil;
 import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.Nullable;
 import io.reactivex.Observable;
-import io.rx_cache2.Reply;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
+import timber.log.Timber;
 
 /**
  * @author xll
@@ -42,6 +43,17 @@ public class RemoteLoanDataSource implements LoanDataSource {
     }
 
     @Override
+    public Observable<SmsSendBean> sendSms(String phone, int type) {
+        Map<String, Object> params = new HashMap<>(3);
+        params.put("phone", phone);
+        params.put("type", type);
+        Timber.tag("sendSms").d(phone);
+        return mRetrofitUtil.getFaceIDService(false).sendSms(HttpUrl.SMS_SEND_URL, params)
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
+    }
+
+    @Override
     public Observable<String> getAccessToken(long userId, long shopId, String dbName) {
         Map<String, Object> params = new HashMap<>(3);
         params.put("dbName", dbName);
@@ -52,19 +64,34 @@ public class RemoteLoanDataSource implements LoanDataSource {
                 .compose(RxJavaUtil.changeSchedulers());
     }
 
-    /**
-     * 登录
-     *
-     * @param userName 账号
-     * @param password 密码
-     * @return Observable
-     */
     @Override
-    public Observable<Reply<LoginBean>> login(String userName, String password) {
+    public Observable<LoginBean> register(String mobile, String code, String password) {
         Map<String, Object> params = new HashMap<>(3);
-        params.put("login", "+86-" + userName);
-        params.put("password", password);
-        params.put("login_type", "password");
-        return cacheProvider.login(mRetrofitUtil.getFaceIDService(Constant.LOGIN_URL).login(HttpUrl.LOGIN_URL, params));
+        params.put("mobile", mobile);
+        params.put("code", code);
+        params.put("passwd", password);
+        return mRetrofitUtil.getFaceIDService(false).register(HttpUrl.REGISTER_URL, params)
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
+    }
+
+    @Override
+    public Observable<LoginBean> accountLogin(String account, String password) {
+        Map<String, Object> params = new HashMap<>(2);
+        params.put("passwd", password);
+        params.put("account", account);
+        return mRetrofitUtil.getFaceIDService(Constant.LOGIN_URL).accountLogin(HttpUrl.ACCOUNT_LOGIN_URL, params)
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
+    }
+
+    @Override
+    public Observable<LoginBean> mobileLogin(String mobile, String code) {
+        Map<String, Object> params = new HashMap<>(3);
+        params.put("mobile", mobile);
+        params.put("code", code);
+        return mRetrofitUtil.getFaceIDService(false).mobileLogin(HttpUrl.MOBILE_LOGIN_URL, params)
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
     }
 }

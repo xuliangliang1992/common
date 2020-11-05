@@ -1,6 +1,7 @@
 package com.highlands.tianFuFinance.fun.register;
 
 import com.highlands.common.base.BaseView;
+import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 /**
  * Main控制器
@@ -13,25 +14,28 @@ class RegisterContract {
 
     interface View extends BaseView {
 
+        void sendSmsSuccess(SmsSendBean smsSendBean);
+
+        void register();
 
     }
 
     interface Presenter {
 
         /**
-         * 账号密码登录
+         * 注册
          *
-         * @param phone    手机号
+         * @param mobile   手机号
          * @param code     验证码
          * @param password 密码
          */
-        void register(String phone, String code, String password);
+        void register(String mobile, String code, String password);
 
         /**
          * 获取验证码
          *
          * @param phone 手机号
          */
-        void getCode(String phone);
+        void sendSms(String phone);
     }
 }

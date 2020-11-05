@@ -2,11 +2,11 @@ package com.highlands.tianFuFinance.http.request;
 
 
 import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import io.reactivex.Observable;
-import io.rx_cache2.Reply;
 
 /**
  * @author xll
@@ -31,19 +31,27 @@ public class LoanRepository implements LoanDataSource {
     }
 
     @Override
+    public Observable<SmsSendBean> sendSms(String phone, int type) {
+        return mRemoteLoanDataSource.sendSms(phone, type);
+    }
+
+    @Override
     public Observable<String> getAccessToken(long userId, long shopId, String dbName) {
         return mRemoteLoanDataSource.getAccessToken(userId, shopId, dbName);
     }
 
-    /**
-     * 登录
-     *
-     * @param userName 账号
-     * @param password 密码
-     * @return Observable
-     */
     @Override
-    public Observable<Reply<LoginBean>> login(String userName, String password) {
-        return mRemoteLoanDataSource.login(userName, password);
+    public Observable<LoginBean> register(String mobile, String code, String password) {
+        return mRemoteLoanDataSource.register(mobile, code, password);
+    }
+
+    @Override
+    public Observable<LoginBean> accountLogin(String account, String password) {
+        return mRemoteLoanDataSource.accountLogin(account, password);
+    }
+
+    @Override
+    public Observable<LoginBean> mobileLogin(String mobile, String code) {
+        return mRemoteLoanDataSource.mobileLogin(mobile, code);
     }
 }

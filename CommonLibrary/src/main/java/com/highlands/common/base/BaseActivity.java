@@ -15,6 +15,7 @@ import com.highlands.common.databinding.StubInitLoadingBinding;
 import com.highlands.common.databinding.StubNetErrorBinding;
 import com.highlands.common.databinding.StubNoDataBinding;
 import com.highlands.common.databinding.StubToolBarBinding;
+import com.highlands.common.dialog.DialogManager;
 import com.highlands.common.network.NetChangeObserver;
 import com.highlands.common.network.NetType;
 import com.highlands.common.network.NetWorkManager;
@@ -62,7 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         }
 
         NetWorkManager.getInstance().setNetChangeObserver(this);
-        ImmersionBar.with(this).navigationBarColor(R.color.colorPrimary).init();
+        ImmersionBar.with(this).statusBarDarkFont(false).navigationBarColor(R.color.colorPrimary).init();
     }
 
     /**
@@ -246,7 +247,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         mStubNetErrorBinding.viewNetError.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-    protected void toHome() {
+    protected void toMain() {
         ARouter.getInstance().build(RouterUrl.TAX_MAIN).navigation();
     }
 
@@ -311,5 +312,19 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         if (isRegisteredNetChange()) {
             Timber.tag(TAG).d("onDisConnect");
         }
+    }
+
+    /**
+     * 显示小菊花
+     */
+    protected void showLoading() {
+        DialogManager.getInstance().showProgressDialog(this);
+    }
+
+    /**
+     * 隐藏小菊花
+     */
+    protected void hideLoading() {
+        DialogManager.getInstance().dismissDialog();
     }
 }

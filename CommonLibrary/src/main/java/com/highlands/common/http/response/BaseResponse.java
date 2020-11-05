@@ -10,8 +10,9 @@ public class BaseResponse<T> {
     public T data;
     public String code;
     public boolean success;
-    public String message;
+    public String msg;
     public String httpmsg;
+    public long timestamp;
     public int pageIndex;
     public int pages;
     public int total;
@@ -41,12 +42,12 @@ public class BaseResponse<T> {
         this.success = success;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public String getHttpmsg() {
@@ -87,5 +88,13 @@ public class BaseResponse<T> {
 
     public void setHttpcode(int httpcode) {
         this.httpcode = httpcode;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
