@@ -1,41 +1,29 @@
 package com.highlands.home.home;
 
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.snackbar.Snackbar;
 import com.gyf.immersionbar.ImmersionBar;
-import com.gyf.immersionbar.components.SimpleImmersionOwner;
-import com.highlands.home.view.SlideRecyclerView;
+import com.gyf.immersionbar.components.SimpleImmersionFragment;
 import com.highlands.home.R;
 import com.highlands.home.databinding.HomeFragmentBinding;
-import com.highlands.common.base.fragment.BaseLazyFragment;
-import com.highlands.common.constant.RouterUrl;
 import com.youth.banner.Banner;
-import com.youth.banner.adapter.BannerAdapter;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
-import com.youth.banner.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableArrayList;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import timber.log.Timber;
 
 
 /**
@@ -44,90 +32,31 @@ import timber.log.Timber;
  * copyright(c) Highlands
  */
 //@Route(path = RouterUrl.HOME_FRAGMENT_HOME)
-public class HomeFragment extends BaseLazyFragment<HomePresenter> implements HomeContract.View/*,SimpleImmersionOwner*/ {
-    private HomeContract.Presenter mPresenter;
+public class HomeFragment extends SimpleImmersionFragment {
     private HomeFragmentBinding binding;
-    private static String TAG = "HomeFragment";
-    private ObservableArrayList<HomeBean> mHomeBeans;
-    private HomeViewModel mViewModel;
 
     static HomeFragment newInstance() {
         return new HomeFragment();
     }
 
-    @Override
-    public int setLayout() {
-        return R.layout.home_fragment;
-    }
 
-    @Override
     public void initView(View view) {
         binding = DataBindingUtil.bind(view);
-        Timber.tag(TAG).d("onViewCreated initView");
 
         initBanner();
     }
 
+    @Nullable
     @Override
-    public void initListener() {
-        Timber.tag(TAG).d("onViewCreated initListener");
-        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        // Create the observer which updates the UI.
-        final Observer<List<HomeBean>> nameObserver = newName -> {
-            // Update the UI, in this case, a TextView.
-        };
-
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        mViewModel.getHomeBeans().observe(this, nameObserver);
-
-        //        binding.rvHome.setSlideClickListener(new SlideRecyclerView.SlideClickListener() {
-        //            @Override
-        //            public void onDelete(int position) {
-        //                Timber.tag(TAG).d("onDelete " + position);
-        //            }
-        //
-        //            @Override
-        //            public void onClick(int position) {
-        //
-        //                Timber.tag(TAG).d("onClick " + position);
-        //            }
-        //        });
-
-        //        binding.button.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                mHomeBeans.add(new HomeBean(111));
-        //                mViewModel.getHomeBeans().setValue(mHomeBeans);
-        //            }
-        //        });
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.home_fragment, null);
     }
 
     @Override
-    public void initData() {
-        Timber.tag(TAG).d("onActivityCreated");
-        mHomeBeans = new ObservableArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            mHomeBeans.add(new HomeBean(i));
-        }
-        mViewModel.getHomeBeans().setValue(mHomeBeans);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
     }
-
-    @Override
-    public void setPresenter() {
-        mPresenter = new HomePresenter(this);
-    }
-
-    @Override
-    public void onLazyLoad() {
-        Timber.tag(TAG).d("onLazyLoad");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Timber.tag(TAG).d("onResume");
-    }
-
     private void initBanner() {
         List<String> mImages = new ArrayList<>();
         mImages.add("http://172.31.225.218/zentao/file-read-34542.png");
@@ -144,7 +73,7 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
             }
         })
                 .addBannerLifecycleObserver(this)//添加生命周期观察者
-                .setIndicator(new CircleIndicator(mActivity))//设置指示器
+                .setIndicator(new CircleIndicator(getActivity()))//设置指示器
                 .setOnBannerListener((data, position) -> {
                 })
                 .isAutoLoop(true)
@@ -156,14 +85,12 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
 
     }
 
-//    @Override
-//    public void initImmersionBar() {
-//        ImmersionBar.with(this).statusBarColorTransformEnable(false)
-//                .keyboardEnable(false)
-//                .navigationBarColor(R.color.colorPrimary)
-//                .init();
-//    }
-
-
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this).statusBarColorTransformEnable(false)
+                .keyboardEnable(false)
+                .navigationBarColor(R.color.colorPrimary)
+                .init();
+    }
 
 }
