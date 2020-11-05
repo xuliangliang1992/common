@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.gyf.immersionbar.ImmersionBar;
 import com.highlands.common.base.fragment.BaseLazyFragment;
 import com.highlands.common.constant.RouterUrl;
 import com.highlands.common.util.ShapeUtil;
@@ -121,5 +122,12 @@ ARouter.getInstance().build(RouterUrl.MINE_ACTIVITY_HISTORY).navigation();
         } else if (v.getId() == R.id.cl_support) {
 
         }
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .init();
     }
 }

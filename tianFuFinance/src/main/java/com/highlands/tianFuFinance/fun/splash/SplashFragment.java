@@ -2,6 +2,7 @@ package com.highlands.tianFuFinance.fun.splash;
 
 import android.view.View;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.highlands.common.base.fragment.BaseMvpFragment;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.SplashFragmentBinding;
@@ -94,5 +95,12 @@ public class SplashFragment extends BaseMvpFragment<SplashPresenter> implements 
     protected void toHome() {
         super.toHome();
         mActivity.finish();
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .init();
     }
 }

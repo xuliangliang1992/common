@@ -52,7 +52,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.base_activity);
-//        FitUtil.autoFit(this, true);
 
         binding.viewStubToolbar.setOnInflateListener(this);
         binding.viewStubInitLoading.setOnInflateListener(this);
@@ -74,6 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         setSupportActionBar(mStubToolBarBinding.toolBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mStubToolBarBinding.toolBar.setNavigationOnClickListener(v -> onBackPressed());
+        ImmersionBar.with(this).titleBar(mStubToolBarBinding.toolBar).navigationBarColor(R.color.colorPrimary).init();
     }
 
     /**

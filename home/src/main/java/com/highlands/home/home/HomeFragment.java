@@ -87,9 +87,8 @@ public class HomeFragment extends SimpleImmersionFragment {
 
     @Override
     public void initImmersionBar() {
-        ImmersionBar.with(this).statusBarColorTransformEnable(false)
-                .keyboardEnable(false)
-                .navigationBarColor(R.color.colorPrimary)
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
                 .init();
     }
 
