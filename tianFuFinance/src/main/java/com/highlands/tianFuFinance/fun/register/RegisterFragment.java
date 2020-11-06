@@ -1,5 +1,6 @@
 package com.highlands.tianFuFinance.fun.register;
 
+import android.text.InputType;
 import android.view.View;
 
 import com.highlands.common.base.fragment.BaseMvpFragment;
@@ -41,6 +42,9 @@ public class RegisterFragment extends BaseMvpFragment<RegisterPresenter> impleme
         binding.setLifecycleOwner(this);
         ShapeUtil.setShape(binding.tvCode, mActivity, 8, R.color.blue_709AFF);
         ShapeUtil.setShape(binding.tvRegister, mActivity, 8, R.color.blue_3974FF);
+
+        binding.lvPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        binding.lvPasswordAgain.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
     }
 

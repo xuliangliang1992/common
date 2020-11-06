@@ -63,7 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoadVie
         }
 
         NetWorkManager.getInstance().setNetChangeObserver(this);
-        ImmersionBar.with(this).statusBarDarkFont(false).navigationBarColor(R.color.colorPrimary).init();
+        ImmersionBar.with(this).statusBarDarkFont(false).navigationBarColor(R.color.colorPrimary).keyboardEnable(true).init();
     }
 
     /**

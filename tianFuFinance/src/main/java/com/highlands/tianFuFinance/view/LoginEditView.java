@@ -2,6 +2,7 @@ package com.highlands.tianFuFinance.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.InputFilter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 
@@ -11,7 +12,6 @@ import com.highlands.tianFuFinance.databinding.LoginViewBinding;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 
@@ -56,7 +56,8 @@ public class LoginEditView extends ConstraintLayout {
             if(!StringUtil.isStringNull(editText)){
             binding.edit.setText(editText);
             }
-
+            int maxLength = attributes.getInt(R.styleable.LoginEditView_max_length,11);
+            binding.edit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
 
             attributes.recycle();
         }
@@ -64,14 +65,6 @@ public class LoginEditView extends ConstraintLayout {
 
     public String getText() {
         return binding.edit.getText().toString().trim();
-    }
-
-    public void setHint(String hint) {
-        binding.edit.setHint(hint);
-    }
-
-    public void setHint(@StringRes int resId) {
-        binding.edit.setHint(resId);
     }
 
     public void setInputType(int inputType) {

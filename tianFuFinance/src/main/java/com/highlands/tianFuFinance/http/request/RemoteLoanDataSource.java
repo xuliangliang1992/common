@@ -6,10 +6,15 @@ import com.highlands.tianFuFinance.constant.Constant;
 import com.highlands.tianFuFinance.http.CacheProvider;
 import com.highlands.tianFuFinance.http.HttpUrl;
 import com.highlands.tianFuFinance.http.RetrofitUtil;
-import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.common.http.response.LiveBean;
+import com.highlands.common.http.response.LoginBean;
+import com.highlands.common.http.response.PolicyBean;
+import com.highlands.tianFuFinance.http.response.BannerBean;
 import com.highlands.tianFuFinance.http.response.SmsSendBean;
+import com.highlands.common.http.response.VideoBean;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.Nullable;
@@ -91,6 +96,34 @@ public class RemoteLoanDataSource implements LoanDataSource {
         params.put("mobile", mobile);
         params.put("code", code);
         return mRetrofitUtil.getFaceIDService(false).mobileLogin(HttpUrl.MOBILE_LOGIN_URL, params)
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
+    }
+
+    @Override
+    public Observable<List<BannerBean>> getBannerList() {
+        return mRetrofitUtil.getFaceIDService(false).getBannerList(HttpUrl.BANNER_LIST_URL)
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
+    }
+
+    @Override
+    public Observable<List<PolicyBean>> getPolicyNews() {
+        return mRetrofitUtil.getFaceIDService(false).getPolicyNews(HttpUrl.POLICY_NEWS_URL, Constant.LIMIT)
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
+    }
+
+    @Override
+    public Observable<List<LiveBean>> getLiveNotices() {
+        return mRetrofitUtil.getFaceIDService(false).getLiveNotices(HttpUrl.LIVE_NOTICE_URL,  Constant.LIMIT)
+                .compose(RxJavaUtil.filterData())
+                .compose(RxJavaUtil.changeSchedulers());
+    }
+
+    @Override
+    public Observable<List<VideoBean>> getVideoNews() {
+        return mRetrofitUtil.getFaceIDService(false).getVideoNews(HttpUrl.VIDEO_NEWS_URL,  Constant.LIMIT)
                 .compose(RxJavaUtil.filterData())
                 .compose(RxJavaUtil.changeSchedulers());
     }

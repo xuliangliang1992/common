@@ -19,9 +19,13 @@
     <color name="white_EFF4FF">#EFF4FF</color>
     <color name="yellow_FFF9F0">#FFF9F0</color>
     <color name="green_F2FDFF">#F2FDFF</color>
+    <color name="green_00AA7B">#00AA7B</color>
+    <color name="green_D1FFF2">#D1FFF2</color>
     <color name="yellow_FFF7F4">#FFF7F4</color>
     <color name="yellow_FFDB9F">#FFDB9F</color>
     <color name="yellow_FFBC1F">#FFBC1F</color>
+    <color name="yellow_FFEFD4">#FFEFD4</color>
+    <color name="yellow_FEA104">#FEA104</color>
     <color name="gray_646968">#646968</color>
     <color name="black_061436">#061436</color>
 

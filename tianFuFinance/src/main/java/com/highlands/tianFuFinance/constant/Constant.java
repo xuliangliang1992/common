@@ -18,4 +18,5 @@ public class Constant extends BaseConstant {
 
     public static String LOGIN_URL = "https://cloudshop.iwhalecloud.com/";
 
+    public static final int LIMIT = 5;
 }

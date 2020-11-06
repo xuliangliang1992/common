@@ -6,24 +6,29 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
-import com.highlands.common.base.fragment.BaseLazyFragment;
+import com.highlands.common.base.fragment.BaseMvpFragment;
 import com.highlands.common.constant.RouterUrl;
-import com.highlands.common.util.ShapeUtil;
+import com.highlands.common.http.response.HomeBean;
+import com.highlands.common.http.response.LiveBean;
+import com.highlands.common.http.response.PolicyBean;
+import com.highlands.common.http.response.VideoBean;
 import com.highlands.common.util.ToastUtil;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.HomeFragmentBinding;
+import com.highlands.tianFuFinance.http.response.BannerBean;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
-import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.indicator.RectangleIndicator;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import timber.log.Timber;
 
 /**
@@ -32,11 +37,11 @@ import timber.log.Timber;
  * copyright(c) Highlands
  */
 @Route(path = RouterUrl.HOME_FRAGMENT_HOME)
-public class HomeFragment extends BaseLazyFragment<HomePresenter> implements HomeContract.View, SimpleImmersionOwner {
+public class HomeFragment extends BaseMvpFragment<HomePresenter> implements HomeContract.View, SimpleImmersionOwner, View.OnClickListener {
     private HomeFragmentBinding binding;
-    private static String TAG = "HomeFragment";
     private ObservableArrayList<HomeBean> mHomeBeans;
     private HomeViewModel mViewModel;
+    private HomeAdapter mHomeAdapter;
 
     static HomeFragment newInstance() {
         return new HomeFragment();
@@ -50,15 +55,12 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
     @Override
     public void initView(View view) {
         binding = DataBindingUtil.bind(view);
+        mHomeAdapter = new HomeAdapter();
+        binding.rvHome.setLayoutManager(new LinearLayoutManager(mActivity));
+        //        ShapeUtil.setShape(binding.tvNotice, mActivity, 20, R.color.yellow_FFBC1F);
+        //        ShapeUtil.setShape(binding.tvSearch, mActivity, 20, R.color.gray_646968);
+        binding.rvHome.setAdapter(mHomeAdapter);
 
-        ShapeUtil.setShapeRadius(binding.clInformation, mActivity, 12);
-        ShapeUtil.setShapeRadius(binding.clAsk, mActivity, 12);
-        ShapeUtil.setShapeRadius(binding.clTrain, mActivity, 12);
-        ShapeUtil.setShapeRadius(binding.clShare, mActivity, 12);
-        ShapeUtil.setShape(binding.tvNotice, mActivity, 20, R.color.yellow_FFBC1F);
-        ShapeUtil.setShape(binding.tvSearch, mActivity, 20, R.color.gray_646968);
-
-        initBanner();
     }
 
     @Override
@@ -68,82 +70,68 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
         // Create the observer which updates the UI.
         final Observer<List<HomeBean>> nameObserver = newName -> {
             // Update the UI, in this case, a TextView.
+            mHomeAdapter.refresh(newName);
         };
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         mViewModel.getHomeBeans().observe(this, nameObserver);
 
-        //        binding.rvHome.setSlideClickListener(new SlideRecyclerView.SlideClickListener() {
-        //            @Override
-        //            public void onDelete(int position) {
-        //                Timber.tag(TAG).d("onDelete " + position);
-        //            }
-        //
-        //            @Override
-        //            public void onClick(int position) {
-        //
-        //                Timber.tag(TAG).d("onClick " + position);
-        //            }
-        //        });
+        mHomeAdapter.setHomeClickListener(new OnHomeClickListener() {
+            @Override
+            public void toInformation() {
+                showToast("此版本不支持该功能");
+            }
 
-        //        binding.button.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                mHomeBeans.add(new HomeBean(111));
-        //                mViewModel.getHomeBeans().setValue(mHomeBeans);
-        //            }
-        //        });
+            @Override
+            public void toAsk() {
+                showToast("此版本不支持该功能");
+            }
+
+            @Override
+            public void toTrain() {
+                showToast("此版本不支持该功能");
+            }
+
+            @Override
+            public void toShare() {
+                showToast("此版本不支持该功能");
+            }
+
+            @Override
+            public void toPolicyDetail(PolicyBean policyBean, int position) {
+                showToast("toPolicy");
+            }
+
+            @Override
+            public void toLiveDetail(LiveBean liveBean, int position) {
+                showToast("toLive");
+            }
+
+            @Override
+            public void toVideoDetail(VideoBean videoBean, int position) {
+                showToast("toVideo");
+            }
+        });
     }
 
     @Override
     public void initData() {
-        Timber.tag(TAG).d("onActivityCreated");
         mHomeBeans = new ObservableArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            mHomeBeans.add(new HomeBean(i));
-        }
+        mHomeBeans.add(new HomeBean(HomeAdapter.TYPE_FUNCTION));
+        mHomeBeans.add(new HomeBean(HomeAdapter.TYPE_BOTTOM));
         mViewModel.getHomeBeans().setValue(mHomeBeans);
+
+        mActivity.showInitLoadView();
+        mPresenter.getBannerList();
+        mPresenter.getPolicyNews();
+        mPresenter.getLiveNotices();
+        mPresenter.getVideoNews();
     }
 
     @Override
     public void setPresenter() {
         mPresenter = new HomePresenter(this);
     }
-
-    @Override
-    public void onLazyLoad() {
-        Timber.tag(TAG).d("onLazyLoad");
-    }
-
-    @SuppressWarnings("unchecked")
-    private void initBanner() {
-        List<String> mImages = new ArrayList<>();
-        mImages.add("http://172.31.225.218/zentao/file-read-34542.png");
-        mImages.add("http://172.31.225.218/zentao/file-read-33569.png");
-        mImages.add("http://172.31.225.218/zentao/file-read-34542.png");
-        binding.banner.setAdapter(new BannerImageAdapter<String>(mImages) {
-            @Override
-            public void onBindView(BannerImageHolder holder, String url, int position, int size) {
-                //图片加载自己实现
-                Glide.with(holder.itemView)
-                        .load(url)
-                        .into(holder.imageView);
-            }
-        })
-                .addBannerLifecycleObserver(this)//添加生命周期观察者
-                .setIndicator(new CircleIndicator(mActivity))//设置指示器
-                .setOnBannerListener((data, position) -> {
-                    ToastUtil.showToast(mActivity, "点击了banner" + position);
-                })
-                .isAutoLoop(true)
-                .setBannerRound2(5)
-                .setUserInputEnabled(true)
-                .setOrientation(Banner.HORIZONTAL)
-                .start();
-
-
-    }
-
 
     @Override
     public boolean immersionBarEnabled() {
@@ -153,11 +141,73 @@ public class HomeFragment extends BaseLazyFragment<HomePresenter> implements Hom
     @Override
     public void initImmersionBar() {
         ImmersionBar.with(this)
-                .statusBarView(binding.statusBarView)
+                .titleBar(binding.toolBar)
                 .navigationBarColor(R.color.colorPrimary)
                 .keyboardEnable(false)
                 .init();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHomeAdapter.destroy();
+    }
 
+    @SuppressWarnings("ALL")
+    @Override
+    public void getBanner(List<BannerBean> bannerBeans) {
+        binding.banner.setAdapter(new BannerImageAdapter<BannerBean>(bannerBeans) {
+            @Override
+            public void onBindView(BannerImageHolder holder, BannerBean bannerBean, int position, int size) {
+                //图片加载自己实现
+                Glide.with(holder.itemView)
+                        .load(bannerBean.getFileUrl())
+                        .into(holder.imageView);
+            }
+        })
+                .addBannerLifecycleObserver(this)//添加生命周期观察者
+                .setIndicator(new RectangleIndicator(mActivity))//设置指示器
+                .setOnBannerListener((data, position) -> {
+                    ToastUtil.showToast(mActivity, "点击了banner" + position);
+                })
+                .isAutoLoop(true)
+                .setBannerRound2(5)
+                .setUserInputEnabled(false)
+                .setOrientation(Banner.HORIZONTAL)
+                .start();
+    }
+
+    @Override
+    public void getPolicyNews(List<PolicyBean> policyBeans) {
+        hideLoading();
+        mHomeBeans.addAll(mHomeBeans.size() - 1, policyBeans);
+        loadData();
+    }
+
+    @Override
+    public void getLiveNotices(List<LiveBean> liveBeans) {
+        mHomeBeans.addAll(mHomeBeans.size() - 1, liveBeans);
+        loadData();
+    }
+
+    @Override
+    public void getVideoNews(List<VideoBean> videoBeans) {
+        mHomeBeans.addAll(mHomeBeans.size() - 1, videoBeans);
+        loadData();
+    }
+
+    private void loadData() {
+        mViewModel.getHomeBeans().setValue(mHomeBeans);
+        Collections.sort(mHomeBeans, (o1, o2) -> o1.getViewType() - o2.getViewType());
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.tv_search) {
+            showToast("此版本不支持该功能");
+        }
+        if (v.getId() == R.id.iv_cus_service) {
+            showToast("此版本不支持该功能");
+        }
+    }
 }

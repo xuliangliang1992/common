@@ -3,7 +3,7 @@ package com.highlands.tianFuFinance.fun.login;
 import com.highlands.common.base.BasePresenter;
 import com.highlands.common.http.BaseXllObserver;
 import com.highlands.tianFuFinance.http.request.RemoteLoanDataSource;
-import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.common.http.response.LoginBean;
 import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 import io.reactivex.annotations.NonNull;

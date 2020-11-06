@@ -1,6 +1,6 @@
 package com.highlands.tianFuFinance.http;
 
-import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.common.http.response.LoginBean;
 
 import java.util.concurrent.TimeUnit;
 

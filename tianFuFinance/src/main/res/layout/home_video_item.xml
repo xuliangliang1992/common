@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_shape"
+        android:paddingEnd="14dp"
+        android:paddingStart="14dp">
+
+        <ImageView
+            android:id="@+id/iv_video"
+            android:layout_width="0dp"
+            android:layout_height="178dp"
+            android:layout_marginTop="53dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/video_cover"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/home_play"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_video"
+            app:layout_constraintEnd_toEndOf="@+id/iv_video"
+            app:layout_constraintStart_toStartOf="@+id/iv_video"
+            app:layout_constraintTop_toTopOf="@+id/iv_video" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:layout_marginStart="4dp"
+            android:text="最新视频"
+            android:textColor="@color/black_212222"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            app:layout_constraintBottom_toTopOf="@+id/iv_video"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:background="@drawable/base_shape"
+            android:paddingBottom="4dp"
+            android:paddingEnd="7dp"
+            android:paddingStart="7dp"
+            android:paddingTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_video"
+            tools:text="房地产" />
+
+        <TextView
+            android:id="@+id/tv_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="17dp"
+            android:background="@drawable/base_shape"
+            android:paddingBottom="4dp"
+            android:paddingEnd="7dp"
+            android:paddingStart="7dp"
+            android:paddingTop="4dp"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_category"
+            app:layout_constraintTop_toBottomOf="@+id/iv_video"
+            tools:text="增值税" />
+
+        <TextView
+            android:id="@+id/tv_video_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:lineHeight="27dp"
+            android:maxLines="2"
+            android:text="@{StringUtil.emptyIs(model.getTitle())}"
+            android:textColor="@color/black_212222"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_category"
+            tools:text="国家税务总局关于大屯煤电(集团有)限责任公司债转股及减资企业所得税处理问题的批复" />
+
+        <TextView
+            android:id="@+id/tv_video_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="@{StringUtil.emptyIs(model.getLecturerInfo().getName())}"
+            android:textColor="@color/gray_646968"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_video_head"
+            app:layout_constraintTop_toBottomOf="@id/tv_video_title"
+            tools:text="傅瑾" />
+
+        <TextView
+            android:id="@+id/tv_video_certificate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{StringUtil.emptyIs(model.getLecturerInfo().getProfile())}"
+            android:textColor="@color/gray_646968"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_video_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_video_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_video_name"
+            tools:text="中国注册会计师证、中国注册税务师证" />
+
+        <com.highlands.common.view.CircleImageView
+            android:id="@+id/iv_video_head"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_video_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_video_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.highlands.common.util.StringUtil" />
+
+        <variable
+            name="model"
+            type="com.highlands.common.http.response.VideoBean" />
+    </data>
+</layout>

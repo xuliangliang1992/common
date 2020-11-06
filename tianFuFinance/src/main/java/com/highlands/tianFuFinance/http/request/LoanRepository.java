@@ -1,8 +1,14 @@
 package com.highlands.tianFuFinance.http.request;
 
 
-import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.common.http.response.LiveBean;
+import com.highlands.common.http.response.LoginBean;
+import com.highlands.common.http.response.PolicyBean;
+import com.highlands.tianFuFinance.http.response.BannerBean;
 import com.highlands.tianFuFinance.http.response.SmsSendBean;
+import com.highlands.common.http.response.VideoBean;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,5 +59,25 @@ public class LoanRepository implements LoanDataSource {
     @Override
     public Observable<LoginBean> mobileLogin(String mobile, String code) {
         return mRemoteLoanDataSource.mobileLogin(mobile, code);
+    }
+
+    @Override
+    public Observable<List<BannerBean>> getBannerList() {
+        return mRemoteLoanDataSource.getBannerList();
+    }
+
+    @Override
+    public Observable<List<PolicyBean>> getPolicyNews() {
+        return mRemoteLoanDataSource.getPolicyNews();
+    }
+
+    @Override
+    public Observable<List<LiveBean>> getLiveNotices() {
+        return mRemoteLoanDataSource.getLiveNotices();
+    }
+
+    @Override
+    public Observable<List<VideoBean>> getVideoNews() {
+        return mRemoteLoanDataSource.getVideoNews();
     }
 }

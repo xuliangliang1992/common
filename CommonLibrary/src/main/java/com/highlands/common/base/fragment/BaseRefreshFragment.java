@@ -6,6 +6,8 @@ import com.highlands.common.base.BasePresenter;
 import com.highlands.common.base.BaseRefreshView;
 import com.highlands.common.view.refresh.DaisyRefreshLayout;
 
+import androidx.databinding.ObservableArrayList;
+
 /**
  * @author xuliangliang
  * @date 2019-09-09
@@ -65,6 +67,26 @@ public abstract class BaseRefreshFragment<T, P extends BasePresenter> extends Ba
         mRefreshLayout.setEnableLoadMore(b);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onRefreshEvent() {
+
+    }
+
+    @Override
+    public void onLoadMoreEvent() {
+
+    }
+
+    @Override
+    public void onAutoLoadEvent() {
+
+    }
+
     /**
      * 停止刷新
      */
@@ -94,5 +116,15 @@ public abstract class BaseRefreshFragment<T, P extends BasePresenter> extends Ba
         super.hideLoading();
         stopLoadMore();
         stopRefresh();
+    }
+
+    @Override
+    public void refreshData(ObservableArrayList<T> data) {
+        hideLoading();
+    }
+
+    @Override
+    public void loadMoreData(ObservableArrayList<T> data) {
+        hideLoading();
     }
 }

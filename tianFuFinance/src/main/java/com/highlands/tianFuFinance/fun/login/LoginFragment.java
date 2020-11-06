@@ -1,5 +1,6 @@
 package com.highlands.tianFuFinance.fun.login;
 
+import android.text.InputType;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -9,7 +10,7 @@ import com.highlands.common.util.ShapeUtil;
 import com.highlands.common.util.StringUtil;
 import com.highlands.tianFuFinance.R;
 import com.highlands.tianFuFinance.databinding.LoginFragmentBinding;
-import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.common.http.response.LoginBean;
 import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 import androidx.databinding.DataBindingUtil;
@@ -44,6 +45,7 @@ public class LoginFragment extends BaseMvpFragment<LoginPresenter> implements Lo
         ShapeUtil.setShape(binding.tvCode, mActivity, 8, R.color.blue_709AFF);
         ShapeUtil.setShape(binding.tvLogin, mActivity, 8, R.color.blue_3974FF);
 
+        binding.lvPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
     }
 
     @Override

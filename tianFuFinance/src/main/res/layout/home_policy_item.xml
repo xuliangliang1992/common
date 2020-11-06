@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_shape"
+        android:paddingEnd="13dp"
+        android:paddingStart="14dp">
+
+        <ImageView
+            android:id="@+id/iv_policy"
+            android:layout_width="87dp"
+            android:layout_height="66dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="11dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/policy_cover"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_policy_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_policy_name" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/label_new"
+            app:layout_constraintBottom_toTopOf="@+id/tv_policy_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_policy_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:lineHeight="27dp"
+            android:maxLines="2"
+            android:text="@{StringUtil.emptyIs(model.getTitle())}"
+            android:textColor="@color/black_212222"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_policy_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="国家税务总局关于大屯煤电(集团有)限责任公司债转股及减资企业所得税处理问题的批复" />
+
+        <TextView
+            android:id="@+id/tv_policy_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/gray_646968"
+            android:textSize="12dp"
+            android:text="@{StringUtil.emptyIs(model.getLecturerInfo().getName())}"
+            app:layout_constraintBottom_toTopOf="@id/iv_policy"
+            app:layout_constraintStart_toEndOf="@+id/iv_policy_head"
+            app:layout_constraintTop_toBottomOf="@id/tv_policy_title"
+            tools:text="傅瑾" />
+
+        <TextView
+            android:id="@+id/tv_policy_certificate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/gray_646968"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_policy_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_policy_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_policy_name"
+            android:text="@{StringUtil.emptyIs(model.getLecturerInfo().getProfile())}"
+            tools:text="中国注册会计师证、中国注册税务师证" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="54dp"
+            android:text="政策解读"
+            android:textColor="@color/black_212222"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            app:layout_constraintBottom_toTopOf="@+id/tv_policy_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_policy_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="9dp"
+            android:lineHeight="22dp"
+            android:maxLines="3"
+            android:text="@{StringUtil.emptyIs(model.getContent())}"
+            android:textColor="#2D2F2F"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_policy"
+            app:layout_constraintEnd_toStartOf="@+id/iv_policy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_policy"
+            tools:text="老师解读内容，老师解读内容老师解读内容老师解读内容。老师内容解读解读老师，内容解读解读老师内容。" />
+
+        <com.highlands.common.view.CircleImageView
+            android:id="@+id/iv_policy_head"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_policy_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_policy_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.highlands.common.util.StringUtil" />
+
+        <variable
+            name="model"
+            type="com.highlands.common.http.response.PolicyBean" />
+    </data>
+</layout>

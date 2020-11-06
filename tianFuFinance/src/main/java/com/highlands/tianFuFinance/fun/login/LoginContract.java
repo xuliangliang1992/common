@@ -1,7 +1,7 @@
 package com.highlands.tianFuFinance.fun.login;
 
 import com.highlands.common.base.BaseView;
-import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.common.http.response.LoginBean;
 import com.highlands.tianFuFinance.http.response.SmsSendBean;
 
 /**

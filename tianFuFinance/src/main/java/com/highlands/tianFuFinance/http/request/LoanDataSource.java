@@ -1,7 +1,13 @@
 package com.highlands.tianFuFinance.http.request;
 
-import com.highlands.tianFuFinance.http.response.LoginBean;
+import com.highlands.common.http.response.LiveBean;
+import com.highlands.common.http.response.LoginBean;
+import com.highlands.common.http.response.PolicyBean;
+import com.highlands.common.http.response.VideoBean;
+import com.highlands.tianFuFinance.http.response.BannerBean;
 import com.highlands.tianFuFinance.http.response.SmsSendBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -44,7 +50,7 @@ public interface LoanDataSource {
     /**
      * 账号密码登录
      *
-     * @param account 账号
+     * @param account  账号
      * @param password 密码
      * @return Observable
      */
@@ -58,4 +64,32 @@ public interface LoanDataSource {
      * @return Observable
      */
     Observable<LoginBean> mobileLogin(String mobile, String code);
+
+    /**
+     * Banner List
+     *
+     * @return Observable
+     */
+    Observable<List<BannerBean>> getBannerList();
+    /**
+     * 最新政策解读列表
+     *
+     * @return Observable
+     */
+    Observable<List<PolicyBean>> getPolicyNews();
+
+    /**
+     * 直播预告
+     *
+     * @return Observable
+     */
+    Observable<List<LiveBean>> getLiveNotices();
+
+    /**
+     * 最新视频
+     *
+     * @return Observable
+     */
+    Observable<List<VideoBean>> getVideoNews();
+
 }

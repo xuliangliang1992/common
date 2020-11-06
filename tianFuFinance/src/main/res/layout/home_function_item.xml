@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_marginTop="22dp"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_information"
+            style="@style/home_constraint_layout"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/cl_train"
+            app:layout_constraintEnd_toStartOf="@+id/cl_ask"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_information"
+                style="@style/home_image"
+                android:src="@drawable/information"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_information"
+                app:layout_constraintEnd_toEndOf="@+id/cl_information"
+                app:layout_constraintStart_toStartOf="@+id/cl_information"
+                app:layout_constraintTop_toTopOf="@+id/cl_information" />
+
+            <TextView
+                style="@style/home_title"
+                android:text="资讯"
+                app:layout_constraintEnd_toEndOf="@+id/iv_information"
+                app:layout_constraintStart_toStartOf="@+id/iv_information"
+                app:layout_constraintTop_toTopOf="@+id/iv_information" />
+
+            <TextView
+                style="@style/home_sub_title"
+                android:text="每日资讯随心看"
+                app:layout_constraintEnd_toEndOf="@+id/iv_information"
+                app:layout_constraintStart_toStartOf="@+id/iv_information"
+                app:layout_constraintTop_toTopOf="@+id/iv_information" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_ask"
+            style="@style/home_constraint_layout"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="9dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cl_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/cl_information"
+            app:layout_constraintTop_toTopOf="@+id/cl_information">
+
+            <ImageView
+                android:id="@+id/iv_ask"
+                style="@style/home_image"
+                android:src="@drawable/ask"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_ask"
+                app:layout_constraintEnd_toEndOf="@+id/cl_ask"
+                app:layout_constraintStart_toStartOf="@+id/cl_ask"
+                app:layout_constraintTop_toTopOf="@+id/cl_ask" />
+
+            <TextView
+                style="@style/home_title"
+                android:text="咨询"
+                app:layout_constraintEnd_toEndOf="@+id/iv_ask"
+                app:layout_constraintStart_toStartOf="@+id/iv_ask"
+                app:layout_constraintTop_toTopOf="@+id/iv_ask" />
+
+            <TextView
+                style="@style/home_sub_title"
+                android:text="24小时客服不停歇"
+                app:layout_constraintEnd_toEndOf="@+id/iv_ask"
+                app:layout_constraintStart_toStartOf="@+id/iv_ask"
+                app:layout_constraintTop_toTopOf="@+id/iv_ask" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_train"
+            style="@style/home_constraint_layout"
+            android:layout_marginTop="9dp"
+            app:layout_constraintBottom_toTopOf="@+id/cl_policy"
+            app:layout_constraintEnd_toEndOf="@+id/cl_information"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/cl_information"
+            app:layout_constraintTop_toBottomOf="@+id/cl_information">
+
+            <ImageView
+                android:id="@+id/iv_train"
+                style="@style/home_image"
+                android:src="@drawable/train"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_train"
+                app:layout_constraintEnd_toEndOf="@+id/cl_train"
+                app:layout_constraintStart_toStartOf="@+id/cl_train"
+                app:layout_constraintTop_toTopOf="@+id/cl_train" />
+
+            <TextView
+                style="@style/home_title"
+                android:text="培训"
+                app:layout_constraintEnd_toEndOf="@+id/iv_train"
+                app:layout_constraintStart_toStartOf="@+id/iv_train"
+                app:layout_constraintTop_toTopOf="@+id/iv_train" />
+
+            <TextView
+                style="@style/home_sub_title"
+                android:text="重量级讲师每日更"
+                app:layout_constraintEnd_toEndOf="@+id/iv_train"
+                app:layout_constraintStart_toStartOf="@+id/iv_train"
+                app:layout_constraintTop_toTopOf="@+id/iv_train" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_share"
+            style="@style/home_constraint_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/cl_train"
+            app:layout_constraintEnd_toEndOf="@+id/cl_ask"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/cl_ask"
+            app:layout_constraintTop_toTopOf="@+id/cl_train">
+
+            <ImageView
+                android:id="@+id/iv_share"
+                style="@style/home_image"
+                android:src="@drawable/share"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_share"
+                app:layout_constraintEnd_toEndOf="@+id/cl_share"
+                app:layout_constraintStart_toStartOf="@+id/cl_share"
+                app:layout_constraintTop_toTopOf="@+id/cl_share" />
+
+            <TextView
+                style="@style/home_title"
+                android:text="共享"
+                app:layout_constraintEnd_toEndOf="@+id/iv_share"
+                app:layout_constraintStart_toStartOf="@+id/iv_share"
+                app:layout_constraintTop_toTopOf="@+id/iv_share" />
+
+            <TextView
+                style="@style/home_sub_title"
+                android:text="会员福利等你解锁"
+                app:layout_constraintEnd_toEndOf="@+id/iv_share"
+                app:layout_constraintStart_toStartOf="@+id/iv_share"
+                app:layout_constraintTop_toTopOf="@+id/iv_share" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+    </data>
+</layout>

@@ -194,5 +194,6 @@ public abstract class BaseFragment extends SimpleImmersionFragment implements Ba
      */
     protected void hideLoading() {
         DialogManager.getInstance().dismissProgressDialog();
+        mActivity.hideInitLoadView();
     }
 }

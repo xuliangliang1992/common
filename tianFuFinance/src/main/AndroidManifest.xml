@@ -37,16 +37,16 @@
 
         <activity
             android:name="com.highlands.tianFuFinance.fun.register.RegisterActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.highlands.tianFuFinance.fun.login.LoginActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask"/>
 
         <activity
             android:name="com.highlands.tianFuFinance.fun.main.MainActivity"
@@ -64,12 +64,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
-        <receiver android:name="com.highlands.common.network.NetStateReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
 
         <service android:name="com.highlands.tianFuFinance.fun.HelloService" />
     </application>
